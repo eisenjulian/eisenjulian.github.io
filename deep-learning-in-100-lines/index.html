@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-    <title>A Minimalist ML Framework in 100 lines of code</title>
+    <title>Deep Learning in 100 lines of plain Python</title>
     <meta name="HandheldFriendly" content="True" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -18,20 +18,20 @@
     
     <meta property="og:site_name" content="Julian Eisenschlos" />
     <meta property="og:type" content="article" />
-    <meta property="og:title" content="A Minimalist ML Framework in 100 lines of code" />
-    <meta property="og:description" content="Can we build a Deep learning framework in plain Numpy? Can we make it compact, clear and extendable? Let&#x27;s set out to explore those ideas and see what we can create!" />
-    <meta property="og:url" content="https://eisenjulian.github.io/minimalist-ml-framework/" />
+    <meta property="og:title" content="Deep Learning in 100 lines of plain Python" />
+    <meta property="og:description" content="Can we build a Deep learning framework in plain Python and Numpy? Can we make it compact, clear and extendable? Let&#x27;s set out to explore those ideas and see what we can create!" />
+    <meta property="og:url" content="https://eisenjulian.github.io/deep-learning-in-100-lines/" />
     <meta property="og:image" content="https://eisenjulian.github.io/content/images/2019/03/onion.jpg" />
     <meta property="article:published_time" content="2019-03-17T15:33:37.000Z" />
-    <meta property="article:modified_time" content="2019-03-18T16:16:28.000Z" />
+    <meta property="article:modified_time" content="2019-03-21T14:56:43.000Z" />
     <meta property="article:tag" content="Automatic Differentiation" />
     <meta property="article:tag" content="Math" />
     <meta property="article:tag" content="Tutorials" />
     
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="A Minimalist ML Framework in 100 lines of code" />
-    <meta name="twitter:description" content="Can we build a Deep learning framework in plain Numpy? Can we make it compact, clear and extendable? Let&#x27;s set out to explore those ideas and see what we can create!" />
-    <meta name="twitter:url" content="https://eisenjulian.github.io/minimalist-ml-framework/" />
+    <meta name="twitter:title" content="Deep Learning in 100 lines of plain Python" />
+    <meta name="twitter:description" content="Can we build a Deep learning framework in plain Python and Numpy? Can we make it compact, clear and extendable? Let&#x27;s set out to explore those ideas and see what we can create!" />
+    <meta name="twitter:url" content="https://eisenjulian.github.io/deep-learning-in-100-lines/" />
     <meta name="twitter:image" content="https://eisenjulian.github.io/content/images/2019/03/onion.jpg" />
     <meta name="twitter:label1" content="Written by" />
     <meta name="twitter:data1" content="Julian Eisenschlos" />
@@ -67,10 +67,10 @@
         "url": "https://eisenjulian.github.io/author/julian/",
         "sameAs": []
     },
-    "headline": "A Minimalist ML Framework in 100 lines of code",
-    "url": "https://eisenjulian.github.io/minimalist-ml-framework/",
+    "headline": "Deep Learning in 100 lines of plain Python",
+    "url": "https://eisenjulian.github.io/deep-learning-in-100-lines/",
     "datePublished": "2019-03-17T15:33:37.000Z",
-    "dateModified": "2019-03-18T16:16:28.000Z",
+    "dateModified": "2019-03-21T14:56:43.000Z",
     "image": {
         "@type": "ImageObject",
         "url": "https://eisenjulian.github.io/content/images/2019/03/onion.jpg",
@@ -78,7 +78,7 @@
         "height": 360
     },
     "keywords": "Automatic Differentiation, Math, Tutorials",
-    "description": "Can we build a Deep learning framework in plain Numpy? Can we make it compact, clear and extendable? Let&#x27;s set out to explore those ideas and see what we can create!",
+    "description": "Can we build a Deep learning framework in plain Python and Numpy? Can we make it compact, clear and extendable? Let&#x27;s set out to explore those ideas and see what we can create!",
     "mainEntityOfPage": {
         "@type": "WebPage",
         "@id": "https://eisenjulian.github.io/"
@@ -98,8 +98,7 @@
   gtag('config', 'UA-136394483-1');
 </script>
 
-<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/themes/prism.min.css" rel="stylesheet"/>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/plugins/toolbar/prism-toolbar.min.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/themes/prism-tomorrow.min.css" rel="stylesheet"/>
 
 </head>
 <body class="post-template tag-automatic-differentiation tag-math tag-tutorials">
@@ -146,7 +145,7 @@
                     <time class="post-full-meta-date" datetime="2019-03-17">17 March 2019</time>
                         <span class="date-divider">/</span> <a href="../tag/automatic-differentiation/index.html">Automatic Differentiation</a>
                 </section>
-                <h1 class="post-full-title">A Minimalist ML Framework in 100 lines of code</h1>
+                <h1 class="post-full-title">Deep Learning in 100 lines of plain Python</h1>
             </header>
 
             <figure class="post-full-image">
@@ -159,13 +158,129 @@
                             (max-width: 1170px) 700px,
                             1400px"
                     src="../content/images/size/w2000/2019/03/onion.jpg"
-                    alt="A Minimalist ML Framework in 100 lines of code"
+                    alt="Deep Learning in 100 lines of plain Python"
                 />
             </figure>
 
             <section class="post-full-content">
                 <div class="post-content">
-                    <p><em>Can we build a Deep learning framework in plain Numpy? Can we make it compact, clear and extendable? Let's set out to explore those ideas and see what we can create!</em></p><!--kg-card-begin: hr--><hr><!--kg-card-end: hr--><p>In today's day and age there are multiple frameworks to choose from, with various important features such as auto-differentiation, graph-based optimized computation and hardware acceleration. 	differentiation</p><ul><li>How to implement a few basic layers</li><li>How to create a training loop</li></ul><p>The design choices are heavily based on <a href="https://github.com/explosion/thinc">Thinc</a>'s Deep Learning library, since they came up with the smart idea of using anonymous functions, closures, and the stack to share and keep track of intermediate results while calculating gradients. This post is also inspired by Jeremy Howard's great <a href="https://pytorch.org/tutorials/beginner/nn_tutorial.html">PyTorch tutorial</a>, but taking it one more step towards the bottom getting rid of <code>autograd</code>.</p><h2 id="bring-on-the-math">Bring on the math</h2><p>You probably heard this already, but the back-propagation algorithm, originally described in 60's and 70's is the application of the chain rule to calculate gradients of a real function with respect of its various parameters.</p><p>The end goal is to find a minimum (hopefully global) of a function by taking steps in the direction of said gradient. This is how it looks when we have two parameters to optimize.</p><!--kg-card-begin: image--><figure class="kg-card kg-image-card kg-card-hascaption"><img src="../content/images/2019/03/gradient_descent.gif" class="kg-image" alt="Gradient Descent"><figcaption>Source: <a href="https://jed-ai.github.io/py1_gd_animation/">7 Simple Steps To Visualize And Animate The Gradient Descent Algorithm</a></figcaption></figure><!--kg-card-end: image--><p>That is, if we have two vector spaces $V$ and $W$ and two differentiable functions $f:V\to W$ and $g:W\to\mathbb{R}$ we have that if $v\in V$ and $f(v) = w$</p><p>$$\nabla g \circ f(v) = \nabla g(w) 	J f(x)$$</p><p>where $\nabla$ (or gradient) of a function into $\mathbb{R}$ is the row vector function consisting of all the partial derivatives and $J$, the Jacobian, is a generalization of the gradient for functions with multi-dimensional output, represents a matrix function where each row is the gradient of the function projected each one of the output coordinates.</p>
+                    <p><em>Can we build a Deep learning framework in plain Python and Numpy? Can we make it compact, clear and extendable? Let's set out to explore those ideas and see what we can create!</em></p><!--kg-card-begin: hr--><hr><!--kg-card-end: hr--><p>In today's day and age there are multiple frameworks to choose from, with various important features such as auto-differentiation, graph-based optimized computation and hardware acceleration.</p><p>What we'll cover:</p><ul><li>Automatic reverse-mode differentiation</li><li>How to implement a few basic layers</li><li>How to create a training loop</li></ul><p>The design choices are heavily based on <a href="https://github.com/explosion/thinc">Thinc</a>'s Deep Learning library, since they came up with the smart idea of using anonymous functions, closures, and the stack to share and keep track of intermediate results while calculating gradients. This post is also inspired by Jeremy Howard's great <a href="https://pytorch.org/tutorials/beginner/nn_tutorial.html">PyTorch tutorial</a>, but taking it one more step towards the bottom getting rid of <code>autograd</code>.</p><h2 id="bring-on-the-math">Bring on the math</h2><p>You probably heard this already, but the back-propagation algorithm, originally described in the 60's and 70's is the application of the chain rule to calculate gradients of a real function with respect of its various parameters.</p><p>The end goal is to find a minimum (hopefully global) of a function by taking steps in the opposite direction of said gradient. This is how it looks when we have two parameters to optimize.</p><!--kg-card-begin: image--><figure class="kg-card kg-image-card kg-card-hascaption"><img src="../content/images/2019/03/gradient_descent.gif" class="kg-image" alt="Gradient Descent"><figcaption>Source: <a href="https://jed-ai.github.io/py1_gd_animation/">7 Simple Steps To Visualize And Animate The Gradient Descent Algorithm</a></figcaption></figure><!--kg-card-end: image--><p>That is, if we have two vector spaces $V$ and $W$ and two differentiable functions $f:V\to W$ and $g:W\to\mathbb{R}$ we have that if $v\in V$ and $f(v) = w$</p><p>$$\nabla g \circ f(v) = \nabla g(w) \cdot Jf(v)$$</p><p>where the gradient $\nabla$ of a function into $\mathbb{R}$ is the row vector function consisting of all the partial derivatives and the Jacobian $J$ is a generalization of the gradient for functions with multi-dimensional output, represents a matrix function where each row is the gradient of the function projected each one of the output coordinates. Finally, the $\cdot$ on the right hand side is good old matrix multiplication.</p><p>It's important to point out that usually the vectors spaces $V$ and $W$ will usually have extra structure, they will be tensors of some shape and even though that doesn't affect the chain rule derivation described above, that structure will come in handy in the gradient calculation. The Jacobian can be huge, but very often it will be a sparse, <a href="https://en.wikipedia.org/wiki/Block_matrix">block</a> or diagonal matrix and we wont't need to compute it explicitly, because we only care about the result of multiplying it by the gradient. This operation is sometimes referred in the literature as <em>VJP</em>, or Vector-Jacobian Product.</p><h2 id="link-to-deep-neural-networks">Link to deep neural networks</h2><p>In the typical setting for supervised machine learning we have a big complex function that takes in a tensor of numerical features for our labelled samples, and several tensors that correspond to weights that characterize the model, and the output is a loss we want to minimize to find the most suitable weights. In deep learning, this complex function is expressed as a composition of simpler functions, which are much easier to differentiate and reason about.</p><!--kg-card-begin: image--><figure class="kg-card kg-image-card kg-card-hascaption"><img src="../content/images/2019/03/Artificial_neural_network.svg" class="kg-image"><figcaption>A two-layer fully connected neural network</figcaption></figure><!--kg-card-end: image--><p>For example a linear layer $f$ is characterized by a matrix multiplication (let's leave the bias out for a sec):</p><p>$$f(X, w) = X\cdot w$$</p><p>If this layer is the last one of the model, after that we compute the scalar loss, comparing the predicted outputs $y_p$ with the true ones $y_t$ with, for instance, a mean square error metric. In order to tune the values of $w$ we need to compute the gradient $\nabla_w g \circ f$ with respect to $w$. Applying the chain rule, it's enough to calculate $\nabla g$ which is $2\  \text{avg}(y_p - y_t)$ and $J_w f$ with respect $w$, which is $X^t$, since $f$ is linear with respect to $w$. We can similarly calculate $J_X f$ with respect to the input $X$ to be $w$, and this allows us to compute $\nabla_X	 g \circ f$ with respect to $X$, ie: the gradient of the loss with respect to the layer inputs, this isn't useful at first sight, but wait and see!</p><p><strong>So where does the back-prop actually happen?</strong></p><p>When we want to go back and tune the weights of the second to last layer. If we call $h$ to this layer we will need $J h$ and $\nabla_X g \circ f$, to calculate the gradient with respect to the layer weights using the chain rule, and also $\nabla h \circ g \circ f$ to keep passing backwards, and that's it!</p><h2 id="finally-it-s-time-to-implement-it">Finally, it's time to implement it</h2><p>Dependency wise, we only need <code>numpy</code> and <code>matplotlib</code> to visualize the learning progress later on</p><!--kg-card-begin: markdown--><pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+</code></pre>
+<!--kg-card-end: markdown--><p>We can start with a class that encapsulates a tensor and its gradients</p><!--kg-card-begin: markdown--><pre><code class="language-python">class Parameter():
+  def __init__(self, tensor):
+    self.tensor = tensor
+    self.gradient = np.zeros_like(self.tensor)
+</code></pre>
+<!--kg-card-end: markdown--><p>Now we can create the layer class, the key idea is that in forward pass we return both the layer output and function that can receive the gradient of loss with respect to the outputs can return the gradient with respect of the inputs, and update the weight gradients in the process.</p><p>The training process will then have three steps, calculate the forward step, then the backwards steps accumulates the gradients, and finally updating the weights. It’s important to this at the end, since weights can be reused in multiple layers and we don’t want to mutate the weights before time.</p><!--kg-card-begin: markdown--><pre><code class="language-python">class Layer:
+  def __init__(self):
+    self.parameters = []
+
+  def forward(self, X):
+    &quot;&quot;&quot;
+    Override me! A simple no-op layer, it passes forward the inputs
+    &quot;&quot;&quot;
+    return X, lambda D: D
+
+  def build_param(self, tensor):
+    &quot;&quot;&quot;
+    Creates a parameter from a tensor, and saves a reference for the update step
+    &quot;&quot;&quot;
+    param = Parameter(tensor)
+    self.parameters.append(param)
+    return param
+
+  def update(self, optimizer):
+    for param in self.parameters: optimizer.update(param)
+</code></pre>
+<!--kg-card-end: markdown--><p>It's standard to delegate the job of updating the parameters to an optimizer, which receives an instance of a parameter after every batch. The simplest and most known optimization method out there is the mini-batch stochastic gradient descent</p><!--kg-card-begin: markdown--><pre><code class="language-python">class SGDOptimizer():
+  def __init__(self, lr=0.1):
+    self.lr = lr
+
+  def update(self, param):
+    param.tensor -= self.lr * param.gradient
+    param.gradient.fill(0)
+</code></pre>
+<!--kg-card-end: markdown--><p>Under this framework, the linear layer looks like this:</p><!--kg-card-begin: markdown--><pre><code class="language-python">class Linear(Layer):
+  def __init__(self, inputs, outputs):
+    super().__init__()
+    tensor = np.random.randn(inputs, outputs) * np.sqrt(1 / inputs)
+    self.weights = self.build_param(tensor)
+    self.bias = self.build_param(np.zeros(outputs))
+
+  def forward(self, X):
+    def backward(D):
+      self.weights.gradient += X.T @ D
+      self.bias.gradient += D.sum(axis=0)
+      return D @ self.weights.tensor.T
+    return X @ self.weights.tensor +  self.bias.tensor, backward
+</code></pre>
+<!--kg-card-end: markdown--><p>Now, the next most used types of layers are activations, which are non-linear point-wise functions. The Jacobian of a point-wise function is diagonal, which means that when multiplied by the gradient it also acts a point-wise multiplication. </p><!--kg-card-begin: markdown--><pre><code class="language-python">class ReLu(Layer):
+  def forward(self, X):
+    mask = X &gt; 0
+    return X * mask, lambda D: D * mask
+</code></pre>
+<!--kg-card-end: markdown--><p>Now that I have we have two kinds of layers, we want to compose them and make sure that backward propagation works as expected. As we traverse the layers and get the successive outputs we can save the <code>backward</code> functions in a list that will be used in the reverse order, to get all the way to gradient with respect to the first layer inputs and return it. This is were the magic happens:</p><!--kg-card-begin: markdown--><pre><code class="language-python">class Sequential(Layer):
+  def __init__(self, *layers):
+    super().__init__()
+    self.layers = layers
+    for layer in layers:
+      self.parameters.extend(layer.parameters)
+
+  def forward(self, X):
+    backprops = []
+    Y = X
+    for layer in self.layers:
+      Y, backprop = layer.forward(Y)
+      backprops.append(backprop)
+    def backward(D):
+      for backprop in reversed(backprops): 
+        D = backprop(D)
+      return D
+    return Y, backward
+</code></pre>
+<!--kg-card-end: markdown--><p>As we mentioned earlier, we will need a way to calculate the loss function associated with a batch of samples, and its gradient. One example would be <em>MSE</em> loss, typically used in regression problems, and it can be implemented in this manner:</p><!--kg-card-begin: markdown--><pre><code class="language-python">def mse_loss(Yp, Yt):
+  diff = Yp - Yt
+  return np.square(diff).mean(), 2 * diff / len(diff)
+</code></pre>
+<!--kg-card-end: markdown--><p>Almost there now, we have two types of layers and a way to combine them, so how does the training loop look like. We can use an API similar to <code>scikit-learn</code> or <code>keras</code>.</p><!--kg-card-begin: markdown--><pre><code class="language-python">class Learner():
+  def __init__(self, model, loss, optimizer):
+    self.model = model
+    self.loss = loss
+    self.optimizer = optimizer
+
+  def fit_batch(self, X, Y):
+    Y_, backward = self.model.forward(X)
+    L, D = self.loss(Y_, Y)
+    backward(D)
+    self.model.update(self.optimizer)
+    return L
+
+  def fit(self, X, Y, epochs, bs):
+    losses = []
+    for epoch in range(epochs):
+      p = np.random.permutation(len(X))
+      X, Y = X[p], Y[p]
+      loss = 0.0
+      for i in range(0, len(X), bs):
+        loss += self.fit_batch(X[i:i + bs], Y[i:i + bs])
+      losses.append(loss)
+      print('Epoch', epoch, '\tLoss', loss)
+    return losses
+</code></pre>
+<!--kg-card-end: markdown--><p>And that's it, if you were keeping track, we even have a few lines of code to spare. </p><h2 id="but-does-it-work">But does it work?</h2><p>Thought you would never ask, we can start testing with some synthetic data.</p><!--kg-card-begin: markdown--><pre><code class="language-python">X = np.random.randn(100, 10)
+w = np.random.randn(10, 1)
+b = np.random.randn(1)
+Y = X @ W + B
+
+model = Linear(10, 1)
+learner = Learner(model, mse_loss, SGDOptimizer(lr=0.05))
+learner.fit(X, Y, epochs=10, bs=10)
+</code></pre>
+<!--kg-card-end: markdown--><!--kg-card-begin: image--><figure class="kg-card kg-image-card kg-card-hascaption"><img src="../content/images/2019/03/linear_loss.png" class="kg-image"><figcaption>Training loss in 10 epochs</figcaption></figure><!--kg-card-end: image--><p>We can also check that the learned weights coincide with the true ones</p><!--kg-card-begin: markdown--><pre><code class="language-python">print(np.linalg.norm(m.weights.tensor - W), (m.bias.tensor - B)[0])
+&gt; 1.848553648022619e-05 5.69305886743976e-06
+</code></pre>
+<!--kg-card-end: markdown--><p>Ok, so that was easy, but let's come up with a non-linear dataset, how about $y = x_1 x_2$. Here we go:</p><p><br></p>
                 </div>
             </section>
 
@@ -192,7 +307,7 @@
                 <div id="disqus_thread"></div>
                 <script>
                 var disqus_config = function () {
-                    this.page.url = "https://eisenjulian.github.io/minimalist-ml-framework/";  
+                    this.page.url = "https://eisenjulian.github.io/deep-learning-in-100-lines/";  
                     this.page.identifier = "ghost-5c8e67ae6d2ff81194b67a1c"
                 };
                 (function() {
@@ -277,17 +392,17 @@
         </a>
     </div>
     <span class="floating-header-divider">&mdash;</span>
-    <div class="floating-header-title">A Minimalist ML Framework in 100 lines of code</div>
+    <div class="floating-header-title">Deep Learning in 100 lines of plain Python</div>
     <div class="floating-header-share">
         <div class="floating-header-share-label">Share this <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
     <path d="M7.5 15.5V4a1.5 1.5 0 1 1 3 0v4.5h2a1 1 0 0 1 1 1h2a1 1 0 0 1 1 1H18a1.5 1.5 0 0 1 1.5 1.5v3.099c0 .929-.13 1.854-.385 2.748L17.5 23.5h-9c-1.5-2-5.417-8.673-5.417-8.673a1.2 1.2 0 0 1 1.76-1.605L7.5 15.5zm6-6v2m-3-3.5v3.5m6-1v2"/>
 </svg>
 </div>
-        <a class="floating-header-share-tw" href="https://twitter.com/share?text=A%20Minimalist%20ML%20Framework%20in%20100%20lines%20of%20code&amp;url=https://eisenjulian.github.io/minimalist-ml-framework/"
+        <a class="floating-header-share-tw" href="https://twitter.com/share?text=Deep%20Learning%20in%20100%20lines%20of%20plain%20Python&amp;url=https://eisenjulian.github.io/deep-learning-in-100-lines/"
             onclick="window.open(this.href, 'share-twitter', 'width=550,height=235');return false;">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
         </a>
-        <a class="floating-header-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=https://eisenjulian.github.io/minimalist-ml-framework/"
+        <a class="floating-header-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=https://eisenjulian.github.io/deep-learning-in-100-lines/"
             onclick="window.open(this.href, 'share-facebook','width=580,height=296');return false;">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M19 6h5V0h-5c-3.86 0-7 3.14-7 7v3H8v6h4v16h6V16h5l1-6h-6V7c0-.542.458-1 1-1z"/></svg>
         </a>
@@ -404,13 +519,9 @@ $(document).ready(function () {
 
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/prism.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/plugins/toolbar/prism-toolbar.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/plugins/show-language/prism-show-language.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/components/prism-lua.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/components/prism-c.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/components/prism-cpp.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/components/prism-parigp.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/components/prism-latex.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/components/prism-python.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/components/prism-markdown.min.js"></script>
