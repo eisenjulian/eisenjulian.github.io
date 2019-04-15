@@ -82,7 +82,7 @@
 }
     </script>
 
-    <meta name="generator" content="Ghost 2.18" />
+    <meta name="generator" content="Ghost 2.19" />
     <link rel="alternate" type="application/rss+xml" title="Julian Eisenschlos" href="../../rss/index.html" />
 
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,600,400" />
@@ -270,7 +270,7 @@ cnn_pretrained_classifier = tf.estimator.Estimator(
 train_and_evaluate(cnn_pretrained_classifier)
 </code></pre>
 <h3 id="running-tensorboard">Running TensorBoard</h3><p>Now we can launch TensorBoard and see how the different models we’ve trained compare against each other in terms of training time and performance.</p><p>In a terminal, we run</p><p><code>&gt; tensorboard --logdir={model_dir}</code></p>
-<p>We can visualize many metrics collected while training and testing, including the loss function values of each model at each training step, and the precision-recall curves. This is of course most useful to select which model works best for our use-case as well as how to choose classification thresholds.</p><figure class="kg-card kg-image-card"><amp-img src="https://cdn-images-1.medium.com/max/1000/1*ACyqHB1zNYZQ3YDTiY7WPg.png" class="kg-image" width="1000" height="393" layout="responsive"></amp-img></figure><figure class="kg-card kg-image-card kg-card-hascaption"><amp-img src="https://cdn-images-1.medium.com/max/750/1*_tL-oN9IvzDCWyVGZ4LF3A.png" class="kg-image" width="750" height="431" layout="responsive"></amp-img><figcaption>Training loss across steps on the left and Precision-Recall curves on the test data for each of our models on the left</figcaption></figure><h3 id="getting-predictions">Getting Predictions</h3><p>To obtain predictions on new sentences we can use the <code>predict</code> method in the <code>Estimator</code> instances, which will load the latest checkpoint for each model and evaluate on the unseen examples. But before passing the data into the model we have to clean up, tokenize and map each token to the corresponding index as we see below.</p><pre><code class="language-python">def text_to_index(sentence):
+<p>We can visualize many metrics collected while training and testing, including the loss function values of each model at each training step, and the precision-recall curves. This is of course most useful to select which model works best for our use-case as well as how to choose classification thresholds.</p><figure class="kg-card kg-image-card"></figure><figure class="kg-card kg-image-card kg-card-hascaption"><amp-img src="https://cdn-images-1.medium.com/max/750/1*_tL-oN9IvzDCWyVGZ4LF3A.png" class="kg-image" width="750" height="431" layout="responsive"></amp-img><figcaption>Training loss across steps on the left and Precision-Recall curves on the test data for each of our models on the left</figcaption></figure><h3 id="getting-predictions">Getting Predictions</h3><p>To obtain predictions on new sentences we can use the <code>predict</code> method in the <code>Estimator</code> instances, which will load the latest checkpoint for each model and evaluate on the unseen examples. But before passing the data into the model we have to clean up, tokenize and map each token to the corresponding index as we see below.</p><pre><code class="language-python">def text_to_index(sentence):
     # Remove punctuation characters except for the apostrophe
     translator = str.maketrans('', '', string.punctuation.replace("'", ''))
     tokens = sentence.translate(translator).lower().split()
