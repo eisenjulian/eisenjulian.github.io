@@ -9,9 +9,8 @@
     <meta name="HandheldFriendly" content="True" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" type="text/css" href="../assets/built/screen.css%3Fv=efa7f99d1e.css" />
+    <link rel="stylesheet" type="text/css" href="../assets/built/screen.css@v=903911b6fa.css" />
 
-    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon" />
     <link rel="canonical" href="index.html" />
     <meta name="referrer" content="no-referrer-when-downgrade" />
     <link rel="amphtml" href="amp/index.html" />
@@ -19,7 +18,7 @@
     <meta property="og:site_name" content="Julian Eisenschlos" />
     <meta property="og:type" content="article" />
     <meta property="og:title" content="Text Classification with TensorFlow Estimators" />
-    <meta property="og:description" content="Throughout this post we will explain how to classify text using Estimators,  Datasets and Feature Columns, with a scalable high-level API in TensorFlow. " />
+    <meta property="og:description" content="Throughout this post we will explain how to classify text using Estimators,  Datasets and Feature Columns, with a scalable high-level API in TensorFlow." />
     <meta property="og:url" content="https://eisenjulian.github.io/text-classification-with-estimators/" />
     <meta property="og:image" content="https://eisenjulian.github.io/content/images/2019/03/estimators_loss.png" />
     <meta property="article:published_time" content="2018-03-07T04:50:00.000Z" />
@@ -30,7 +29,7 @@
     
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Text Classification with TensorFlow Estimators" />
-    <meta name="twitter:description" content="Throughout this post we will explain how to classify text using Estimators,  Datasets and Feature Columns, with a scalable high-level API in TensorFlow. " />
+    <meta name="twitter:description" content="Throughout this post we will explain how to classify text using Estimators,  Datasets and Feature Columns, with a scalable high-level API in TensorFlow." />
     <meta name="twitter:url" content="https://eisenjulian.github.io/text-classification-with-estimators/" />
     <meta name="twitter:image" content="https://eisenjulian.github.io/content/images/2019/03/estimators_loss.png" />
     <meta name="twitter:label1" content="Written by" />
@@ -48,11 +47,12 @@
     "publisher": {
         "@type": "Organization",
         "name": "Julian Eisenschlos",
+        "url": "https://eisenjulian.github.io/",
         "logo": {
             "@type": "ImageObject",
             "url": "https://eisenjulian.github.io/favicon.ico",
-            "width": 60,
-            "height": 60
+            "width": 48,
+            "height": 48
         }
     },
     "author": {
@@ -86,7 +86,7 @@
 }
     </script>
 
-    <meta name="generator" content="Ghost 2.28" />
+    <meta name="generator" content="Ghost 3.30" />
     <link rel="alternate" type="application/rss+xml" title="Julian Eisenschlos" href="../rss/index.html" />
     <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-136394483-1"></script>
@@ -107,32 +107,39 @@
 
         
 
-<header class="site-header outer">
+<header class="site-header">
+    <div class="outer site-nav-main">
     <div class="inner">
         <nav class="site-nav">
-    <div class="site-nav-left">
+    <div class="site-nav-left-wrapper">
+        <div class="site-nav-left">
                 <a class="site-nav-logo" href="../index.html">Julian Eisenschlos</a>
-            <ul class="nav" role="menu">
-    <li class="nav-home" role="menuitem"><a href="../index.html">Home</a></li>
-    <li class="nav-about" role="menuitem"><a href="../about/index.html">About</a></li>
-    <li class="nav-papers" role="menuitem"><a href="../publications/index.html">Papers</a></li>
-    <li class="nav-talks" role="menuitem"><a href="../talks/index.html">Talks</a></li>
-    <li class="nav-github" role="menuitem"><a href="https://github.com/eisenjulian">GitHub</a></li>
-    <li class="nav-linkedin" role="menuitem"><a href="https://www.linkedin.com/in/eisenjulian">LinkedIn</a></li>
+            <div class="site-nav-content">
+                    <ul class="nav">
+    <li class="nav-home"><a href="../index.html">Home</a></li>
+    <li class="nav-about"><a href="../about/index.html">About</a></li>
+    <li class="nav-papers"><a href="../publications/index.html">Papers</a></li>
+    <li class="nav-talks"><a href="../talks/index.html">Talks</a></li>
+    <li class="nav-github"><a href="https://github.com/eisenjulian">GitHub</a></li>
+    <li class="nav-linkedin"><a href="https://www.linkedin.com/in/eisenjulian">LinkedIn</a></li>
 </ul>
 
+                    <span class="nav-post-title dash">Text Classification with TensorFlow Estimators</span>
+            </div>
+        </div>
     </div>
     <div class="site-nav-right">
-        <div class="social-links">
-                <a class="social-link social-link-tw" href="https://twitter.com/eisenjulian" title="Twitter" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
+            <div class="social-links">
+                    <a class="social-link social-link-tw" href="https://twitter.com/eisenjulian" title="Twitter" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
 </a>
-        </div>
-            <a class="rss-button" href="https://feedly.com/i/subscription/feed/https://eisenjulian.github.io/rss/" title="RSS" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="6.18" cy="17.82" r="2.18"/><path d="M4 4.44v2.83c7.03 0 12.73 5.7 12.73 12.73h2.83c0-8.59-6.97-15.56-15.56-15.56zm0 5.66v2.83c3.9 0 7.07 3.17 7.07 7.07h2.83c0-5.47-4.43-9.9-9.9-9.9z"/></svg>
+            </div>
+                <a class="rss-button" href="https://feedly.com/i/subscription/feed/https://eisenjulian.github.io/rss/" title="RSS" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="6.18" cy="17.82" r="2.18"/><path d="M4 4.44v2.83c7.03 0 12.73 5.7 12.73 12.73h2.83c0-8.59-6.97-15.56-15.56-15.56zm0 5.66v2.83c3.9 0 7.07 3.17 7.07 7.07h2.83c0-5.47-4.43-9.9-9.9-9.9z"/></svg>
 </a>
+
     </div>
 </nav>
     </div>
-</header>
+</div></header>
 
 
 <main id="site-main" class="site-main outer">
@@ -141,11 +148,49 @@
         <article class="post-full post tag-natural-language-processing tag-tensorflow tag-tutorials ">
 
             <header class="post-full-header">
-                <section class="post-full-meta">
-                    <time class="post-full-meta-date" datetime="2018-03-07">7 March 2018</time>
-                        <span class="date-divider">/</span> <a href="../tag/natural-language-processing/index.html">Natural Language Processing</a>
+
+                <section class="post-full-tags">
+                    <a href="../tag/natural-language-processing/index.html">Natural Language Processing</a>
                 </section>
+
                 <h1 class="post-full-title">Text Classification with TensorFlow Estimators</h1>
+
+                <p class="post-full-custom-excerpt">Throughout this post we will explain how to classify text using Estimators,  Datasets and Feature Columns, with a scalable high-level API in TensorFlow. </p>
+
+                <div class="post-full-byline">
+
+                    <section class="post-full-byline-content">
+
+                        <ul class="author-list">
+                            <li class="author-list-item">
+
+                                <div class="author-card">
+                                    <img class="author-profile-image" src="../content/images/size/w100/2019/03/perfil-square.jpeg" alt="Julian Eisenschlos" />
+                                    <div class="author-info">
+                                        <h2>Julian Eisenschlos</h2>
+                                        <p>Read <a href="../author/julian/index.html">more posts</a> by this author.</p>
+                                    </div>
+                                </div>
+
+                                <a href="../author/julian/index.html" class="author-avatar">
+                                    <img class="author-profile-image" src="../content/images/size/w100/2019/03/perfil-square.jpeg" alt="Julian Eisenschlos" />
+                                </a>
+
+                            </li>
+                        </ul>
+
+                        <section class="post-full-byline-meta">
+                            <h4 class="author-name"><a href="../author/julian/index.html">Julian Eisenschlos</a></h4>
+                            <div class="byline-meta-content">
+                                <time class="byline-meta-date" datetime="2018-03-07">7 Mar 2018</time>
+                                <span class="byline-reading-time"><span class="bull">&bull;</span> 14 min read</span>
+                            </div>
+                        </section>
+
+                    </section>
+
+
+                </div>
             </header>
 
             <figure class="post-full-image">
@@ -155,8 +200,8 @@
                           ../content/images/size/w1000/2019/03/estimators_loss.png 1000w,
                          ../content/images/size/w2000/2019/03/estimators_loss.png 2000w"
                     sizes="(max-width: 800px) 400px,
-                            (max-width: 1170px) 700px,
-                            1400px"
+                        (max-width: 1170px) 1170px,
+                            2000px"
                     src="../content/images/size/w2000/2019/03/estimators_loss.png"
                     alt="Text Classification with TensorFlow Estimators"
                 />
@@ -235,7 +280,7 @@ plt.ylabel('Weight')
 plt.title('Most significant tokens') 
 plt.show()
 </code></pre>
-<!--kg-card-end: markdown--><!--kg-card-begin: image--><figure class="kg-card kg-image-card"><img src="https://cdn-images-1.medium.com/max/1000/0*tCGMsIAQ9PTb9lml.png" class="kg-image"></figure><!--kg-card-end: image--><p>As we can see, tokens with the most positive weight such as ‘refreshing’ are clearly associated with positive sentiment, while tokens that have a large negative weight unarguably evoke negative emotions. A simple but powerful modification that one can do to improve this model is weighting the tokens by their <a href="https://en.wikipedia.org/wiki/Tf%E2%80%93idf" rel="nofollow noopener">tf-idf</a> scores.</p><h3 id="embeddings">Embeddings</h3><p>The next step of complexity we can add are word embeddings. Embeddings are a dense low-dimensional representation of sparse high-dimensional data. This allows our model to learn a more meaningful representation of each token, rather than just an index. While an individual dimension is not meaningful, the low-dimensional space — when learned from a large enough corpus — has been shown to capture relations such as tense, plural, gender, thematic relatedness, and many more. We can add word embeddings by converting our existing feature column into an <code>embedding_column</code>. The representation seen by the model is the mean of the embeddings for each token (see the <code>combiner</code> argument in the <a href="https://www.tensorflow.org/api_docs/python/tf/feature_column/embedding_column" rel="nofollow noopener">docs</a>). We can plug in the embedded features into a pre-canned <code>DNNClassifier</code>.</p><p>A note for the keen observer: an <code>embedding_column</code> is just an efficient way of applying a fully connected layer to the sparse binary feature vector of tokens, which is multiplied by a constant depending of the chosen combiner. A direct consequence of this is that it wouldn’t make sense to use an <code>embedding_column</code>directly in a <code>LinearClassifier</code> because two consecutive linear layers without non-linearities in between add no prediction power to the model, unless of course the embeddings are pre-trained.</p><!--kg-card-begin: markdown--><pre><code class="language-python">embedding_size = 50
+<!--kg-card-end: markdown--><figure class="kg-card kg-image-card"><img src="https://cdn-images-1.medium.com/max/1000/0*tCGMsIAQ9PTb9lml.png" class="kg-image" alt></figure><p>As we can see, tokens with the most positive weight such as ‘refreshing’ are clearly associated with positive sentiment, while tokens that have a large negative weight unarguably evoke negative emotions. A simple but powerful modification that one can do to improve this model is weighting the tokens by their <a href="https://en.wikipedia.org/wiki/Tf%E2%80%93idf" rel="nofollow noopener">tf-idf</a> scores.</p><h3 id="embeddings">Embeddings</h3><p>The next step of complexity we can add are word embeddings. Embeddings are a dense low-dimensional representation of sparse high-dimensional data. This allows our model to learn a more meaningful representation of each token, rather than just an index. While an individual dimension is not meaningful, the low-dimensional space — when learned from a large enough corpus — has been shown to capture relations such as tense, plural, gender, thematic relatedness, and many more. We can add word embeddings by converting our existing feature column into an <code>embedding_column</code>. The representation seen by the model is the mean of the embeddings for each token (see the <code>combiner</code> argument in the <a href="https://www.tensorflow.org/api_docs/python/tf/feature_column/embedding_column" rel="nofollow noopener">docs</a>). We can plug in the embedded features into a pre-canned <code>DNNClassifier</code>.</p><p>A note for the keen observer: an <code>embedding_column</code> is just an efficient way of applying a fully connected layer to the sparse binary feature vector of tokens, which is multiplied by a constant depending of the chosen combiner. A direct consequence of this is that it wouldn’t make sense to use an <code>embedding_column</code>directly in a <code>LinearClassifier</code> because two consecutive linear layers without non-linearities in between add no prediction power to the model, unless of course the embeddings are pre-trained.</p><!--kg-card-begin: markdown--><pre><code class="language-python">embedding_size = 50
 word_embedding_column = tf.feature_column.embedding_column(
     column, dimension=embedding_size)
 classifier = tf.estimator.DNNClassifier(
@@ -244,7 +289,7 @@ classifier = tf.estimator.DNNClassifier(
     model_dir=os.path.join(model_dir, 'bow_embeddings'))
 train_and_evaluate(classifier)
 </code></pre>
-<!--kg-card-end: markdown--><p>We can use TensorBoard to visualize our 50-dimensional word vectors projected into $\mathbb{R}^3$ using <a href="https://en.wikipedia.org/wiki/T-distributed_stochastic_neighbor_embedding" rel="nofollow noopener">t-SNE</a>. We expect similar words to be close to each other. This can be a useful way to inspect our model weights and find unexpected behaviors.</p><!--kg-card-begin: image--><figure class="kg-card kg-image-card"><img src="https://cdn-images-1.medium.com/max/1000/0*lxcE4sPyHteV4lVH.gif" class="kg-image"></figure><!--kg-card-end: image--><p>At this point one possible approach would be to go deeper, further adding more fully connected layers and playing around with layer sizes and training functions. However, by doing that we would add extra complexity and ignore important structure in our sentences. Words do not live in a vacuum and meaning is compositional, formed by words and its neighbors.</p><p>Convolutions are one way to take advantage of this structure, similar to how we can model salient clusters of pixels for <a href="https://www.tensorflow.org/tutorials/layers" rel="nofollow noopener">image classification</a>. The intuition is that certain sequences of words, or <em>n-grams</em>, usually have the same meaning regardless of their overall position in the sentence. Introducing a structural prior via the convolution operation allows us to model the interaction between neighboring words and consequently gives us a better way to represent such meaning.</p><p>The following image shows how a filter matrix <em>F</em> of shape <em>d</em>×<em>m</em> slides across each 3-gram window of tokens to build a new feature map. Afterwards a <em>pooling</em> layer is usually applied to combine adjacent results.</p><!--kg-card-begin: image--><figure class="kg-card kg-image-card kg-card-hascaption"><img src="https://cdn-images-1.medium.com/max/1000/1*TsW55MIvzHwb-GRA21Q7Zw.png" class="kg-image"><figcaption>Source: <a href="https://www.semanticscholar.org/paper/Learning-to-Rank-Short-Text-Pairs-with-Convolution-Severyn-Moschitti/452f7411af7d471dd3ba84c2b06b2aaffc38cdb9" data-href="https://www.semanticscholar.org/paper/Learning-to-Rank-Short-Text-Pairs-with-Convolution-Severyn-Moschitti/452f7411af7d471dd3ba84c2b06b2aaffc38cdb9" class="markup--anchor markup--figure-anchor" rel="nofollow noopener" target="_blank" style="background-color: transparent; color: inherit; text-decoration: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0.54); background-repeat: repeat-x; background-image: url(&quot;data:image/svg+xml;utf8,<svg preserveAspectRatio=\&quot;none\&quot; viewBox=\&quot;0 0 1 1\&quot; xmlns=\&quot;http://www.w3.org/2000/svg\&quot;><line x1=\&quot;0\&quot; y1=\&quot;0\&quot; x2=\&quot;1\&quot; y2=\&quot;1\&quot; stroke=\&quot;currentColor\&quot; /></svg>&quot;); background-size: 1px 1px; background-position: 0px calc(1em + 1px);">Learning to Rank Short Text Pairs with Convolutional Deep Neural Networks</a> by <strong class="markup--strong markup--figure-strong" style="font-weight: 700;">Severyn</strong> et al.&nbsp;[2015]</figcaption></figure><!--kg-card-end: image--><p>Let us look at the full model architecture. The use of dropout layers is a regularization technique that makes the model less likely to overfit.</p><!--kg-card-begin: image--><figure class="kg-card kg-image-card"><img src="https://cdn-images-1.medium.com/max/1000/1*zwj1G4Hem-PX1I54j_9gAw.png" class="kg-image"></figure><!--kg-card-end: image--><p>As seen in previous blog posts, the <code>tf.estimator</code> framework provides a high-level API for training machine learning models, defining <code>train()</code>, <code>evaluate()</code> and <code>predict()</code> operations, handling checkpointing, loading, initializing, serving, building the graph and the session out of the box. There is a small family of pre-made estimators, like the ones we used earlier, but it’s most likely that you will need to <a href="https://www.tensorflow.org/extend/estimators" rel="nofollow noopener">build your own</a>.</p><p>Writing a custom estimator means writing a <code>model_fn(features, labels, mode, params)</code> that returns an <code>EstimatorSpec</code>. The first step will be mapping the features into our embedding layer:</p><!--kg-card-begin: markdown--><pre><code class="language-python">input_layer = tf.contrib.layers.embed_sequence(
+<!--kg-card-end: markdown--><p>We can use TensorBoard to visualize our 50-dimensional word vectors projected into $\mathbb{R}^3$ using <a href="https://en.wikipedia.org/wiki/T-distributed_stochastic_neighbor_embedding" rel="nofollow noopener">t-SNE</a>. We expect similar words to be close to each other. This can be a useful way to inspect our model weights and find unexpected behaviors.</p><figure class="kg-card kg-image-card"><img src="https://cdn-images-1.medium.com/max/1000/0*lxcE4sPyHteV4lVH.gif" class="kg-image" alt></figure><p>At this point one possible approach would be to go deeper, further adding more fully connected layers and playing around with layer sizes and training functions. However, by doing that we would add extra complexity and ignore important structure in our sentences. Words do not live in a vacuum and meaning is compositional, formed by words and its neighbors.</p><p>Convolutions are one way to take advantage of this structure, similar to how we can model salient clusters of pixels for <a href="https://www.tensorflow.org/tutorials/layers" rel="nofollow noopener">image classification</a>. The intuition is that certain sequences of words, or <em>n-grams</em>, usually have the same meaning regardless of their overall position in the sentence. Introducing a structural prior via the convolution operation allows us to model the interaction between neighboring words and consequently gives us a better way to represent such meaning.</p><p>The following image shows how a filter matrix <em>F</em> of shape <em>d</em>×<em>m</em> slides across each 3-gram window of tokens to build a new feature map. Afterwards a <em>pooling</em> layer is usually applied to combine adjacent results.</p><figure class="kg-card kg-image-card kg-card-hascaption"><img src="https://cdn-images-1.medium.com/max/1000/1*TsW55MIvzHwb-GRA21Q7Zw.png" class="kg-image" alt><figcaption>Source: <a href="https://www.semanticscholar.org/paper/Learning-to-Rank-Short-Text-Pairs-with-Convolution-Severyn-Moschitti/452f7411af7d471dd3ba84c2b06b2aaffc38cdb9" data-href="https://www.semanticscholar.org/paper/Learning-to-Rank-Short-Text-Pairs-with-Convolution-Severyn-Moschitti/452f7411af7d471dd3ba84c2b06b2aaffc38cdb9" class="markup--anchor markup--figure-anchor" rel="nofollow noopener" target="_blank" style="background-color: transparent; color: inherit; text-decoration: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0.54); background-repeat: repeat-x; background-image: url(&quot;data:image/svg+xml;utf8,<svg preserveAspectRatio=\&quot;none\&quot; viewBox=\&quot;0 0 1 1\&quot; xmlns=\&quot;http://www.w3.org/2000/svg\&quot;><line x1=\&quot;0\&quot; y1=\&quot;0\&quot; x2=\&quot;1\&quot; y2=\&quot;1\&quot; stroke=\&quot;currentColor\&quot; /></svg>&quot;); background-size: 1px 1px; background-position: 0px calc(1em + 1px);">Learning to Rank Short Text Pairs with Convolutional Deep Neural Networks</a> by <strong class="markup--strong markup--figure-strong" style="font-weight: 700;">Severyn</strong> et al.&nbsp;[2015]</figcaption></figure><p>Let us look at the full model architecture. The use of dropout layers is a regularization technique that makes the model less likely to overfit.</p><figure class="kg-card kg-image-card"><img src="https://cdn-images-1.medium.com/max/1000/1*zwj1G4Hem-PX1I54j_9gAw.png" class="kg-image" alt></figure><p>As seen in previous blog posts, the <code>tf.estimator</code> framework provides a high-level API for training machine learning models, defining <code>train()</code>, <code>evaluate()</code> and <code>predict()</code> operations, handling checkpointing, loading, initializing, serving, building the graph and the session out of the box. There is a small family of pre-made estimators, like the ones we used earlier, but it’s most likely that you will need to <a href="https://www.tensorflow.org/extend/estimators" rel="nofollow noopener">build your own</a>.</p><p>Writing a custom estimator means writing a <code>model_fn(features, labels, mode, params)</code> that returns an <code>EstimatorSpec</code>. The first step will be mapping the features into our embedding layer:</p><!--kg-card-begin: markdown--><pre><code class="language-python">input_layer = tf.contrib.layers.embed_sequence(
     features['x'], 
     vocab_size, 
     embedding_size,
@@ -287,7 +332,7 @@ cnn_classifier = tf.estimator.Estimator(model_fn=model_fn,
                                         params=params)
 train_and_evaluate(cnn_classifier)
 </code></pre>
-<!--kg-card-end: markdown--><h3 id="lstm-networks">LSTM Networks</h3><p>Using the <code>Estimator</code> API and the same model <code>head</code>, we can also create a classifier that uses a <em>Long Short-Term Memory</em> (<em>LSTM</em>) cell instead of convolutions. Recurrent models such as this are some of the most successful building blocks for NLP applications. An LSTM processes the entire document sequentially, recursing over the sequence with its cell while storing the current state of the sequence in its memory.</p><p>One of the drawbacks of recurrent models compared to CNNs is that, because of the nature of recursion, models turn out deeper and more complex, which usually produces slower training time and worse convergence. LSTMs (and RNNs in general) can suffer convergence issues like vanishing or exploding gradients, that said, with sufficient tuning they can obtain state-of-the-art results for many problems. As a rule of thumb CNNs are good at feature extraction, while RNNs excel at tasks that depend on the meaning of the whole sentence, like question answering or machine translation.</p><p>Each cell processes one token embedding at a time and updates its internal state based on a differentiable computation that depends on both the embedding vector <em>x</em> at time <em>t</em>​ and the previous state <em>h</em> at time <em>t−1</em>​. In order to get a better understanding of how LSTMs work, you can refer to Chris Olah’s <a href="https://colah.github.io/posts/2015-08-Understanding-LSTMs/" rel="nofollow noopener">blog post</a>.</p><!--kg-card-begin: image--><figure class="kg-card kg-image-card kg-card-hascaption"><img src="https://cdn-images-1.medium.com/max/1000/0*_lp7l6lhNBhETERr.png" class="kg-image"><figcaption>Source: <a href="https://colah.github.io/posts/2015-08-Understanding-LSTMs/" data-href="https://colah.github.io/posts/2015-08-Understanding-LSTMs/" class="markup--anchor markup--figure-anchor" rel="nofollow noopener" target="_blank" style="background-color: transparent; color: inherit; text-decoration: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0.54); background-repeat: repeat-x; background-image: url(&quot;data:image/svg+xml;utf8,<svg preserveAspectRatio=\&quot;none\&quot; viewBox=\&quot;0 0 1 1\&quot; xmlns=\&quot;http://www.w3.org/2000/svg\&quot;><line x1=\&quot;0\&quot; y1=\&quot;0\&quot; x2=\&quot;1\&quot; y2=\&quot;1\&quot; stroke=\&quot;currentColor\&quot; /></svg>&quot;); background-size: 1px 1px; background-position: 0px calc(1em + 1px);">Understanding LSTM Networks</a> by <strong class="markup--strong markup--figure-strong" style="font-weight: 700;">Chris&nbsp;Olah</strong></figcaption></figure><!--kg-card-end: image--><p>The complete LSTM model can be expressed by the following simple flowchart:</p><!--kg-card-begin: image--><figure class="kg-card kg-image-card"><img src="https://cdn-images-1.medium.com/max/1000/1*y3w54qFX7D2P0I4FKHUddQ.png" class="kg-image"></figure><!--kg-card-end: image--><p>In the beginning of this post, we padded all documents up to 200 tokens, which is necessary to build a proper tensor. However, when a document contains fewer than 200 words, we don’t want the LSTM to continue processing padding tokens as it does not add information and degrades performance. For this reason, we additionally want to provide our network with the length of the original sequence before it was padded. Internally, the model then copies the last state through to the sequence’s end. We can do this by using the <code>"len"</code> feature in our input functions. We can now use the same logic as above and simply replace the convolutional, pooling, and flatten layers with our LSTM cell.</p><!--kg-card-begin: markdown--><pre><code class="language-python">lstm_cell = tf.nn.rnn_cell.BasicLSTMCell(100)
+<!--kg-card-end: markdown--><h3 id="lstm-networks">LSTM Networks</h3><p>Using the <code>Estimator</code> API and the same model <code>head</code>, we can also create a classifier that uses a <em>Long Short-Term Memory</em> (<em>LSTM</em>) cell instead of convolutions. Recurrent models such as this are some of the most successful building blocks for NLP applications. An LSTM processes the entire document sequentially, recursing over the sequence with its cell while storing the current state of the sequence in its memory.</p><p>One of the drawbacks of recurrent models compared to CNNs is that, because of the nature of recursion, models turn out deeper and more complex, which usually produces slower training time and worse convergence. LSTMs (and RNNs in general) can suffer convergence issues like vanishing or exploding gradients, that said, with sufficient tuning they can obtain state-of-the-art results for many problems. As a rule of thumb CNNs are good at feature extraction, while RNNs excel at tasks that depend on the meaning of the whole sentence, like question answering or machine translation.</p><p>Each cell processes one token embedding at a time and updates its internal state based on a differentiable computation that depends on both the embedding vector <em>x</em> at time <em>t</em>​ and the previous state <em>h</em> at time <em>t−1</em>​. In order to get a better understanding of how LSTMs work, you can refer to Chris Olah’s <a href="https://colah.github.io/posts/2015-08-Understanding-LSTMs/" rel="nofollow noopener">blog post</a>.</p><figure class="kg-card kg-image-card kg-card-hascaption"><img src="https://cdn-images-1.medium.com/max/1000/0*_lp7l6lhNBhETERr.png" class="kg-image" alt><figcaption>Source: <a href="https://colah.github.io/posts/2015-08-Understanding-LSTMs/" data-href="https://colah.github.io/posts/2015-08-Understanding-LSTMs/" class="markup--anchor markup--figure-anchor" rel="nofollow noopener" target="_blank" style="background-color: transparent; color: inherit; text-decoration: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0.54); background-repeat: repeat-x; background-image: url(&quot;data:image/svg+xml;utf8,<svg preserveAspectRatio=\&quot;none\&quot; viewBox=\&quot;0 0 1 1\&quot; xmlns=\&quot;http://www.w3.org/2000/svg\&quot;><line x1=\&quot;0\&quot; y1=\&quot;0\&quot; x2=\&quot;1\&quot; y2=\&quot;1\&quot; stroke=\&quot;currentColor\&quot; /></svg>&quot;); background-size: 1px 1px; background-position: 0px calc(1em + 1px);">Understanding LSTM Networks</a> by <strong class="markup--strong markup--figure-strong" style="font-weight: 700;">Chris&nbsp;Olah</strong></figcaption></figure><p>The complete LSTM model can be expressed by the following simple flowchart:</p><figure class="kg-card kg-image-card"><img src="https://cdn-images-1.medium.com/max/1000/1*y3w54qFX7D2P0I4FKHUddQ.png" class="kg-image" alt></figure><p>In the beginning of this post, we padded all documents up to 200 tokens, which is necessary to build a proper tensor. However, when a document contains fewer than 200 words, we don’t want the LSTM to continue processing padding tokens as it does not add information and degrades performance. For this reason, we additionally want to provide our network with the length of the original sequence before it was padded. Internally, the model then copies the last state through to the sequence’s end. We can do this by using the <code>"len"</code> feature in our input functions. We can now use the same logic as above and simply replace the convolutional, pooling, and flatten layers with our LSTM cell.</p><!--kg-card-begin: markdown--><pre><code class="language-python">lstm_cell = tf.nn.rnn_cell.BasicLSTMCell(100)
 _, final_states = tf.nn.dynamic_rnn(
         lstm_cell, inputs, sequence_length=features['len'], dtype=tf.float32)
 logits = tf.layers.dense(inputs=final_states.h, units=1)
@@ -317,7 +362,7 @@ cnn_pretrained_classifier = tf.estimator.Estimator(
 train_and_evaluate(cnn_pretrained_classifier)
 </code></pre>
 <!--kg-card-end: markdown--><h3 id="running-tensorboard">Running TensorBoard</h3><p>Now we can launch TensorBoard and see how the different models we’ve trained compare against each other in terms of training time and performance.</p><p>In a terminal, we run</p><!--kg-card-begin: markdown--><p><code>&gt; tensorboard --logdir={model_dir}</code></p>
-<!--kg-card-end: markdown--><p>We can visualize many metrics collected while training and testing, including the loss function values of each model at each training step, and the precision-recall curves. This is of course most useful to select which model works best for our use-case as well as how to choose classification thresholds.</p><!--kg-card-begin: image--><figure class="kg-card kg-image-card"><img src="https://cdn-images-1.medium.com/max/1000/1*ACyqHB1zNYZQ3YDTiY7WPg.png" class="kg-image"></figure><!--kg-card-end: image--><!--kg-card-begin: image--><figure class="kg-card kg-image-card kg-card-hascaption"><img src="https://cdn-images-1.medium.com/max/750/1*_tL-oN9IvzDCWyVGZ4LF3A.png" class="kg-image"><figcaption>Training loss across steps on the left and Precision-Recall curves on the test data for each of our models on the&nbsp;left</figcaption></figure><!--kg-card-end: image--><h3 id="getting-predictions">Getting Predictions</h3><p>To obtain predictions on new sentences we can use the <code>predict</code> method in the <code>Estimator</code> instances, which will load the latest checkpoint for each model and evaluate on the unseen examples. But before passing the data into the model we have to clean up, tokenize and map each token to the corresponding index as we see below.</p><!--kg-card-begin: markdown--><pre><code class="language-python">def text_to_index(sentence):
+<!--kg-card-end: markdown--><p>We can visualize many metrics collected while training and testing, including the loss function values of each model at each training step, and the precision-recall curves. This is of course most useful to select which model works best for our use-case as well as how to choose classification thresholds.</p><figure class="kg-card kg-image-card"><img src="https://cdn-images-1.medium.com/max/1000/1*ACyqHB1zNYZQ3YDTiY7WPg.png" class="kg-image" alt></figure><figure class="kg-card kg-image-card kg-card-hascaption"><img src="https://cdn-images-1.medium.com/max/750/1*_tL-oN9IvzDCWyVGZ4LF3A.png" class="kg-image" alt><figcaption>Training loss across steps on the left and Precision-Recall curves on the test data for each of our models on the&nbsp;left</figcaption></figure><h3 id="getting-predictions">Getting Predictions</h3><p>To obtain predictions on new sentences we can use the <code>predict</code> method in the <code>Estimator</code> instances, which will load the latest checkpoint for each model and evaluate on the unseen examples. But before passing the data into the model we have to clean up, tokenize and map each token to the corresponding index as we see below.</p><!--kg-card-begin: markdown--><pre><code class="language-python">def text_to_index(sentence):
     # Remove punctuation characters except for the apostrophe
     translator = str.maketrans('', '', string.punctuation.replace(&quot;'&quot;, ''))
     tokens = sentence.translate(translator).lower().split()
@@ -334,43 +379,25 @@ def print_predictions(sentences, classifier):
     predictions = [p['logistic'][0] for p in classifier.predict(input_fn=predict_input_fn)]
     print(predictions)
 </code></pre>
-<!--kg-card-end: markdown--><p>It is worth noting that the checkpoint itself is not sufficient to make predictions; the actual code used to build the estimator is necessary as well in order to map the saved weights to the corresponding tensors. It’s a good practice to associate saved checkpoints with the branch of code with which they were created.</p><p>If you are interested in exporting the models to disk in a fully recoverable way, you might want to look into the <a href="https://www.tensorflow.org/programmers_guide/saved_model#using_savedmodel_with_estimators" rel="nofollow noopener">SavedModel</a> class, which is especially useful for serving your model through an API using <a href="https://github.com/tensorflow/serving" rel="nofollow noopener">TensorFlow Serving</a> or loading it in the browser with <a href="https://js.tensorflow.org/" rel="nofollow noopener">TensorFlow.js</a>.</p><p>In this blog post, we explored how to use estimators for text classification, in particular for the IMDB Reviews Dataset. We trained and visualized our own embeddings, as well as loaded pre-trained ones. We started from a simple baseline and made our way to convolutional neural networks and LSTMs.</p><p>For more details, be sure to check out:</p><ul><li>A <a href="https://github.com/eisenjulian/nlp_estimator_tutorial/blob/master/nlp_estimators.ipynb" rel="nofollow noopener">Jupyter Notebook</a> that can run locally, or on <a href="https://goo.gl/fXsCra" rel="nofollow noopener">Colaboratory</a>.</li><li>The complete <a href="https://github.com/eisenjulian/nlp_estimator_tutorial/blob/master/nlp_estimators.py" rel="nofollow noopener">source code</a> for this blog post.</li><li>The TensorFlow <a href="https://www.tensorflow.org/programmers_guide/embedding" rel="nofollow noopener">Embedding</a> guide.</li><li>The TensorFlow <a href="https://www.tensorflow.org/tutorials/word2vec" rel="nofollow noopener">Vector Representation of Words</a> tutorial.</li><li>The <em>NLTK</em> <a href="http://www.nltk.org/book/ch03.html" rel="nofollow noopener">Processing Raw Text</a> chapter on how to design langage pipelines.</li></ul><!--kg-card-begin: hr--><hr><!--kg-card-end: hr--><p>Thanks for reading! If you like you can find us online at <a href="http://ruder.io/" rel="nofollow noopener nofollow noopener nofollow noopener">ruder.io</a> and <a href="https://twitter.com/eisenjulian" rel="nofollow noopener nofollow noopener">@eisenjulian</a>. Send our way all your feedback and questions.</p>
+<!--kg-card-end: markdown--><p>It is worth noting that the checkpoint itself is not sufficient to make predictions; the actual code used to build the estimator is necessary as well in order to map the saved weights to the corresponding tensors. It’s a good practice to associate saved checkpoints with the branch of code with which they were created.</p><p>If you are interested in exporting the models to disk in a fully recoverable way, you might want to look into the <a href="https://www.tensorflow.org/programmers_guide/saved_model#using_savedmodel_with_estimators" rel="nofollow noopener">SavedModel</a> class, which is especially useful for serving your model through an API using <a href="https://github.com/tensorflow/serving" rel="nofollow noopener">TensorFlow Serving</a> or loading it in the browser with <a href="https://js.tensorflow.org/" rel="nofollow noopener">TensorFlow.js</a>.</p><p>In this blog post, we explored how to use estimators for text classification, in particular for the IMDB Reviews Dataset. We trained and visualized our own embeddings, as well as loaded pre-trained ones. We started from a simple baseline and made our way to convolutional neural networks and LSTMs.</p><p>For more details, be sure to check out:</p><ul><li>A <a href="https://github.com/eisenjulian/nlp_estimator_tutorial/blob/master/nlp_estimators.ipynb" rel="nofollow noopener">Jupyter Notebook</a> that can run locally, or on <a href="https://goo.gl/fXsCra" rel="nofollow noopener">Colaboratory</a>.</li><li>The complete <a href="https://github.com/eisenjulian/nlp_estimator_tutorial/blob/master/nlp_estimators.py" rel="nofollow noopener">source code</a> for this blog post.</li><li>The TensorFlow <a href="https://www.tensorflow.org/programmers_guide/embedding" rel="nofollow noopener">Embedding</a> guide.</li><li>The TensorFlow <a href="https://www.tensorflow.org/tutorials/word2vec" rel="nofollow noopener">Vector Representation of Words</a> tutorial.</li><li>The <em>NLTK</em> <a href="http://www.nltk.org/book/ch03.html" rel="nofollow noopener">Processing Raw Text</a> chapter on how to design langage pipelines.</li></ul><hr><p>Thanks for reading! If you like you can find us online at <a href="http://ruder.io/" rel="nofollow noopener nofollow noopener nofollow noopener">ruder.io</a> and <a href="https://twitter.com/eisenjulian" rel="nofollow noopener nofollow noopener">@eisenjulian</a>. Send our way all your feedback and questions.</p>
                 </div>
             </section>
 
 
-            <footer class="post-full-footer">
-
-
-                    
-<section class="author-card">
-        <img class="author-profile-image" src="../content/images/size/w100/2019/03/perfil-square.jpeg" alt="Julian Eisenschlos" />
-    <section class="author-card-content">
-        <h4 class="author-card-name"><a href="../author/julian/index.html">Julian Eisenschlos</a></h4>
-            <p>Read <a href="../author/julian/index.html">more posts</a> by this author.</p>
-    </section>
-</section>
-<div class="post-full-footer-right">
-    <a class="author-card-button" href="../author/julian/index.html">Read More</a>
-</div>
-
-
-            </footer>
-
             <section class="post-full-comments">
-              <div id="disqus_thread"></div>
-              <script>
-              var disqus_config = function () {
-                  this.page.url = "https://eisenjulian.github.io/text-classification-with-estimators/";
-                  this.page.identifier = "ghost-5c8f230f6d2ff81194b67a4f"
-              };
-              (function() {
-              var d = document, s = d.createElement('script');
-              s.src = 'https://eisenjulian.disqus.com/embed.js';
-              s.setAttribute('data-timestamp', +new Date());
-              (d.head || d.body).appendChild(s);
-              })();
-              </script>
+                <div id="disqus_thread"></div>
+                <script>
+                var disqus_config = function () {
+                    this.page.url = "https://eisenjulian.github.io/text-classification-with-estimators/";  
+                    this.page.identifier = "ghost-5c8f230f6d2ff81194b67a4f"
+                };
+                (function() {
+                var d = document, s = d.createElement('script');
+                s.src = 'https://eisenjulian.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+                })();
+                </script>
             </section>
 
         </article>
@@ -381,6 +408,26 @@ def print_predictions(sentences, classifier):
 <aside class="read-next outer">
     <div class="inner">
         <div class="read-next-feed">
+                <article class="read-next-card">
+                    <header class="read-next-card-header">
+                        <h3><span>More in</span> <a href="../tag/natural-language-processing/index.html">Natural Language Processing</a></h3>
+                    </header>
+                    <div class="read-next-card-content">
+                        <ul>
+                            <li>
+                                <h4><a href="../multifit/index.html">Efficient multi-lingual language model fine-tuning</a></h4>
+                                <div class="read-next-card-meta">
+                                    <p><time datetime="2019-09-10">10 Sep 2019</time> –
+                                        10 min read</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <footer class="read-next-card-footer">
+                        <a href="../tag/natural-language-processing/index.html">1 post
+                            →</a>
+                    </footer>
+                </article>
 
                 <article class="post-card post tag-automatic-differentiation tag-math tag-tutorials ">
 
@@ -391,6 +438,7 @@ def print_predictions(sentences, classifier):
                   ../content/images/size/w1000/2019/03/onion.jpg 1000w,
                  ../content/images/size/w2000/2019/03/onion.jpg 2000w"
             sizes="(max-width: 1000px) 400px, 700px"
+            loading="lazy"
             src="../content/images/size/w600/2019/03/onion.jpg"
             alt="Neural Networks in 100 lines of pure Python"
         />
@@ -401,79 +449,49 @@ def print_predictions(sentences, classifier):
         <a class="post-card-content-link" href="../deep-learning-in-100-lines/index.html">
 
             <header class="post-card-header">
-                    <span class="post-card-tags">Automatic Differentiation</span>
+                    <div class="post-card-primary-tag">Automatic Differentiation</div>
                 <h2 class="post-card-title">Neural Networks in 100 lines of pure Python</h2>
             </header>
 
             <section class="post-card-excerpt">
-                <p>Can we build a Deep learning framework in plain Python and Numpy? Can we make it compact, clear and extendable? Let's set out to explore those ideas and see what we can create!</p>
+                    <p>Can we build a Deep learning framework in plain Python and Numpy? Can we make it compact, clear and extendable? Let's set out to explore those ideas and see what we can create!</p>
             </section>
 
         </a>
 
         <footer class="post-card-meta">
-
             <ul class="author-list">
                 <li class="author-list-item">
-
+            
                     <div class="author-name-tooltip">
                         Julian Eisenschlos
                     </div>
-
-                        <a href="../author/julian/index.html" class="static-avatar">
-                            <img class="author-profile-image" src="../content/images/size/w100/2019/03/perfil-square.jpeg" alt="Julian Eisenschlos" />
-                        </a>
+            
+                    <a href="../author/julian/index.html" class="static-avatar">
+                        <img class="author-profile-image" src="../content/images/size/w100/2019/03/perfil-square.jpeg" alt="Julian Eisenschlos" />
+                    </a>
                 </li>
             </ul>
-
-            <span class="reading-time">11 min read</span>
-
+            <div class="post-card-byline-content">
+                <span><a href="../author/julian/index.html">Julian Eisenschlos</a></span>
+                <span class="post-card-byline-date"><time datetime="2019-03-17">17 Mar 2019</time> <span class="bull">&bull;</span> 11 min read</span>
+            </div>
         </footer>
 
     </div>
 
 </article>
 
-
         </div>
     </div>
 </aside>
-
-<div class="floating-header">
-    <div class="floating-header-logo">
-        <a href="../index.html">
-            <span>Julian Eisenschlos</span>
-        </a>
-    </div>
-    <span class="floating-header-divider">&mdash;</span>
-    <div class="floating-header-title">Text Classification with TensorFlow Estimators</div>
-    <div class="floating-header-share">
-        <div class="floating-header-share-label">Share this <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-    <path d="M7.5 15.5V4a1.5 1.5 0 1 1 3 0v4.5h2a1 1 0 0 1 1 1h2a1 1 0 0 1 1 1H18a1.5 1.5 0 0 1 1.5 1.5v3.099c0 .929-.13 1.854-.385 2.748L17.5 23.5h-9c-1.5-2-5.417-8.673-5.417-8.673a1.2 1.2 0 0 1 1.76-1.605L7.5 15.5zm6-6v2m-3-3.5v3.5m6-1v2"/>
-</svg>
-</div>
-        <a class="floating-header-share-tw" href="https://twitter.com/share?text=Text%20Classification%20with%20TensorFlow%20Estimators&amp;url=https://eisenjulian.github.io/text-classification-with-estimators/"
-            onclick="window.open(this.href, 'share-twitter', 'width=550,height=235');return false;">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
-        </a>
-        <a class="floating-header-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=https://eisenjulian.github.io/text-classification-with-estimators/"
-            onclick="window.open(this.href, 'share-facebook','width=580,height=296');return false;">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M19 6h5V0h-5c-3.86 0-7 3.14-7 7v3H8v6h4v16h6V16h5l1-6h-6V7c0-.542.458-1 1-1z"/></svg>
-        </a>
-    </div>
-    <progress id="reading-progress" class="progress" value="0">
-        <div class="progress-container">
-            <span class="progress-bar"></span>
-        </div>
-    </progress>
-</div>
 
 
 
 
         <footer class="site-footer outer">
             <div class="site-footer-content inner">
-                <section class="copyright"><a href="../index.html">Julian Eisenschlos</a> &copy; 2019</section>
+                <section class="copyright"><a href="../index.html">Julian Eisenschlos</a> &copy; 2020</section>
                 <nav class="site-footer-nav">
                     <a href="../index.html">Latest Posts</a>
                     
@@ -486,89 +504,78 @@ def print_predictions(sentences, classifier):
     </div>
 
 
-    <script>
-        var images = document.querySelectorAll('.kg-gallery-image img');
-        images.forEach(function (image) {
-            var container = image.closest('.kg-gallery-image');
-            var width = image.attributes.width.value;
-            var height = image.attributes.height.value;
-            var ratio = width / height;
-            container.style.flex = ratio + ' 1 0%';
-        })
-    </script>
-
-
     <script
-        src="https://code.jquery.com/jquery-3.2.1.min.js"
-        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
         crossorigin="anonymous">
     </script>
-    <script type="text/javascript" src="../assets/built/jquery.fitvids.js%3Fv=efa7f99d1e"></script>
-
+    <script src="../assets/built/casper.js@v=903911b6fa"></script>
 
     <script>
-
-// NOTE: Scroll performance is poor in Safari
-// - this appears to be due to the events firing much more slowly in Safari.
-//   Dropping the scroll event and using only a raf loop results in smoother
-//   scrolling but continuous processing even when not scrolling
-$(document).ready(function () {
-    // Start fitVids
-    var $postContent = $(".post-full-content");
-    $postContent.fitVids();
-    // End fitVids
-
-    var progressBar = document.querySelector('#reading-progress');
-    var header = document.querySelector('.floating-header');
-    var title = document.querySelector('.post-full-title');
-
-    var lastScrollY = window.scrollY;
-    var lastWindowHeight = window.innerHeight;
-    var lastDocumentHeight = $(document).height();
-    var ticking = false;
-
-    function onScroll() {
-        lastScrollY = window.scrollY;
-        requestTick();
-    }
-
-    function onResize() {
-        lastWindowHeight = window.innerHeight;
-        lastDocumentHeight = $(document).height();
-        requestTick();
-    }
-
-    function requestTick() {
-        if (!ticking) {
-            requestAnimationFrame(update);
-        }
-        ticking = true;
-    }
-
-    function update() {
-        var trigger = title.getBoundingClientRect().top + window.scrollY;
-        var triggerOffset = title.offsetHeight + 35;
-        var progressMax = lastDocumentHeight - lastWindowHeight;
-
-        // show/hide floating header
-        if (lastScrollY >= trigger + triggerOffset) {
-            header.classList.add('floating-active');
-        } else {
-            header.classList.remove('floating-active');
+        // Parse the URL parameter
+        function getParameterByName(name, url) {
+            if (!url) url = window.location.href;
+            name = name.replace(/[\[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
         }
 
-        progressBar.setAttribute('max', progressMax);
-        progressBar.setAttribute('value', lastScrollY);
+        // Give the parameter a variable name
+        var action = getParameterByName('action');
 
-        ticking = false;
-    }
+        $(document).ready(function () {
+            if (action == 'subscribe') {
+                $('body').addClass("subscribe-success");
+            }
 
-    window.addEventListener('scroll', onScroll, {passive: true});
-    window.addEventListener('resize', onResize, false);
+            $('.subscribe-success-message .subscribe-close').click(function () {
+                $('.subscribe-success-message').addClass('close');
+            });
 
-    update();
+            // Reset form on opening subscrion overlay
+            $('.subscribe-button').click(function() {
+                $('.subscribe-overlay form').removeClass();
+                $('.subscribe-email').val('');
+            });
+        });
+    </script>
 
-});
+    <script>
+    $(document).ready(function () {
+        // FitVids - start
+        var $postContent = $(".post-full-content");
+        $postContent.fitVids();
+        // FitVids - end
+
+        // Replace nav with title on scroll - start
+        Casper.stickyNavTitle({
+            navSelector: '.site-nav-main',
+            titleSelector: '.post-full-title',
+            activeClass: 'nav-post-title-active'
+        });
+        // Replace nav with title on scroll - end
+
+        // Hover on avatar
+        var hoverTimeout;
+        $('.author-list-item').hover(function () {
+            var $this = $(this);
+
+            clearTimeout(hoverTimeout);
+
+            $('.author-card').removeClass('hovered');
+            $(this).children('.author-card').addClass('hovered');
+
+        }, function () {
+            var $this = $(this);
+
+            hoverTimeout = setTimeout(function () {
+                $this.children('.author-card').removeClass('hovered');
+            }, 800);
+        });
+    });
 </script>
 
 
