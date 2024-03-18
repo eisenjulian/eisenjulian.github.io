@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+<html ⚡>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+    <title>Foundation models for reasoning on charts</title>
+
+    <link rel="canonical" href="../index.html">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    
+    <meta property="og:site_name" content="Julian Eisenschlos">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Foundation models for reasoning on charts">
+    <meta property="og:description" content="Visual language is the form of communication that relies on pictorial symbols outside of text to convey information. It is ubiquitous in our digital life in the form of iconography, infographics, tables, plots, and charts, extending to the real world in street signs, comic books, food labels, etc. For that">
+    <meta property="og:url" content="https://eisenjulian.github.io/foundation-models-for-reasoning-on-charts/">
+    <meta property="og:image" content="https://eisenjulian.github.io/content/images/2024/03/deplot_front_page_self_referential_figure_v2.jpg">
+    <meta property="article:published_time" content="2024-03-17T19:39:44.000Z">
+    <meta property="article:modified_time" content="2024-03-18T09:14:18.000Z">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Foundation models for reasoning on charts">
+    <meta name="twitter:description" content="Visual language is the form of communication that relies on pictorial symbols outside of text to convey information. It is ubiquitous in our digital life in the form of iconography, infographics, tables, plots, and charts, extending to the real world in street signs, comic books, food labels, etc. For that">
+    <meta name="twitter:url" content="https://eisenjulian.github.io/foundation-models-for-reasoning-on-charts/">
+    <meta name="twitter:image" content="https://eisenjulian.github.io/content/images/2024/03/deplot_front_page_self_referential_figure_v2.jpg">
+    <meta name="twitter:label1" content="Written by">
+    <meta name="twitter:data1" content="Julian Eisenschlos">
+    <meta name="twitter:site" content="@eisenjulian">
+    <meta property="og:image:width" content="875">
+    <meta property="og:image:height" content="512">
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Julian Eisenschlos",
+        "url": "https://eisenjulian.github.io/",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://eisenjulian.github.io/favicon.ico",
+            "width": 48,
+            "height": 48
+        }
+    },
+    "author": {
+        "@type": "Person",
+        "name": "Julian Eisenschlos",
+        "image": {
+            "@type": "ImageObject",
+            "url": "https://eisenjulian.github.io/content/images/2024/03/perfil-square.jpeg",
+            "width": 710,
+            "height": 710
+        },
+        "url": "https://eisenjulian.github.io/author/julian/",
+        "sameAs": []
+    },
+    "headline": "Foundation models for reasoning on charts",
+    "url": "https://eisenjulian.github.io/foundation-models-for-reasoning-on-charts/",
+    "datePublished": "2024-03-17T19:39:44.000Z",
+    "dateModified": "2024-03-18T09:14:18.000Z",
+    "image": {
+        "@type": "ImageObject",
+        "url": "https://eisenjulian.github.io/content/images/2024/03/deplot_front_page_self_referential_figure_v2.jpg",
+        "width": 875,
+        "height": 512
+    },
+    "description": "Visual language is the form of communication that relies on pictorial symbols outside of text to convey information. It is ubiquitous in our digital life in the form of iconography, infographics, tables, plots, and charts, extending to the real world in street signs, comic books, food labels, etc. For that reason, having computers better understand this type of media can help with scientific communication and discovery, accessibility, and data transparency.\n\nFoundation models for reasoning on ch",
+    "mainEntityOfPage": "https://eisenjulian.github.io/foundation-models-for-reasoning-on-charts/"
+}
+    </script>
+
+    <meta name="generator" content="Ghost 5.80">
+    <link rel="alternate" type="application/rss+xml" title="Julian Eisenschlos" href="../../rss/index.html">
+
+    <style amp-custom>
+    *,
+    *::before,
+    *::after {
+        box-sizing: border-box;
+    }
+
+    html {
+        overflow-x: hidden;
+        overflow-y: scroll;
+        font-size: 62.5%;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    }
+
+    body {
+        min-height: 100vh;
+        margin: 0;
+        padding: 0;
+        color: #3a4145;
+        font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Open Sans,Helvetica Neue,sans-serif;
+        font-size: 1.7rem;
+        line-height: 1.55em;
+        font-weight: 400;
+        font-style: normal;
+        background: #fff;
+        scroll-behavior: smooth;
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    p,
+    ul,
+    ol,
+    li,
+    dl,
+    dd,
+    hr,
+    pre,
+    form,
+    table,
+    video,
+    figure,
+    figcaption,
+    blockquote {
+        margin: 0;
+        padding: 0;
+    }
+
+    ul[class],
+    ol[class] {
+        padding: 0;
+        list-style: none;
+    }
+
+    img {
+        display: block;
+        max-width: 100%;
+    }
+
+    input,
+    button,
+    select,
+    textarea {
+        font: inherit;
+        -webkit-appearance: none;
+    }
+
+    fieldset {
+        margin: 0;
+        padding: 0;
+        border: 0;
+    }
+
+    label {
+        display: block;
+        font-size: 0.9em;
+        font-weight: 700;
+    }
+
+    hr {
+        position: relative;
+        display: block;
+        width: 100%;
+        height: 1px;
+        border: 0;
+        border-top: 1px solid currentcolor;
+        opacity: 0.1;
+    }
+
+    ::selection {
+        text-shadow: none;
+        background: #cbeafb;
+    }
+
+    mark {
+        background-color: #fdffb6;
+    }
+
+    small {
+        font-size: 80%;
+    }
+
+    sub,
+    sup {
+        position: relative;
+        font-size: 75%;
+        line-height: 0;
+        vertical-align: baseline;
+    }
+    sup {
+        top: -0.5em;
+    }
+    sub {
+        bottom: -0.25em;
+    }
+
+    ul li + li {
+        margin-top: 0.6em;
+    }
+
+    a {
+        color: var(--ghost-accent-color, #1292EE);
+        text-decoration-skip-ink: auto;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        margin: 0;
+        font-weight: 700;
+        color: #121212;
+        line-height: 1.4em;
+    }
+
+    h1 {
+        font-size: 3.4rem;
+        line-height: 1.1em;
+    }
+
+    h2 {
+        font-size: 2.4rem;
+        line-height: 1.2em;
+    }
+
+    h3 {
+        font-size: 1.8rem;
+    }
+
+    h4 {
+        font-size: 1.7rem;
+    }
+
+    h5 {
+        font-size: 1.6rem;
+    }
+
+    h6 {
+        font-size: 1.6rem;
+    }
+
+    amp-img {
+        height: 100%;
+        width: 100%;
+        max-width: 100%;
+        max-height: 100%;
+    }
+
+    amp-img img {
+        object-fit: cover;
+    }
+    
+    amp-youtube {
+        height: calc(100vw / 1.78);
+        width: 100vw;
+        position: relative;
+    }
+
+    amp-youtube img {
+        position: absolute;
+    }
+
+    .page-header {
+        padding: 50px 5vmin 30px;
+        text-align: center;
+        font-size: 2rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .page-header a {
+        color: #121212;
+        font-weight: 700;
+        text-decoration: none;
+        font-size: 1.6rem;
+        letter-spacing: -0.1px;
+    }
+
+    .post {
+        max-width: 680px;
+        margin: 0 auto;
+    }
+
+    .post-header {
+        margin: 0 5vmin 5vmin;
+        text-align: center;
+    }
+
+    .post-meta {
+        margin: 1rem 0 0 0;
+        text-transform: uppercase;
+        color: #738a94;
+        font-weight: 500;
+        font-size: 1.3rem;
+    }
+
+    .post-image {
+        margin: 0 0 5vmin;
+    }
+
+    .post-image img {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+
+    .post-content {
+        padding: 0 5vmin;
+    }
+
+    .post-content > * + * {
+        margin-top: 1.5em;
+    }
+
+    .post-content [id]:not(:first-child) {
+        margin: 2em 0 0;
+    }
+
+    .post-content > [id] + * {
+        margin-top: 1rem;
+    }
+
+    .post-content [id] + .kg-card,
+    .post-content blockquote + .kg-card {
+        margin-top: 40px;
+    }
+
+    .post-content > ul,
+    .post-content > ol,
+    .post-content > dl {
+        padding-left: 1.9em;
+    }
+
+    .post-content hr {
+        margin-top: 40px;
+    }
+
+    .post .post-content hr + * {
+        margin-top: 40px;
+    }
+
+    .post-content amp-img {
+        background-color: #f8f8f8;
+    }
+
+    .post-content blockquote {
+        position: relative;
+        font-style: italic;
+    }
+
+    .post-content blockquote::before {
+        content: "";
+        position: absolute;
+        left: -1.5em;
+        top: 0;
+        bottom: 0;
+        width: 0.3rem;
+        background: var(--ghost-accent-color, #1292EE);
+    }
+
+    .post-content blockquote.kg-blockquote-alt {
+        font-size: 1.2em;
+        font-style: italic;
+        line-height: 1.6em;
+        text-align: center;
+        color: #738a94;
+        padding: 0.75em 3em 1.25em;
+    }
+
+    .post-content blockquote.kg-blockquote-alt::before {
+        display: none;
+    }
+
+    .post-content :not(.kg-card):not([id]) + .kg-card {
+        margin-top: 40px;
+    }
+
+    .post-content .kg-card + :not(.kg-card) {
+        margin-top: 40px;
+    }
+
+    .kg-card figcaption {
+        padding: 1.5rem 1.5rem 0;
+        text-align: center;
+        font-weight: 500;
+        font-size: 1.3rem;
+        line-height: 1.4em;
+        opacity: 0.6;
+    }
+
+    .kg-card figcaption strong {
+        color: rgba(0,0,0,0.8);
+    }
+
+    .post-content :not(pre) code {
+        vertical-align: middle;
+        padding: 0.15em 0.4em 0.15em;
+        border: #e1eaef 1px solid;
+        font-weight: 400;
+        font-size: 0.9em;
+        line-height: 1em;
+        color: #15171a;
+        background: #f0f6f9;
+        border-radius: 0.25em;
+    }
+
+    .post-content > pre {
+        overflow: scroll;
+        padding: 16px 20px;
+        color: #fff;
+        background: #1F2428;
+        border-radius: 5px;
+        box-shadow: 0 2px 6px -2px rgba(0,0,0,.1), 0 0 1px rgba(0,0,0,.4);
+    }
+
+    .kg-embed-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    .kg-image-card img {
+        margin: auto;
+    }
+
+    .kg-gallery-card + .kg-gallery-card {
+        margin-top: 0.75em;
+    }
+
+    .kg-gallery-container {
+        position: relative;
+    }
+
+    .kg-gallery-row {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    .kg-gallery-image {
+        width: 100%;
+        height: 100%;
+    }
+
+    .kg-gallery-row:not(:first-of-type) {
+        margin: 0.75em 0 0 0;
+    }
+
+    .kg-gallery-image:not(:first-of-type) {
+        margin: 0 0 0 0.75em;
+    }
+
+    .kg-bookmark-card,
+    .kg-bookmark-publisher {
+        position: relative;
+    }
+
+    .kg-bookmark-container,
+    .kg-bookmark-container:hover {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row-reverse;
+        color: currentColor;
+        background: rgba(255,255,255,0.6);
+        font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Open Sans,Helvetica Neue,sans-serif;
+        text-decoration: none;
+        border-radius: 3px;
+        box-shadow: 0 2px 6px -2px rgba(0, 0, 0, 0.1), 0 0 1px rgba(0, 0, 0, 0.4);
+        overflow: hidden;
+    }
+
+    .kg-bookmark-content {
+        flex-basis: 0;
+        flex-grow: 999;
+        padding: 20px;
+        order: 1;
+    }
+
+    .kg-bookmark-title {
+        font-weight: 600;
+        font-size: 1.5rem;
+        line-height: 1.3em;
+    }
+
+    .kg-bookmark-description {
+        display: -webkit-box;
+        max-height: 45px;
+        margin: 0.5em 0 0 0;
+        font-size: 1.4rem;
+        line-height: 1.55em;
+        overflow: hidden;
+        opacity: 0.8;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+    }
+
+    .kg-bookmark-metadata {
+        margin-top: 20px;
+    }
+
+    .kg-bookmark-metadata {
+        display: flex;
+        align-items: center;
+        font-weight: 500;
+        font-size: 1.3rem;
+        line-height: 1.3em;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .kg-bookmark-description {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        overflow: hidden;
+    }
+
+    .kg-bookmark-metadata amp-img {
+        width: 18px;
+        height: 18px;
+        max-width: 18px;
+        max-height: 18px;
+        margin-right: 10px;
+    }
+
+    .kg-bookmark-thumbnail {
+        display: flex;
+        flex-basis: 20rem;
+        flex-grow: 1;
+        justify-content: flex-end;
+    }
+
+    .kg-bookmark-thumbnail amp-img {
+        max-height: 200px;
+    }
+
+    .kg-bookmark-author {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+
+    .kg-bookmark-publisher::before {
+        content: "•";
+        margin: 0 .5em;
+    }
+
+    .kg-toggle-card-icon {
+        display: none;
+    }
+
+    .kg-toggle-content {
+        margin-top: 0.8rem;
+    }
+
+    .kg-product-card-container {
+        background: transparent;
+        padding: 20px;
+        width: 100%;
+        border-radius: 5px;
+        box-shadow: inset 0 0 0 1px rgb(124 139 154 / 25%);
+    }
+
+    .kg-product-card-description p {
+        margin-top: 1.5em;
+    }
+
+    .kg-product-card-description ul {
+        margin-left: 24px;
+    }
+
+    .kg-product-card-title {
+        font-size: 1.9rem;
+        font-weight: 700;
+    }
+
+    .kg-product-card-rating-star {
+        height: 28px;
+        width: 20px;
+        margin-right: 2px;
+    }
+
+    .kg-product-card-rating-star svg {
+    width: 16px;
+    height: 16px;
+    fill: currentColor;
+    opacity: 0.15;
+    }
+
+    .kg-product-card-rating-active.kg-product-card-rating-star svg {
+    opacity: 1;
+    }
+
+    .kg-nft-card-container {
+        position: relative;
+        display: flex;
+        flex: auto;
+        flex-direction: column;
+        text-decoration: none;
+        font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Open Sans,Helvetica Neue,sans-serif;
+        font-size: 1.4rem;
+        font-weight: 400;
+        box-shadow: 0 2px 6px -2px rgb(0 0 0 / 10%), 0 0 1px rgb(0 0 0 / 40%);
+        width: 100%;
+        max-width: 512px;
+        color: #15212A;
+        background: #fff;
+        border-radius: 5px;
+        transition: none;
+        margin: 0 auto;
+    }
+
+    .kg-nft-metadata {
+        padding: 2.0rem;
+    }
+
+    .kg-nft-image-container {
+        position: relative;
+    }
+
+    .kg-nft-image {
+        display: flex;
+        border-radius: 5px 5px 0 0;
+    }
+
+    .kg-nft-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 20px;
+    }
+
+    .kg-nft-header h4.kg-nft-title {
+        font-size: 1.9rem;
+        font-weight: 700;
+        margin: 0;
+        color: #15212A;
+    }
+
+    .kg-nft-header amp-img {
+        max-width: 114px;
+        max-height: 26px;
+    }
+
+    .kg-nft-opensea-logo {
+        margin-top: 2px;
+        width: 100px;
+    }
+
+    .kg-nft-creator {
+        font-family: inherit;
+        color: #95A1AD;
+    }
+
+    .kg-nft-creator span {
+        font-weight: 500;
+        color: #15212A;
+    }
+
+    .kg-nft-card p.kg-nft-description {
+        font-size: 1.4rem;
+        line-height: 1.4em;
+        margin: 2.0rem 0 0;
+        color: #222;
+    }
+
+    .kg-button-card {
+        display: flex;
+        position: static;
+        align-items: center;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .kg-btn {
+        display: flex;
+        position: static;
+        align-items: center;
+        padding: 0 2.0rem;
+        height: 4.0rem;
+        line-height: 4.0rem;
+        font-size: 1.65rem;
+        font-weight: 600;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: opacity 0.2s ease-in-out;
+    }
+
+    .kg-btn:hover {
+        opacity: 0.85;
+    }
+
+    .kg-btn-accent {
+        background-color: var(--ghost-accent-color, #1292EE);
+        color: #fff;
+    }
+
+    .kg-callout-card {
+        display: flex;
+        padding: 20px 28px;
+        border-radius: 3px;
+    }
+
+    .kg-callout-card-grey {
+        background: rgba(124, 139, 154, 0.13);
+    }
+
+    .kg-callout-card-white {
+        background: transparent;
+        box-shadow: inset 0 0 0 1px rgba(124, 139, 154, 0.25);
+    }
+
+    .kg-callout-card-blue {
+        background: rgba(33, 172, 232, 0.12);
+    }
+
+    .kg-callout-card-green {
+        background: rgba(52, 183, 67, 0.12);
+    }
+
+    .kg-callout-card-yellow {
+        background: rgba(240, 165, 15, 0.13);
+    }
+
+    .kg-callout-card-red {
+        background: rgba(209, 46, 46, 0.11);
+    }
+
+    .kg-callout-card-pink {
+        background: rgba(225, 71, 174, 0.11);
+    }
+
+    .kg-callout-card-purple {
+        background: rgba(135, 85, 236, 0.12);
+    }
+
+    .kg-callout-card-accent {
+        background: var(--ghost-accent-color);
+        color: #fff;
+    }
+
+    .kg-callout-card-accent a {
+        color: #fff;
+    }
+
+    .kg-callout-emoji {
+        padding-right: 16px;
+        line-height: 1.3;
+        font-size: 1.25em;
+    }
+
+    .kg-header-card {
+        padding: 6em 3em;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .kg-header-card.kg-size-small {
+        padding-top: 4em;
+        padding-bottom: 4em;
+    }
+
+    .kg-header-card.kg-size-large {
+        padding-top: 12em;
+        padding-bottom: 12em;
+    }
+
+    .kg-header-card.kg-width-full {
+        padding-left: 4em;
+        padding-right: 4em;
+    }
+
+    .kg-header-card.kg-align-left {
+        text-align: left;
+        align-items: flex-start;
+    }
+
+    .kg-header-card.kg-style-dark {
+        background: #15171a;
+        color: #ffffff;
+    }
+
+    .kg-header-card.kg-style-light {
+        color: #15171a;
+        border: 1px solid rgba(124, 139, 154, 0.25);
+        border-width: 1px 0;
+    }
+
+    .kg-header-card.kg-style-accent {
+        background-color: var(--ghost-accent-color);
+    }
+
+    .kg-header-card.kg-style-image {
+        background-color: #e7e7eb;
+        background-size: cover;
+        background-position: center center;
+    }
+
+    .kg-header-card h2 {
+        font-size: 4em;
+        font-weight: 700;
+        line-height: 1.1em;
+        margin: 0;
+    }
+
+    .kg-header-card h2 strong {
+        font-weight: 800;
+    }
+
+    .kg-header-card.kg-size-small h2 {
+        font-size: 3em;
+    }
+
+    .kg-header-card.kg-size-large h2 {
+        font-size: 5em;
+    }
+
+    .kg-header-card h3 {
+        font-size: 1.25em;
+        font-weight: 500;
+        line-height: 1.3em;
+        margin: 0;
+    }
+
+    .kg-header-card h3 strong {
+        font-weight: 600;
+    }
+
+    .kg-header-card.kg-size-small h3 {
+        font-size: 1em;
+    }
+
+    .kg-header-card.kg-size-large h3 {
+        font-size: 1.5em;
+    }
+
+    .kg-header-card:not(.kg-style-light) h2,
+    .kg-header-card:not(.kg-style-light) h3 {
+        color: #ffffff;
+    }
+
+    .kg-header-card a.kg-header-card-button {
+        display: flex;
+        position: static;
+        align-items: center;
+        padding: 0 1.2em;
+        height: 2.4em;
+        line-height: 1em;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+        font-size: 0.95em;
+        font-weight: 600;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: opacity 0.2s ease-in-out;
+        background-color: var(--ghost-accent-color);
+        color: #ffffff;
+        margin: 1.75em 0 0;
+    }
+
+    .kg-header-card a.kg-header-card-button:hover {
+        opacity: 0.85;
+    }
+
+    .kg-header-card.kg-size-large a.kg-header-card-button {
+        margin-top: 2em;
+    }
+
+    .kg-header-card.kg-size-small a.kg-header-card-button {
+        margin-top: 1.5em;
+    }
+
+    .kg-header-card.kg-style-image a.kg-header-card-button,
+    .kg-header-card.kg-style-dark a.kg-header-card-button {
+        background: #ffffff;
+        color: #15171a;
+    }
+
+    .kg-header-card.kg-style-accent a.kg-header-card-button {
+        background: #ffffff;
+        color: var(--ghost-accent-color);
+    }
+
+    .kg-audio-card {
+        display: flex;
+        width: 100%;
+        box-shadow: inset 0 0 0 1px rgba(124, 139, 154, 0.25);
+    }
+
+    .kg-audio-thumbnail {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 80px;
+        min-width: 80px;
+        height: 80px;
+        background: transparent;
+        object-fit: cover;
+        aspect-ratio: 1/1;
+        border-radius: 3px 0 0 3px;
+    }
+
+    .kg-audio-thumbnail.placeholder {
+        background: var(--ghost-accent-color);
+    }
+
+    .kg-audio-thumbnail.placeholder svg {
+        width: 24px;
+        height: 24px;
+        fill: white;
+    }
+
+    .kg-audio-player-container {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 100%;
+        --seek-before-width: 0%;
+        --volume-before-width: 100%;
+        --buffered-width: 0%;
+    }
+
+    .kg-audio-title {
+        width: 100%;
+        padding: 8px 12px 0;
+        border: none;
+        font-family: inherit;
+        font-size: 1.1em;
+        font-weight: 700;
+        background: transparent;
+    }
+
+    .kg-audio-player {
+        display: none;
+    }
+
+    .kg-width-full.kg-card-hascaption {
+        display: grid;
+        grid-template-columns: inherit;
+    }
+
+    .post-content table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    .post-content th {
+        padding: 0.5em 0.8em;
+        text-align: left;
+        font-size: .75em;
+        text-transform: uppercase;
+    }
+
+    .post-content td {
+        padding: 0.4em 0.7em;
+    }
+
+    .post-content tbody tr:nth-child(2n + 1) {
+        background-color: rgba(0,0,0,0.1);
+        padding: 1px;
+    }
+
+    .post-content tbody tr:nth-child(2n + 2) td:last-child {
+        box-shadow:
+            inset 1px 0 rgba(0,0,0,0.1),
+            inset -1px 0 rgba(0,0,0,0.1);
+    }
+
+    .post-content tbody tr:nth-child(2n + 2) td {
+        box-shadow: inset 1px 0 rgba(0,0,0,0.1);
+    }
+
+    .post-content tbody tr:last-child {
+        border-bottom: 1px solid rgba(0,0,0,.1);
+    }
+
+    .page-footer {
+        padding: 60px 5vmin;
+        margin: 60px auto 0;
+        text-align: center;
+        background-color: #f8f8f8;
+    }
+
+    .page-footer h3 {
+        margin: 0.5rem 0 0 0;
+    }
+
+    .page-footer p {
+        max-width: 500px;
+        margin: 1rem auto 1.5rem;
+        font-size: 1.7rem;
+        line-height: 1.5em;
+        color: rgba(0,0,0,0.6)
+    }
+
+    .powered {
+        display: inline-flex;
+        align-items: center;
+        margin: 30px 0 0;
+        padding: 6px 9px 6px 6px;
+        border: rgba(0,0,0,0.1) 1px solid;
+        font-size: 12px;
+        line-height: 12px;
+        letter-spacing: -0.2px;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+        font-weight: 500;
+        color: #222;
+        text-decoration: none;
+        background: #fff;
+        border-radius: 6px;
+    }
+
+    .powered svg {
+        height: 16px;
+        width: 16px;
+        margin: 0 6px 0 0;
+    }
+
+    @media (max-width: 600px) {
+        body {
+            font-size: 1.6rem;
+        }
+        h1 {
+            font-size: 3rem;
+        }
+
+        h2 {
+            font-size: 2.2rem;
+        }
+    }
+
+    @media (max-width: 400px) {
+        h1 {
+            font-size: 2.6rem;
+            line-height: 1.15em;
+        }
+        h2 {
+            font-size: 2rem;
+            line-height: 1.2em;
+        }
+        h3 {
+            font-size: 1.7rem;
+        }
+    }
+
+    :root {--ghost-accent-color: #15171A;}
+    </style>
+
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+
+    
+
+</head>
+
+<body class="amp-template">
+    <header class="page-header">
+        <a href="../../index.html">
+                Julian Eisenschlos
+        </a>
+    </header>
+
+    <main class="content" role="main">
+        <article class="post">
+
+            <header class="post-header">
+                <h1 class="post-title">Foundation models for reasoning on charts</h1>
+                <section class="post-meta">
+                    Julian Eisenschlos -
+                    <time class="post-date" datetime="2024-03-17">17 Mar 2024</time>
+                </section>
+            </header>
+            <figure class="post-image">
+                <amp-img src="https://eisenjulian.github.io/content/images/2024/03/deplot_front_page_self_referential_figure_v2.jpg" width="600" height="340" layout="responsive" 
+                alt="Foundation models for reasoning on charts"
+                ></amp-img>
+            </figure>
+            <section class="post-content">
+
+                <p><em>Visual language is the form of communication that relies on pictorial symbols outside of text to convey information. It is ubiquitous in our digital life in the form of iconography, infographics, tables, plots, and charts, extending to the real world in street signs, comic books, food labels, etc. For that reason, having computers better understand this type of media can help with scientific communication and discovery, accessibility, and data transparency.</em></p><figure class="kg-card kg-bookmark-card kg-card-hascaption"><a class="kg-bookmark-container" href="https://blog.research.google/2023/05/foundation-models-for-reasoning-on.html?ref=localhost"><div class="kg-bookmark-content"><div class="kg-bookmark-title">Foundation models for reasoning on charts</div><div class="kg-bookmark-description"></div><div class="kg-bookmark-metadata"><amp-img class="kg-bookmark-icon" src="https://blog.research.google/favicon.ico" alt="" width="16" height="16" layout="fixed"></amp-img><span class="kg-bookmark-author">Google Research</span><span class="kg-bookmark-publisher">Posted by Julian Eisenschlos, Research Software Engineer, Google Research</span></div></div><div class="kg-bookmark-thumbnail"><amp-img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEifdjDjOARh4hb7ejkosuWwJDb1xEhPVkFiJQpa9Go1uhkRMy58esTSN9DXgWN5N74ZS5P4dyvG6FnZ_F-EzxNl0FcwFycDqEBOvabOoudTXbEXxSohAUbjvKYu_GKu3XNCumZLxBpzeUbjIZ1pgXtXZofVrBdR19g2dGBZ1gIYOCr6h9wYPQY-sXdhbQ/w1200-h630-p-k-no-nu/MatCha.png" alt="" width="1200" height="630" layout="responsive"></amp-img></div></a><figcaption><p><span>Cross posted from the Google AI blog</span></p></figcaption></figure><hr></hr><p>While computer vision models have made tremendous progress using learning-based solutions since the advent of <a href="https://ieeexplore.ieee.org/document/5206848?ref=localhost">ImageNet</a>, the focus has been on natural images, where all sorts of tasks, such as <a href="https://www.image-net.org/?ref=localhost">classification</a>, <a href="https://visualqa.org/?ref=localhost">visual question answering</a> (VQA), <a href="https://cocodataset.org/?ref=localhost">captioning, detection and segmentation</a>, have been defined, studied and in some cases advanced to reach human performance. However, visual language has not garnered a similar level of attention, possibly because of the lack of large-scale training sets in this space. But over the last few years, new academic datasets have been created with the goal of evaluating question answering systems on visual language images, like <a href="https://arxiv.org/abs/1909.00997?ref=localhost">PlotQA</a>, <a href="https://arxiv.org/abs/2104.12756?ref=localhost">InfographicsVQA</a>, and <a href="https://aclanthology.org/2022.findings-acl.177/?ref=localhost">ChartQA</a>.</p>
+
+<table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"><tbody><tr><td><a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiJN-BR8Zy4_5B10U4EeSFd9fU7jfvw_QeA1YvEzRK7NDt8oaGEqU1JesVnP2SIsaPbglFE1Qku8c6aQ6tqQsTgI2X3TkQUK_xIK8Pck7-8zNrbXShLr1Z44QAfBd1uVFVeuvR4f6Iuy_7r-bZoQwnj4xI2_iFhTg4XDEfvQMdgKydPrGfOfWMPMldBtg/s1999/image5.png?ref=localhost"><amp-img data-original-height="898" data-original-width="1999" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiJN-BR8Zy4_5B10U4EeSFd9fU7jfvw_QeA1YvEzRK7NDt8oaGEqU1JesVnP2SIsaPbglFE1Qku8c6aQ6tqQsTgI2X3TkQUK_xIK8Pck7-8zNrbXShLr1Z44QAfBd1uVFVeuvR4f6Iuy_7r-bZoQwnj4xI2_iFhTg4XDEfvQMdgKydPrGfOfWMPMldBtg/s16000/image5.png" width="1999" height="898" layout="responsive"></amp-img></a></td></tr><tr><td class="tr-caption">Example from<span> </span><a href="https://aclanthology.org/2022.findings-acl.177/?ref=localhost">ChartQA</a>. Answering the question requires reading the information and computing the sum and the difference.</td></tr></tbody></table>
+
+<p>Existing models built for these tasks relied on integrating <a href="https://en.wikipedia.org/wiki/Optical_character_recognition?ref=localhost">optical character recognition</a> (OCR) information and their coordinates into larger pipelines but the process is error prone, slow, and generalizes poorly. The prevalence of these methods was because existing end-to-end computer vision models based on <a href="https://en.wikipedia.org/wiki/Convolutional_neural_network?ref=localhost">convolutional neural networks</a> (CNNs) or <a href="https://ai.googleblog.com/2017/08/transformer-novel-neural-network.html?ref=localhost">transformers</a> pre-trained on natural images could not be easily adapted to visual language. But existing models are ill-prepared for the challenges in answering questions on charts, including reading the relative height of bars or the angle of slices in pie charts, understanding axis scales, correctly mapping pictograms with their legend values with colors, sizes and textures, and finally performing numerical operations with the extracted numbers.</p><p>In light of these challenges, we propose “<a href="https://arxiv.org/abs/2212.09662?ref=localhost">MatCha: Enhancing Visual Language Pretraining with Math Reasoning and Chart Derendering</a>”. MatCha, which stands for math and charts, is a pixels-to-text foundation model (a pre-trained model with built-in inductive biases that can be fine-tuned for multiple applications) trained on two complementary tasks: (a) chart de-rendering and (b) math reasoning. In chart de-rendering, given a plot or chart, the image-to-text model is required to generate its underlying data table or the code used to render it. For math reasoning pre-training, we pick textual numerical reasoning datasets and render the input into images, which the image-to-text model needs to decode for answers. We also propose “<a href="https://arxiv.org/abs/2212.10505?ref=localhost">DePlot: One-shot visual language reasoning by plot-to-table translation</a>”, a model built on top of MatCha for one-shot reasoning on charts via translation to tables. With these methods we surpass the previous state of the art in ChartQA by more than 20% and match the best summarization systems that have 1000 times more parameters. Both papers will be presented at <a href="https://2023.aclweb.org/?ref=localhost">ACL2023</a>.</p><h2 id="chart-de-rendering">Chart de-rendering</h2><p>Plots and charts are usually generated by an underlying data table and a piece of code. The code defines the overall layout of the figure (e.g., type, direction, color/shape scheme) and the underlying data table establishes the actual numbers and their groupings. Both the data and code are sent to a compiler/rendering engine to create the final image. To understand a chart, one needs to discover the visual patterns in the image and effectively parse and group them to extract the key information. Reversing the plot rendering process demands all such capabilities and can thus serve as an ideal pre-training task.</p>
+
+<table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"><tbody><tr><td><a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh0uJvVVTEGwHvrPqrbWpHw5YPJGU41c8zdH5FvVRUGnUqSSYn7Un3BFnOaDCBglhNEzbk5xeUzmBDCS8buExIp0qziz1AwUXf6ukGUM-_mufPWWpuEMD89LWUrx1XxVJ8o0lJBpJ8503WyLqMuSG8iBvddycooDvlzVSXkjwuOygW21Xmzf55sskzk_g/s624/image2.png?ref=localhost"><amp-img data-original-height="335" data-original-width="624" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh0uJvVVTEGwHvrPqrbWpHw5YPJGU41c8zdH5FvVRUGnUqSSYn7Un3BFnOaDCBglhNEzbk5xeUzmBDCS8buExIp0qziz1AwUXf6ukGUM-_mufPWWpuEMD89LWUrx1XxVJ8o0lJBpJ8503WyLqMuSG8iBvddycooDvlzVSXkjwuOygW21Xmzf55sskzk_g/s16000/image2.png" width="624" height="335" layout="responsive"></amp-img></a></td></tr><tr><td class="tr-caption">A chart created from a table in the<span> </span><a href="https://en.wikipedia.org/wiki/Airbus_A380?ref=localhost">Airbus A380 Wikipedia page</a><span> </span>using random plotting options. The pre-training task for MatCha consists of recovering the source table or the source code from the image.</td></tr></tbody></table>
+
+<p>In practice, it is challenging to simultaneously obtain charts, their underlying data tables, and their rendering code. To collect sufficient pre-training data, we independently accumulate [chart, code] and [chart, table] pairs. For [chart, code], we crawl all GitHub IPython notebooks with appropriate licenses and extract blocks with figures. A figure and the code block right before it are saved as a [chart, code] pair. For [chart, table] pairs, we explored two sources. For the first source, synthetic data, we manually write code to convert web-crawled Wikipedia tables from the <a href="https://aclanthology.org/2020.acl-main.398/?ref=localhost">TaPas</a> codebase to charts. We sampled from and combined several plotting options depending on the column types. In addition, we also add [chart, table] pairs generated in PlotQA to diversify the pre-training corpus. The second source is web-crawled [chart, table] pairs. We directly use the [chart, table] pairs crawled in the ChartQA training set, containing around 20k pairs in total from four websites: <a href="https://blog.research.google/2023/05/statista.com?ref=localhost">Statista</a>, <a href="https://www.pewresearch.org/?ref=localhost">Pew</a>, <a href="https://ourworldindata.org/?ref=localhost">Our World in Data</a>, and <a href="https://www.oecd.org/?ref=localhost">OECD</a>.</p><h2 id="math-reasoning">Math reasoning</h2><p>We incorporate numerical reasoning knowledge into MatCha by learning math reasoning skills from textual math datasets. We use two existing textual math reasoning datasets, <a href="https://openreview.net/forum?id=H1gR5iR5FX&amp;ref=localhost">MATH</a> and <a href="https://aclanthology.org/N19-1246/?ref=localhost">DROP</a> for pre-training. MATH is synthetically created, containing two million training examples per module (type) of questions. DROP is a reading-comprehension–style QA dataset where the input is a paragraph context and a question.</p><p>To solve questions in DROP, the model needs to read the paragraph, extract relevant numbers and perform numerical computation. We found both datasets to be complementary. MATH contains a large number of questions across different categories, which helps us identify math operations needed to explicitly inject into the model. DROP’s reading-comprehension format resembles the typical QA format wherein models simultaneously perform information extraction and reasoning. In practice, we render inputs of both datasets into images. The model is trained to decode the answer.</p>
+
+<table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"><tbody><tr><td><a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhyaSRY-BeSZ0qxOy3DqRqChADOFXkvYd5iI-sich3d5CZ7qSUh4gdGNoKj-XzCoOWCcGkTPOjlWPTUyrjFJVvgENyKKMTeSXjB39KlsOwC8lJJKHe_bNhjmPk6ewNJWObwENwPiyy_cCFK529eCRxqpXOeStkf2KlLLsn9zALUbJIBiOsTlwK06HlvNw/s624/image1.png?ref=localhost"><amp-img data-original-height="218" data-original-width="624" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhyaSRY-BeSZ0qxOy3DqRqChADOFXkvYd5iI-sich3d5CZ7qSUh4gdGNoKj-XzCoOWCcGkTPOjlWPTUyrjFJVvgENyKKMTeSXjB39KlsOwC8lJJKHe_bNhjmPk6ewNJWObwENwPiyy_cCFK529eCRxqpXOeStkf2KlLLsn9zALUbJIBiOsTlwK06HlvNw/s16000/image1.png" width="624" height="218" layout="responsive"></amp-img></a></td></tr><tr><td class="tr-caption">To improve the math reasoning skills of MatCha we incorporate examples from MATH and DROP into the pre-training objective, by rendering the input text as images.</td></tr></tbody></table>
+
+<h2 id="end-to-end-results">End-to-end results</h2><p>We use a <a href="https://arxiv.org/abs/2210.03347?ref=localhost">Pix2Struct</a> model backbone, which is an image-to-text transformer tailored for website understanding, and pre-train it with the two tasks described above. We demonstrate the strengths of MatCha by fine-tuning it on several visual language tasks — tasks involving charts and plots for question answering and summarization where no access to the underlying table is possible. MatCha surpasses previous models’ performance by a large margin and also outperforms the previous state of the art, which assumes access to underlying tables.</p><p>In the figure below, we first evaluate two baseline models that incorporate information from an <a href="https://aclanthology.org/2022.findings-acl.177/?ref=localhost">OCR pipeline</a>, which until recently was the standard approach for working with charts. The first is based on <a href="https://ai.googleblog.com/2020/02/exploring-transfer-learning-with-t5.html?ref=localhost">T5</a>, the second on <a href="https://aclanthology.org/2022.findings-acl.177/?ref=localhost">VisionTaPas</a>. We also compare against <a href="https://ai.googleblog.com/2022/09/pali-scaling-language-image-learning-in.html?ref=localhost">PaLI-17B</a>, which is a large (~1000 times larger than the other models) image plus text-to-text transformer trained on a diverse set of tasks but with limited capabilities for reading text and other forms of visual language. Finally, we report the Pix2Struct and MatCha model results.</p>
+
+<table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"><tbody><tr><td><a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi2FufIovBgB3bz0ve8Zh3vVwONF4gkTNXQjPUX8wmYYS8N3M2opoQcn9aM5d8pjCNkF7puXds_qesakd6CysizEpk4jccOI57U4hsxXQPO4aR8ehU1MvQCiFr3rrcViJJTXu8o1aElkMuw5VBKi3R6OVoRHt25SNP-pPrxkPZv_36kEQDCimsvFek3zQ/s1646/image3.png?ref=localhost"><amp-img data-original-height="696" data-original-width="1646" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi2FufIovBgB3bz0ve8Zh3vVwONF4gkTNXQjPUX8wmYYS8N3M2opoQcn9aM5d8pjCNkF7puXds_qesakd6CysizEpk4jccOI57U4hsxXQPO4aR8ehU1MvQCiFr3rrcViJJTXu8o1aElkMuw5VBKi3R6OVoRHt25SNP-pPrxkPZv_36kEQDCimsvFek3zQ/s16000/image3.png" width="1646" height="696" layout="responsive"></amp-img></a></td></tr><tr><td class="tr-caption">Experimental results on two chart QA benchmarks ChartQA &amp; PlotQA (using relaxed accuracy) and a chart summarization benchmark chart-to-text (using BLEU4). Matcha surpasses the state of the art by a large margin on QA, compared to larger models, and matches these larger models on summarization.</td></tr></tbody></table>
+
+<p>For QA datasets, we use the <a href="https://github.com/google-research/pix2struct/blob/main/pix2struct/metrics.py?ref=localhost#L81">official relaxed accuracy metric</a> that allows for small relative errors in numerical outputs. For chart-to-text summarization, we report <a href="https://en.wikipedia.org/wiki/BLEU?ref=localhost">BLEU</a> scores. MatCha achieves noticeably improved results compared to baselines for question answering, and comparable results to PaLI in summarization, where large size and extensive long text/captioning generation pre-training are advantageous for this kind of long-form text generation.</p><h2 id="derendering-plus-large-language-model-chains">Derendering plus large language model chains</h2><p>While extremely performant for their number of parameters, particularly on extractive tasks, we observed that fine-tuned MatCha models could still struggle with end-to-end complex reasoning (e.g., mathematical operations involving large numbers or multiple steps). Thus, we also propose a two-step method to tackle this: 1) a model reads a chart, then outputs the underlying table, 2) a large language model (LLM) reads this output and then tries to answer the question solely based on the textual input.</p><p>For the first model, we fine-tuned MatCha solely on the chart-to-table task, increasing the output sequence length to guarantee it could recover all or most of the information in the chart. <a href="https://arxiv.org/abs/2212.10505?ref=localhost">DePlot</a> is the resulting model. In the second stage, any LLM (such as <a href="https://arxiv.org/abs/2210.11416?ref=localhost">FlanPaLM</a> or <a href="https://arxiv.org/abs/2107.03374?ref=localhost">Codex</a>) can be used for the task, and we can rely on the standard methods to increase performance on LLMs, for example <a href="https://ai.googleblog.com/2022/05/language-models-perform-reasoning-via.html?ref=localhost">chain-of-thought</a> and <a href="https://arxiv.org/abs/2203.11171?ref=localhost">self-consistency</a>. We also experimented with <a href="https://arxiv.org/abs/2211.12588?ref=localhost">program-of-thoughts</a> where the model produces executable Python code to offload complex computations.</p>
+
+<table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"><tbody><tr><td><a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEilCkMJE3ftohAt9BeIoISbNLl6W8qXMizYxbR-P4gusArAZI0WYCZgT3z_GwDE9e54V8SE0Hxob1lDr0tIOhpTfNqEFNEwETF3cvm5LbVooJ2sSFmx5QtLlVjNVjPT0n_WYk6d1gb1PKU87siVbNZFFs34UICnymyWxzkgtPt9HtRr7dLB_wa86wJNWA/s622/image4.png?ref=localhost"><amp-img data-original-height="408" data-original-width="622" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEilCkMJE3ftohAt9BeIoISbNLl6W8qXMizYxbR-P4gusArAZI0WYCZgT3z_GwDE9e54V8SE0Hxob1lDr0tIOhpTfNqEFNEwETF3cvm5LbVooJ2sSFmx5QtLlVjNVjPT0n_WYk6d1gb1PKU87siVbNZFFs34UICnymyWxzkgtPt9HtRr7dLB_wa86wJNWA/s16000/image4.png" width="622" height="408" layout="responsive"></amp-img></a></td></tr><tr><td class="tr-caption">An illustration of the DePlot+LLM method. This is a real example using<span> </span><a href="https://arxiv.org/abs/2210.11416?ref=localhost">FlanPaLM</a><span> </span>and<span> </span><a href="https://arxiv.org/abs/2107.03374?ref=localhost">Codex</a>. The blue boxes are input to the LLM and the red boxes contain the answer generated by the LLMs. We highlight some of the key reasoning steps in each answer.</td></tr></tbody></table>
+
+<p>As shown in the example above, the DePlot model in combination with LLMs outperforms fine-tuned models by a significant margin, especially so in the human-sourced portion of ChartQA, where the questions are more natural but demand more difficult reasoning. Furthermore, DePlot+LLM can do so without access to any training data.</p><p>We have released the new models and code at our <a href="https://github.com/google-research/google-research/tree/master/deplot?ref=localhost">GitHub repo</a>, where you can try it out yourself in colab. Checkout the papers for <a href="https://arxiv.org/abs/2212.09662?ref=localhost">MatCha</a> and <a href="https://arxiv.org/abs/2212.10505?ref=localhost">DePlot</a> for more details on the experimental results. We hope that our results can benefit the research community and make the information in charts and plots more accessible to everyone.</p><h2 id="acknowledgements">Acknowledgements</h2><p><em>This work was carried out by Fangyu Liu, Julian Martin Eisenschlos, Francesco Piccinno, Syrine Krichene, Chenxi Pang, Kenton Lee, Mandar Joshi, Wenhu Chen and Yasemin Altun from our </em><a href="https://research.google/teams/language/?ref=localhost"><em>Language Team</em></a><em> as part of Fangyu's internship project. Nigel Collier from Cambridge also was a collaborator. We would like to thank Joshua Howland, Alex Polozov, Shrestha Basu Mallick, Massimo Nicosia and William Cohen for their valuable comments and suggestions.</em></p>
+
+            </section>
+
+        </article>
+    </main>
+    <footer class="page-footer">
+        <h3>Julian Eisenschlos</h3>
+            <p>Staff Researcher @ Google DeepMind • Previously META &amp; ASAPP • Co-founder botmaker.com</p>
+        <p><a href="../../index.html">Read more posts →</a></p>
+        <a class="powered" href="https://ghost.org" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 156 156"><g fill="none" fill-rule="evenodd"><rect fill="#15212B" width="156" height="156" rx="27"/><g transform="translate(36 36)" fill="#F6F8FA"><path d="M0 71.007A4.004 4.004 0 014 67h26a4 4 0 014 4.007v8.986A4.004 4.004 0 0130 84H4a4 4 0 01-4-4.007v-8.986zM50 71.007A4.004 4.004 0 0154 67h26a4 4 0 014 4.007v8.986A4.004 4.004 0 0180 84H54a4 4 0 01-4-4.007v-8.986z"/><rect y="34" width="84" height="17" rx="4"/><path d="M0 4.007A4.007 4.007 0 014.007 0h41.986A4.003 4.003 0 0150 4.007v8.986A4.007 4.007 0 0145.993 17H4.007A4.003 4.003 0 010 12.993V4.007z"/><rect x="67" width="17" height="17" rx="4"/></g></g></svg> Published with Ghost</a>
+    </footer>
+    
+</body>
+</html>

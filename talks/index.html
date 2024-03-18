@@ -3,34 +3,83 @@
 <head>
 
     <title>Selected talks</title>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="HandheldFriendly" content="True" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <link rel="stylesheet" type="text/css" href="../assets/built/screen.css@v=bc10f09b63.css" />
-
-    <link rel="canonical" href="index.html" />
-    <meta name="referrer" content="no-referrer-when-downgrade" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <meta property="og:site_name" content="Julian Eisenschlos" />
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="Selected talks" />
-    <meta property="og:description" content="2020Parsing Structured Data from the Web Data Science Argentina Discussion Panel, August 27 Neural Solutions to discrete problems and applications FCEyN Virtual Machine Learning Seminar, May 14 2019Know what you don&#x27;t know: Tools to measure uncertainty in deep learning Data Science Argentina, Despegar.com HQ, August 8 Running ML in" />
-    <meta property="og:url" content="https://eisenjulian.github.io/talks/" />
-    <meta property="og:image" content="https://static.ghost.org/v1.0.0/images/blog-cover.jpg" />
-    <meta property="article:published_time" content="2019-03-17T15:23:43.000Z" />
-    <meta property="article:modified_time" content="2020-10-03T11:45:12.000Z" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Selected talks" />
-    <meta name="twitter:description" content="2020Parsing Structured Data from the Web Data Science Argentina Discussion Panel, August 27 Neural Solutions to discrete problems and applications FCEyN Virtual Machine Learning Seminar, May 14 2019Know what you don&#x27;t know: Tools to measure uncertainty in deep learning Data Science Argentina, Despegar.com HQ, August 8 Running ML in" />
-    <meta name="twitter:url" content="https://eisenjulian.github.io/talks/" />
-    <meta name="twitter:image" content="https://static.ghost.org/v1.0.0/images/blog-cover.jpg" />
-    <meta name="twitter:label1" content="Written by" />
-    <meta name="twitter:data1" content="Julian Eisenschlos" />
-    <meta name="twitter:site" content="@eisenjulian" />
-    <meta property="og:image:width" content="2000" />
-    <meta property="og:image:height" content="666" />
+    <link rel="preload" as="style" href="../assets/built/screen.css%3Fv=f60aed1d93.css">
+    <link rel="preload" as="script" href="../assets/built/source.js%3Fv=f60aed1d93">
+
+    <link rel="stylesheet" type="text/css" href="../assets/built/screen.css%3Fv=f60aed1d93.css">
+
+    <style>
+        :root {
+            --background-color: #ffffff
+        }
+    </style>
+
+    <script>
+        /* The script for calculating the color contrast has been taken from
+        https://gomakethings.com/dynamically-changing-the-text-color-based-on-background-color-contrast-with-vanilla-js/ */
+        var accentColor = getComputedStyle(document.documentElement).getPropertyValue('--background-color');
+        accentColor = accentColor.trim().slice(1);
+        var r = parseInt(accentColor.substr(0, 2), 16);
+        var g = parseInt(accentColor.substr(2, 2), 16);
+        var b = parseInt(accentColor.substr(4, 2), 16);
+        var yiq = ((r * 299) + (g * 587) + (b * 114)) / 1000;
+        var textColor = (yiq >= 128) ? 'dark' : 'light';
+
+        document.documentElement.className = `has-${textColor}-text`;
+    </script>
+
+    <link rel="canonical" href="index.html">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    
+    <meta property="og:site_name" content="Julian Eisenschlos">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Selected talks">
+    <meta property="og:description" content="2024
+
+Visual language: How generating drives understanding
+Tel Aviv NLP Group Seminar, February 28
+
+Claim verification from visual language on the web
+Idiap Perspectives on AI: AI and Democracy, February 21
+
+
+2023
+
+Practical Session on NLP &amp; Transformers
+Khipu Latin America Meeting in Artificial Intelligence, March 8
+
+WinoDict: Probing language models">
+    <meta property="og:url" content="https://eisenjulian.github.io/talks/">
+    <meta property="og:image" content="https://static.ghost.org/v1.0.0/images/blog-cover.jpg">
+    <meta property="article:published_time" content="2019-03-17T15:23:43.000Z">
+    <meta property="article:modified_time" content="2024-03-17T20:06:02.000Z">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Selected talks">
+    <meta name="twitter:description" content="2024
+
+Visual language: How generating drives understanding
+Tel Aviv NLP Group Seminar, February 28
+
+Claim verification from visual language on the web
+Idiap Perspectives on AI: AI and Democracy, February 21
+
+
+2023
+
+Practical Session on NLP &amp; Transformers
+Khipu Latin America Meeting in Artificial Intelligence, March 8
+
+WinoDict: Probing language models">
+    <meta name="twitter:url" content="https://eisenjulian.github.io/talks/">
+    <meta name="twitter:image" content="https://static.ghost.org/v1.0.0/images/blog-cover.jpg">
+    <meta name="twitter:label1" content="Written by">
+    <meta name="twitter:data1" content="Julian Eisenschlos">
+    <meta name="twitter:site" content="@eisenjulian">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="400">
     
     <script type="application/ld+json">
 {
@@ -52,7 +101,7 @@
         "name": "Julian Eisenschlos",
         "image": {
             "@type": "ImageObject",
-            "url": "https://eisenjulian.github.io/content/images/2019/03/perfil-square.jpeg",
+            "url": "https://eisenjulian.github.io/content/images/2024/03/perfil-square.jpeg",
             "width": 710,
             "height": 710
         },
@@ -62,18 +111,20 @@
     "headline": "Selected talks",
     "url": "https://eisenjulian.github.io/talks/",
     "datePublished": "2019-03-17T15:23:43.000Z",
-    "dateModified": "2020-10-03T11:45:12.000Z",
-    "description": "2020\nParsing Structured Data from the Web\n[https://www.facebook.com/groups/DataScienceArgentina/permalink/2172538919558977]\nData Science Argentina Discussion Panel, August 27\n\nNeural Solutions to discrete problems and applications\nFCEyN Virtual Machine Learning Seminar, May 14\n\n2019\nKnow what you don&#x27;t know: Tools to measure uncertainty in deep learning\n[http://bit.ly/dl-incierto]\nData Science Argentina, Despegar.com HQ, August 8\n\nRunning ML in your browser with TensorFlow.js [http://bit.ly/ml-b",
-    "mainEntityOfPage": {
-        "@type": "WebPage",
-        "@id": "https://eisenjulian.github.io/"
-    }
+    "dateModified": "2024-03-17T20:06:02.000Z",
+    "description": "2024\n\nVisual language: How generating drives understanding\nTel Aviv NLP Group Seminar, February 28\n\nClaim verification from visual language on the web\nIdiap Perspectives on AI: AI and Democracy, February 21\n\n\n2023\n\nPractical Session on NLP &amp; Transformers\nKhipu Latin America Meeting in Artificial Intelligence, March 8\n\nWinoDict: Probing language models for in-context word acquisition\nZurich NLP Meetup, May 10\n\n\n2022\n\nPanel on past, present and future of table representation\nTRL: Table Representat",
+    "mainEntityOfPage": "https://eisenjulian.github.io/talks/"
 }
     </script>
 
-    <meta name="generator" content="Ghost 4.7" />
-    <link rel="alternate" type="application/rss+xml" title="Julian Eisenschlos" href="../rss/index.html" />
+    <meta name="generator" content="Ghost 5.80">
+    <link rel="alternate" type="application/rss+xml" title="Julian Eisenschlos" href="../rss/index.html">
     
+    <script defer src="https://cdn.jsdelivr.net/ghost/sodo-search@~1.1/umd/sodo-search.min.js" data-key="3948e65ad8bc7936f3efbbea1e" data-styles="https://cdn.jsdelivr.net/ghost/sodo-search@~1.1/umd/main.css" data-sodo-search="https://eisenjulian.github.io/" crossorigin="anonymous"></script>
+    
+    <link href="https://eisenjulian.github.io/webmentions/receive/" rel="webmention">
+    <script defer src="../public/cards.min.js%3Fv=f60aed1d93"></script>
+    <link rel="stylesheet" type="text/css" href="../public/cards.min.css%3Fv=f60aed1d93.css">
     <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-136394483-1"></script>
 <script>
@@ -85,103 +136,126 @@
 </script>
 
 <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/themes/prism-tomorrow.min.css" rel="stylesheet"/>
-<style type='text/css'>
-    .footer-cta,
-    a.gh-head-button,
-    .site-footer a[href^="https://ghost.org"] { display: none; }
+<style>
+  .gh-footer-bar {display: none; !important}
 </style><style>:root {--ghost-accent-color: #15171A;}</style>
 
 </head>
-<body class="page-template page-talks">
-<div class="viewport">
+<body class="page-template page-talks has-sans-title has-sans-body">
 
-    <header id="gh-head" class="gh-head has-cover">
-        <nav class="gh-head-inner inner gh-container">
+<div class="gh-viewport">
+    
+    <header id="gh-navigation" class="gh-navigation is-left-logo has-accent-color gh-outer">
+    <div class="gh-navigation-inner gh-inner">
 
-            <div class="gh-head-brand">
-                <a class="gh-head-logo" href="../index.html">
-                        Julian Eisenschlos
-                </a>
-                <a class="gh-burger" role="button">
-                    <div class="gh-burger-box">
-                        <div class="gh-burger-inner"></div>
-                    </div>
-                </a>
-            </div>
-            <div class="gh-head-menu">
-                <ul class="nav">
-    <li class="nav-home"><a href="../index.html">Home</a></li>
+        <div class="gh-navigation-brand">
+            <a class="gh-navigation-logo is-title" href="../index.html">
+                    Julian Eisenschlos
+            </a>
+            <button class="gh-search gh-icon-button" aria-label="Search this site" data-ghost-search>
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" width="20" height="20"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg></button>            <button class="gh-burger gh-icon-button" aria-label="Menu">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 256 256"><path d="M224,128a8,8,0,0,1-8,8H40a8,8,0,0,1,0-16H216A8,8,0,0,1,224,128ZM40,72H216a8,8,0,0,0,0-16H40a8,8,0,0,0,0,16ZM216,184H40a8,8,0,0,0,0,16H216a8,8,0,0,0,0-16Z"></path></svg>                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 256 256"><path d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z"></path></svg>            </button>
+        </div>
+
+        <nav class="gh-navigation-menu">
+            <ul class="nav">
     <li class="nav-about"><a href="../about/index.html">About</a></li>
     <li class="nav-papers"><a href="../publications/index.html">Papers</a></li>
     <li class="nav-talks nav-current"><a href="index.html">Talks</a></li>
     <li class="nav-github"><a href="https://github.com/eisenjulian">GitHub</a></li>
     <li class="nav-linkedin"><a href="https://www.linkedin.com/in/eisenjulian">LinkedIn</a></li>
+    <li class="nav-x"><a href="https://x.com/eisenjulian">X</a></li>
 </ul>
 
-            </div>
-            <div class="gh-head-actions">
-                <div class="gh-social">
-                        <a class="gh-social-twitter" href="https://twitter.com/eisenjulian" title="Twitter" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
-</a>
-                </div>
-
-                    <a class="gh-head-button" href="index.html#/portal/signup">Subscribe</a>
-            </div>
         </nav>
-    </header>
 
-    <main>
-        
+        <div class="gh-navigation-actions">
+                    <button class="gh-search gh-icon-button" aria-label="Search this site" data-ghost-search>
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" width="20" height="20"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg></button>        </div>
+
+    </div>
+</header>
+
+    
+
+<main class="gh-main">
+    <article class="gh-article post no-image">
+
+            <header class="gh-article-header gh-canvas">
+                <h1 class="gh-article-title is-title">Selected talks</h1>
+                            </header>
+
+        <section class="gh-content gh-canvas is-body">
+            <h2 id="2024">2024</h2><p>Visual language: How generating drives understanding<br><em>Tel Aviv NLP Group Seminar, February 28</em></p><p><a href="https://perspectives-on-ai.idiap.ch/?ref=localhost" rel="noreferrer">Claim verification from visual language on the web</a><br><em>Idiap Perspectives on AI: AI and Democracy, February 21</em></p><h2 id="2023">2023</h2><p><a href="https://github.com/khipu-ai/practicals-2023?ref=localhost" rel="noreferrer">Practical Session on NLP &amp; Transformers</a><br><em>Khipu Latin America Meeting in Artificial Intelligence, March 8</em></p><p><a href="https://zurich-nlp.ch/event/zurich-nlp-meetup-2/?ref=localhost" rel="noreferrer">WinoDict: Probing language models for in-context word acquisition</a><br><em>Zurich NLP Meetup, May 10</em></p><h2 id="2022">2022</h2><p><a href="https://neurips.cc/virtual/2022/workshop/49995?ref=localhost" rel="noreferrer">Panel on past, present and future of table representation</a><br><em>TRL: Table Representation Learning Workshop @ NeurIPS, December 2</em></p><p><a href="https://suki-workshop.github.io/?ref=localhost" rel="noreferrer">Efficient Methods for Learning from Tables</a><br><em>SUKI: Structured and Unstructured Knowledge Integration @ NAACL, July 14</em></p><h2 id="2020">2020</h2><p><a href="https://www.facebook.com/groups/DataScienceArgentina/permalink/2172538919558977">Parsing Structured Data from the Web</a><br><em>Data Science Argentina Discussion Panel, August 27</em></p><p>Neural Solutions to discrete problems and applications<br><em>FCEyN Virtual Machine Learning Seminar, May 14</em></p><h2 id="2019">2019</h2><p><a href="http://bit.ly/dl-incierto?ref=localhost">Know what you don't know: Tools to measure uncertainty in deep learning</a><br><em>Data Science Argentina, Despegar.com HQ, August 8</em></p><p><a href="http://bit.ly/ml-browser?ref=localhost">Running ML in your browser with TensorFlow.js</a><br><em>Google I/O Extended, Santander HQ, July 20</em></p><p><a href="https://bit.ly/bayes-ab?ref=localhost">Bayesian A|B Testing</a><br><em>Data Science Day, University of Buenos Aires, June 7</em></p><p>TensorFlow Dev Summit Highlights<br><em>Buenos Aires TensorFlow Meetup, March 19</em></p><h2 id="2018">2018</h2><p><a href="https://docs.google.com/presentation/d/e/2PACX-1vQc98XmV7zjB2ckVHzug5EBhJR2wGs8vH6fybmjJbI8571QqPDQVP-YWZ1lK_-U1V2IsuTN-sACeTbL/pub?start=false&loop=false&delayms=3000&ref=localhost">Going conversational with the Google Assistant</a><br><em>DevFest Mexico, December 8</em><br><br><a href="https://eisenjulian.github.io/slides/TransferLearningNLP/index.slides.html?ref=localhost#/">Life After Word Embeddings: Language modeling for transfer learning in NLP</a><br><em>Applied Machine Learning Lab, University of Buenos Aires, November 23<br>PyData Córdoba, September 29</em></p><p><a href="https://docs.google.com/presentation/d/e/2PACX-1vSY98bJDNJTj7U2H6aM86djoSmm2RKPMx-kY30i-Ze_sM4zSJtioNc9KY9rSNcX3tbCrY6BsKS-2sja/pub?start=false&loop=false&delayms=3000&ref=localhost">Machine Learning highlights from Google I/O y F8</a><br><em>TensorFlow Buenos Aires Meetup, June 20</em></p><p><a href="https://docs.google.com/presentation/d/e/2PACX-1vR1OnlDdR34_iVhmNoPWjvbYhRTctirHrRrwYCHIgUcxe-U3lGk-ut_q_9IAt1HJKTTYoNEWWhbWwJj/pub?start=false&loop=false&delayms=3000&ref=localhost">Conversational AI Scene in Argentina</a><br><em>World Bot Meetup, San Francisco, May 3</em></p><p><a href="https://docs.google.com/presentation/d/e/2PACX-1vRBkwLmNieJPI37B4-fhMGoeYVZQMmrrcxlVM2LMXZm4vjumdFRVbBcZ9FO2FOQE0n7-av_eK4cgROf/pub?start=false&loop=false&delayms=3000&ref=localhost">Winning the game of GO</a><br><em>Campus Party Argentina, April 26</em><br><br><a href="https://drive.google.com/file/d/1mkYmLH8NHoB3f-EIkp7l6rUPFrfyxdcf/view?usp=sharing&ref=localhost">Classifying text in TensorFlow</a><br><em>TensorFlow Buenos Aires Meetup, March 21</em><br><br><a href="https://docs.google.com/presentation/d/e/2PACX-1vQZvTymep3KJzJRA43NLSQAiOWzR75hgEiqkBlTMmZjnsKNGiJPYgUK7nCrzyX-fertptHyR6s4vRaP/pub?start=false&loop=false&delayms=3000&ref=localhost">Build your first Messenger Bot</a><br><em>Facebook Developer Circle Meetup, March 2</em></p><h2 id="2017">2017</h2><p><a href="https://docs.google.com/presentation/d/e/2PACX-1vRZXBMCnUwJGQq_huByaXmRoIz0RM1GpP-GiVgojfgbR8TLfnbEq7MeyRwzij6hCGdjrUi8dyTQhkwP/pub?start=false&loop=false&delayms=3000&ref=localhost">Tools for successful NLP solutions</a><br><em>Google Launchpad Accelerator Mentor, November 10</em></p><p><a href="https://docs.google.com/presentation/d/e/2PACX-1vRDQlAFnU6NgpbnKpiFLiX_w4ow-st80Jq20OTb6o7Z2uHJGhaTxqTORP6oBr5o66lruAbLS4FCPMbI/pub?start=false&loop=false&delayms=3000&ref=localhost">Application of ML in the industry</a><br><em>Google Launchpad Accelerator Mentor, October 27</em><br><br><a href="https://docs.google.com/presentation/d/e/2PACX-1vTq_6AY0wvyDgvcnB3l4hK8wSn2pIMbwGvbHVnOvjl4MzZFlxjl6I78nS5JlA4tOOHhMV8ajlWvt0Hd/pub?start=false&loop=false&delayms=3000&ref=localhost">Natural Language Processing Toolkit</a><br><em>Nardoz Meetup, September 7</em></p><h2 id="2016">2016</h2><p><a href="https://docs.google.com/presentation/d/e/2PACX-1vTo2Ijb3QDxqCzBu1KYGEHAdqtbv8YaZ1j9KtjRfVSk6TGeBMxhwTtv7lOO0gaVLq0re52LDGG84FwU/pub?start=false&loop=false&delayms=3000&ref=localhost">Bots: challenges for the financial industry</a><br><em>Financial Innovation Hackathon, November 19</em></p><h2 id="2015">2015</h2><p>Crowd-sourcing the knowledge graph at Facebook<br><em>ICML Crowdsourcing and Machine Learning Workshop, Lille, France, July 10</em><br></p><p></p><p><br></p>
+        </section>
+
+    </article>
+</main>
 
 
+    
+    <footer class="gh-footer has-accent-color gh-outer">
+    <div class="gh-footer-inner gh-inner">
 
-<article class="article post no-image page">
-
-    <header class="article-header gh-canvas">
-    </header>
-
-    <section class="gh-content gh-canvas">
-
-        <h1 class="article-title">Selected talks</h1>
-
-        <h2 id="2020">2020</h2><p><a href="https://www.facebook.com/groups/DataScienceArgentina/permalink/2172538919558977">Parsing Structured Data from the Web</a><br><em>Data Science Argentina Discussion Panel, August 27</em></p><p>Neural Solutions to discrete problems and applications<br><em>FCEyN Virtual Machine Learning Seminar, May 14</em></p><h2 id="2019">2019</h2><p><a href="http://bit.ly/dl-incierto">Know what you don't know: Tools to measure uncertainty in deep learning</a><br><em>Data Science Argentina, Despegar.com HQ, August 8</em></p><p><a href="http://bit.ly/ml-browser">Running ML in your browser with TensorFlow.js</a><br><em>Google I/O Extended, Santander HQ, July 20</em></p><p><a href="https://bit.ly/bayes-ab">Bayesian A|B Testing</a><br><em>Data Science Day, University of Buenos Aires, June 7</em></p><p>TensorFlow Dev Summit Highlights<br><em>Buenos Aires TensorFlow Meetup, March 19</em></p><h2 id="2018">2018</h2><p><a href="https://docs.google.com/presentation/d/e/2PACX-1vQc98XmV7zjB2ckVHzug5EBhJR2wGs8vH6fybmjJbI8571QqPDQVP-YWZ1lK_-U1V2IsuTN-sACeTbL/pub?start=false&amp;loop=false&amp;delayms=3000">Going conversational with the Google Assistant</a><br><em>DevFest Mexico, December 8</em><br><br><a href="https://eisenjulian.github.io/slides/TransferLearningNLP/index.slides.html#/">Life After Word Embeddings: Language modeling for transfer learning in NLP</a><br><em>Applied Machine Learning Lab, University of Buenos Aires, November 23</em><br><em>PyData Córdoba, September 29</em></p><p><a href="https://docs.google.com/presentation/d/e/2PACX-1vSY98bJDNJTj7U2H6aM86djoSmm2RKPMx-kY30i-Ze_sM4zSJtioNc9KY9rSNcX3tbCrY6BsKS-2sja/pub?start=false&amp;loop=false&amp;delayms=3000">Machine Learning highlights from Google I/O y F8</a><br><em>TensorFlow Buenos Aires Meetup, June 20</em></p><p><a href="https://docs.google.com/presentation/d/e/2PACX-1vR1OnlDdR34_iVhmNoPWjvbYhRTctirHrRrwYCHIgUcxe-U3lGk-ut_q_9IAt1HJKTTYoNEWWhbWwJj/pub?start=false&amp;loop=false&amp;delayms=3000">Conversational AI Scene in Argentina</a><br><em>World Bot Meetup, San Francisco, May 3</em></p><p><a href="https://docs.google.com/presentation/d/e/2PACX-1vRBkwLmNieJPI37B4-fhMGoeYVZQMmrrcxlVM2LMXZm4vjumdFRVbBcZ9FO2FOQE0n7-av_eK4cgROf/pub?start=false&amp;loop=false&amp;delayms=3000">Winning the game of GO</a><br><em>Campus Party Argentina, April 26</em><br><br><a href="https://drive.google.com/file/d/1mkYmLH8NHoB3f-EIkp7l6rUPFrfyxdcf/view?usp=sharing">Classifying text in TensorFlow</a><br><em>TensorFlow Buenos Aires Meetup, March 21</em><br><br><a href="https://docs.google.com/presentation/d/e/2PACX-1vQZvTymep3KJzJRA43NLSQAiOWzR75hgEiqkBlTMmZjnsKNGiJPYgUK7nCrzyX-fertptHyR6s4vRaP/pub?start=false&amp;loop=false&amp;delayms=3000">Build your first Messenger Bot</a><br><em>Facebook Developer Circle Meetup, March 2</em></p><h2 id="2017">2017</h2><p><a href="https://docs.google.com/presentation/d/e/2PACX-1vRZXBMCnUwJGQq_huByaXmRoIz0RM1GpP-GiVgojfgbR8TLfnbEq7MeyRwzij6hCGdjrUi8dyTQhkwP/pub?start=false&amp;loop=false&amp;delayms=3000">Tools for successful NLP solutions</a><br><em>Google Launchpad Accelerator Mentor, November 10</em></p><p><a href="https://docs.google.com/presentation/d/e/2PACX-1vRDQlAFnU6NgpbnKpiFLiX_w4ow-st80Jq20OTb6o7Z2uHJGhaTxqTORP6oBr5o66lruAbLS4FCPMbI/pub?start=false&amp;loop=false&amp;delayms=3000">Application of ML in the industry</a><br><em>Google Launchpad Accelerator Mentor, October 27</em><br><br><a href="https://docs.google.com/presentation/d/e/2PACX-1vTq_6AY0wvyDgvcnB3l4hK8wSn2pIMbwGvbHVnOvjl4MzZFlxjl6I78nS5JlA4tOOHhMV8ajlWvt0Hd/pub?start=false&amp;loop=false&amp;delayms=3000">Natural Language Processing Toolkit</a><br><em>Nardoz Meetup, September 7</em></p><h2 id="2016">2016</h2><p><a href="https://docs.google.com/presentation/d/e/2PACX-1vTo2Ijb3QDxqCzBu1KYGEHAdqtbv8YaZ1j9KtjRfVSk6TGeBMxhwTtv7lOO0gaVLq0re52LDGG84FwU/pub?start=false&amp;loop=false&amp;delayms=3000">Bots: challenges for the financial industry</a><br><em>Financial Innovation Hackathon, November 19</em></p><h2 id="2015">2015</h2><p>Crowd-sourcing the knowledge graph at Facebook<br><em>ICML Crowdsourcing and Machine Learning Workshop, Lille, France, July 10<br></em></p><p></p><p><br></p>
-
-    </section>
-
-</article>
-
-
-    </main>
-
-    <footer class="site-footer outer">
-        <div class="inner">
-            <section class="copyright"><a href="../index.html">Julian Eisenschlos</a> &copy; 2021</section>
-            <nav class="site-footer-nav">
+        <div class="gh-footer-bar">
+            <span class="gh-footer-logo is-title">
+                    Julian Eisenschlos
+            </span>
+            <nav class="gh-footer-menu">
                 
             </nav>
-            <div><a href="https://ghost.org/" target="_blank" rel="noopener">Powered by Ghost</a></div>
+            <div class="gh-footer-copyright">
+                Powered by <a href="https://ghost.org/" target="_blank" rel="noopener">Ghost</a>
+            </div>
         </div>
-    </footer>
 
+
+    </div>
+</footer>    
 </div>
 
+    <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="pswp__bg"></div>
 
-<script
-    src="https://code.jquery.com/jquery-3.5.1.min.js"
-    integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
-    crossorigin="anonymous">
-</script>
-<script src="../assets/built/casper.js@v=bc10f09b63"></script>
-<script>
-$(document).ready(function () {
-    // Mobile Menu Trigger
-    $('.gh-burger').click(function () {
-        $('body').toggleClass('gh-head-open');
-    });
-    // FitVids - Makes video embeds responsive
-    $(".gh-content").fitVids();
-});
-</script>
+    <div class="pswp__scroll-wrap">
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/built/source.js%3Fv=f60aed1d93"></script>
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/prism.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/components/prism-lua.min.js"></script>

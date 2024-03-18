@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <title>Foundation models for reasoning on charts</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="preload" as="style" href="../assets/built/screen.css%3Fv=f60aed1d93.css">
+    <link rel="preload" as="script" href="../assets/built/source.js%3Fv=f60aed1d93">
+
+    <link rel="stylesheet" type="text/css" href="../assets/built/screen.css%3Fv=f60aed1d93.css">
+
+    <style>
+        :root {
+            --background-color: #ffffff
+        }
+    </style>
+
+    <script>
+        /* The script for calculating the color contrast has been taken from
+        https://gomakethings.com/dynamically-changing-the-text-color-based-on-background-color-contrast-with-vanilla-js/ */
+        var accentColor = getComputedStyle(document.documentElement).getPropertyValue('--background-color');
+        accentColor = accentColor.trim().slice(1);
+        var r = parseInt(accentColor.substr(0, 2), 16);
+        var g = parseInt(accentColor.substr(2, 2), 16);
+        var b = parseInt(accentColor.substr(4, 2), 16);
+        var yiq = ((r * 299) + (g * 587) + (b * 114)) / 1000;
+        var textColor = (yiq >= 128) ? 'dark' : 'light';
+
+        document.documentElement.className = `has-${textColor}-text`;
+    </script>
+
+    <link rel="canonical" href="index.html">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <link rel="amphtml" href="amp/index.html">
+    
+    <meta property="og:site_name" content="Julian Eisenschlos">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Foundation models for reasoning on charts">
+    <meta property="og:description" content="Visual language is the form of communication that relies on pictorial symbols outside of text to convey information. It is ubiquitous in our digital life in the form of iconography, infographics, tables, plots, and charts, extending to the real world in street signs, comic books, food labels, etc. For that">
+    <meta property="og:url" content="https://eisenjulian.github.io/foundation-models-for-reasoning-on-charts/">
+    <meta property="og:image" content="https://eisenjulian.github.io/content/images/2024/03/deplot_front_page_self_referential_figure_v2.jpg">
+    <meta property="article:published_time" content="2024-03-17T19:39:44.000Z">
+    <meta property="article:modified_time" content="2024-03-18T09:14:18.000Z">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Foundation models for reasoning on charts">
+    <meta name="twitter:description" content="Visual language is the form of communication that relies on pictorial symbols outside of text to convey information. It is ubiquitous in our digital life in the form of iconography, infographics, tables, plots, and charts, extending to the real world in street signs, comic books, food labels, etc. For that">
+    <meta name="twitter:url" content="https://eisenjulian.github.io/foundation-models-for-reasoning-on-charts/">
+    <meta name="twitter:image" content="https://eisenjulian.github.io/content/images/2024/03/deplot_front_page_self_referential_figure_v2.jpg">
+    <meta name="twitter:label1" content="Written by">
+    <meta name="twitter:data1" content="Julian Eisenschlos">
+    <meta name="twitter:site" content="@eisenjulian">
+    <meta property="og:image:width" content="875">
+    <meta property="og:image:height" content="512">
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Julian Eisenschlos",
+        "url": "https://eisenjulian.github.io/",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://eisenjulian.github.io/favicon.ico",
+            "width": 48,
+            "height": 48
+        }
+    },
+    "author": {
+        "@type": "Person",
+        "name": "Julian Eisenschlos",
+        "image": {
+            "@type": "ImageObject",
+            "url": "https://eisenjulian.github.io/content/images/2024/03/perfil-square.jpeg",
+            "width": 710,
+            "height": 710
+        },
+        "url": "https://eisenjulian.github.io/author/julian/",
+        "sameAs": []
+    },
+    "headline": "Foundation models for reasoning on charts",
+    "url": "https://eisenjulian.github.io/foundation-models-for-reasoning-on-charts/",
+    "datePublished": "2024-03-17T19:39:44.000Z",
+    "dateModified": "2024-03-18T09:14:18.000Z",
+    "image": {
+        "@type": "ImageObject",
+        "url": "https://eisenjulian.github.io/content/images/2024/03/deplot_front_page_self_referential_figure_v2.jpg",
+        "width": 875,
+        "height": 512
+    },
+    "description": "Visual language is the form of communication that relies on pictorial symbols outside of text to convey information. It is ubiquitous in our digital life in the form of iconography, infographics, tables, plots, and charts, extending to the real world in street signs, comic books, food labels, etc. For that reason, having computers better understand this type of media can help with scientific communication and discovery, accessibility, and data transparency.\n\nFoundation models for reasoning on ch",
+    "mainEntityOfPage": "https://eisenjulian.github.io/foundation-models-for-reasoning-on-charts/"
+}
+    </script>
+
+    <meta name="generator" content="Ghost 5.80">
+    <link rel="alternate" type="application/rss+xml" title="Julian Eisenschlos" href="../rss/index.html">
+    
+    <script defer src="https://cdn.jsdelivr.net/ghost/sodo-search@~1.1/umd/sodo-search.min.js" data-key="3948e65ad8bc7936f3efbbea1e" data-styles="https://cdn.jsdelivr.net/ghost/sodo-search@~1.1/umd/main.css" data-sodo-search="https://eisenjulian.github.io/" crossorigin="anonymous"></script>
+    
+    <link href="https://eisenjulian.github.io/webmentions/receive/" rel="webmention">
+    <script defer src="../public/cards.min.js%3Fv=f60aed1d93"></script>
+    <link rel="stylesheet" type="text/css" href="../public/cards.min.css%3Fv=f60aed1d93.css">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-136394483-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-136394483-1');
+</script>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/themes/prism-tomorrow.min.css" rel="stylesheet"/>
+<style>
+  .gh-footer-bar {display: none; !important}
+</style><style>:root {--ghost-accent-color: #15171A;}</style>
+
+</head>
+<body class="post-template has-sans-title has-sans-body">
+
+<div class="gh-viewport">
+    
+    <header id="gh-navigation" class="gh-navigation is-left-logo has-accent-color gh-outer">
+    <div class="gh-navigation-inner gh-inner">
+
+        <div class="gh-navigation-brand">
+            <a class="gh-navigation-logo is-title" href="../index.html">
+                    Julian Eisenschlos
+            </a>
+            <button class="gh-search gh-icon-button" aria-label="Search this site" data-ghost-search>
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" width="20" height="20"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg></button>            <button class="gh-burger gh-icon-button" aria-label="Menu">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 256 256"><path d="M224,128a8,8,0,0,1-8,8H40a8,8,0,0,1,0-16H216A8,8,0,0,1,224,128ZM40,72H216a8,8,0,0,0,0-16H40a8,8,0,0,0,0,16ZM216,184H40a8,8,0,0,0,0,16H216a8,8,0,0,0,0-16Z"></path></svg>                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 256 256"><path d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z"></path></svg>            </button>
+        </div>
+
+        <nav class="gh-navigation-menu">
+            <ul class="nav">
+    <li class="nav-about"><a href="../about/index.html">About</a></li>
+    <li class="nav-papers"><a href="../publications/index.html">Papers</a></li>
+    <li class="nav-talks"><a href="../talks/index.html">Talks</a></li>
+    <li class="nav-github"><a href="https://github.com/eisenjulian">GitHub</a></li>
+    <li class="nav-linkedin"><a href="https://www.linkedin.com/in/eisenjulian">LinkedIn</a></li>
+    <li class="nav-x"><a href="https://x.com/eisenjulian">X</a></li>
+</ul>
+
+        </nav>
+
+        <div class="gh-navigation-actions">
+                    <button class="gh-search gh-icon-button" aria-label="Search this site" data-ghost-search>
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" width="20" height="20"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg></button>        </div>
+
+    </div>
+</header>
+
+    
+
+<main class="gh-main">
+
+    <article class="gh-article post">
+
+        <header class="gh-article-header gh-canvas">
+
+            <h1 class="gh-article-title is-title">Foundation models for reasoning on charts</h1>
+
+            <div class="gh-article-meta">
+                <div class="gh-article-author-image">
+                            <a href="../author/julian/index.html">
+                                <img class="author-profile-image" src="../content/images/size/w160/2024/03/perfil-square.jpeg" alt="Julian Eisenschlos" />
+                            </a>
+                </div>
+                <div class="gh-article-meta-wrapper">
+                    <h4 class="gh-article-author-name"><a href="../author/julian/index.html">Julian Eisenschlos</a></h4>
+                    <div class="gh-article-meta-content">
+                        <time class="gh-article-meta-date" datetime="2024-03-17">Mar 17, 2024</time>
+                            <span class="gh-article-meta-length"><span class="bull">—</span> 8 min read</span>
+                    </div>
+                </div>
+            </div>
+
+                <figure class="gh-article-image">
+        <img
+            srcset="../content/images/size/w320/2024/03/deplot_front_page_self_referential_figure_v2.jpg 320w,
+                   ../content/images/size/w600/2024/03/deplot_front_page_self_referential_figure_v2.jpg 600w,
+                  ../content/images/size/w960/2024/03/deplot_front_page_self_referential_figure_v2.jpg 960w,
+                 ../content/images/size/w1200/2024/03/deplot_front_page_self_referential_figure_v2.jpg 1200w,
+                ../content/images/size/w2000/2024/03/deplot_front_page_self_referential_figure_v2.jpg 2000w"
+            src="../content/images/size/w1200/2024/03/deplot_front_page_self_referential_figure_v2.jpg"
+            alt="Foundation models for reasoning on charts"
+        >
+    </figure>
+
+        </header>
+
+        <section class="gh-content gh-canvas is-body">
+            <p><em>Visual language is the form of communication that relies on pictorial symbols outside of text to convey information. It is ubiquitous in our digital life in the form of iconography, infographics, tables, plots, and charts, extending to the real world in street signs, comic books, food labels, etc. For that reason, having computers better understand this type of media can help with scientific communication and discovery, accessibility, and data transparency.</em></p><figure class="kg-card kg-bookmark-card kg-card-hascaption"><a class="kg-bookmark-container" href="https://blog.research.google/2023/05/foundation-models-for-reasoning-on.html?ref=localhost"><div class="kg-bookmark-content"><div class="kg-bookmark-title">Foundation models for reasoning on charts</div><div class="kg-bookmark-description"></div><div class="kg-bookmark-metadata"><img class="kg-bookmark-icon" src="https://blog.research.google/favicon.ico" alt=""><span class="kg-bookmark-author">Google Research</span><span class="kg-bookmark-publisher">Posted by Julian Eisenschlos, Research Software Engineer, Google Research</span></div></div><div class="kg-bookmark-thumbnail"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEifdjDjOARh4hb7ejkosuWwJDb1xEhPVkFiJQpa9Go1uhkRMy58esTSN9DXgWN5N74ZS5P4dyvG6FnZ_F-EzxNl0FcwFycDqEBOvabOoudTXbEXxSohAUbjvKYu_GKu3XNCumZLxBpzeUbjIZ1pgXtXZofVrBdR19g2dGBZ1gIYOCr6h9wYPQY-sXdhbQ/w1200-h630-p-k-no-nu/MatCha.png" alt=""></div></a><figcaption><p><span style="white-space: pre-wrap;">Cross posted from the Google AI blog</span></p></figcaption></figure><hr><p>While computer vision models have made tremendous progress using learning-based solutions since the advent of&nbsp;<a href="https://ieeexplore.ieee.org/document/5206848?ref=localhost">ImageNet</a>, the focus has been on natural images, where all sorts of tasks, such as&nbsp;<a href="https://www.image-net.org/?ref=localhost">classification</a>,&nbsp;<a href="https://visualqa.org/?ref=localhost">visual question answering</a>&nbsp;(VQA),&nbsp;<a href="https://cocodataset.org/?ref=localhost">captioning, detection and segmentation</a>, have been defined, studied and in some cases advanced to reach human performance. However, visual language has not garnered a similar level of attention, possibly because of the lack of large-scale training sets in this space. But over the last few years, new academic datasets have been created with the goal of evaluating question answering systems on visual language images, like&nbsp;<a href="https://arxiv.org/abs/1909.00997?ref=localhost">PlotQA</a>,&nbsp;<a href="https://arxiv.org/abs/2104.12756?ref=localhost">InfographicsVQA</a>, and&nbsp;<a href="https://aclanthology.org/2022.findings-acl.177/?ref=localhost">ChartQA</a>.</p>
+<!--kg-card-begin: html-->
+<table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container" style="box-sizing: inherit; border-collapse: collapse; border-spacing: 0px; word-break: initial; color: rgb(95, 99, 104); font-family: Roboto, Arial, Helvetica, sans-serif; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; margin-left: auto; margin-right: auto;"><tbody style="box-sizing: inherit;"><tr style="box-sizing: inherit;"><td style="box-sizing: inherit; padding: 0px; text-align: center;"><a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiJN-BR8Zy4_5B10U4EeSFd9fU7jfvw_QeA1YvEzRK7NDt8oaGEqU1JesVnP2SIsaPbglFE1Qku8c6aQ6tqQsTgI2X3TkQUK_xIK8Pck7-8zNrbXShLr1Z44QAfBd1uVFVeuvR4f6Iuy_7r-bZoQwnj4xI2_iFhTg4XDEfvQMdgKydPrGfOfWMPMldBtg/s1999/image5.png?ref=localhost" imageanchor="1" style="box-sizing: inherit; background-color: transparent; color: rgb(26, 115, 232); font-weight: 500; position: relative; text-decoration: underline rgba(26, 115, 232, 0); transition: text-decoration-color 0.25s linear 0s, color 0.25s linear 0s; display: inline-block; margin-left: auto; margin-right: auto;"><img border="0" data-original-height="898" data-original-width="1999" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiJN-BR8Zy4_5B10U4EeSFd9fU7jfvw_QeA1YvEzRK7NDt8oaGEqU1JesVnP2SIsaPbglFE1Qku8c6aQ6tqQsTgI2X3TkQUK_xIK8Pck7-8zNrbXShLr1Z44QAfBd1uVFVeuvR4f6Iuy_7r-bZoQwnj4xI2_iFhTg4XDEfvQMdgKydPrGfOfWMPMldBtg/s16000/image5.png" style="box-sizing: inherit; border: 0px; height: auto; margin: 48px 0px 16px; max-width: 100%;"></a></td></tr><tr style="box-sizing: inherit;"><td class="tr-caption" style="box-sizing: inherit; padding: 0px 25px 30px; font-family: Roboto, arial, helvetica, sans-serif; font-size: 14px; font-weight: 400; line-height: 20px; font-style: italic; text-align: center;">Example from<span>&nbsp;</span><a href="https://aclanthology.org/2022.findings-acl.177/?ref=localhost" style="box-sizing: inherit; background-color: transparent; color: rgb(26, 115, 232); font-weight: 500; position: relative; text-decoration: underline rgba(26, 115, 232, 0); transition: text-decoration-color 0.25s linear 0s, color 0.25s linear 0s;">ChartQA</a>. Answering the question requires reading the information and computing the sum and the difference.</td></tr></tbody></table>
+<!--kg-card-end: html-->
+<p>Existing models built for these tasks relied on integrating&nbsp;<a href="https://en.wikipedia.org/wiki/Optical_character_recognition?ref=localhost">optical character recognition</a>&nbsp;(OCR) information and their coordinates into larger pipelines but the process is error prone, slow, and generalizes poorly. The prevalence of these methods was because existing end-to-end computer vision models based on&nbsp;<a href="https://en.wikipedia.org/wiki/Convolutional_neural_network?ref=localhost">convolutional neural networks</a>&nbsp;(CNNs) or&nbsp;<a href="https://ai.googleblog.com/2017/08/transformer-novel-neural-network.html?ref=localhost">transformers</a>&nbsp;pre-trained on natural images could not be easily adapted to visual language. But existing models are ill-prepared for the challenges in answering questions on charts, including reading the relative height of bars or the angle of slices in pie charts, understanding axis scales, correctly mapping pictograms with their legend values with colors, sizes and textures, and finally performing numerical operations with the extracted numbers.</p><p>In light of these challenges, we propose “<a href="https://arxiv.org/abs/2212.09662?ref=localhost">MatCha: Enhancing Visual Language Pretraining with Math Reasoning and Chart Derendering</a>”. MatCha, which stands for math and charts, is a pixels-to-text foundation model (a pre-trained model with built-in inductive biases that can be fine-tuned for multiple applications) trained on two complementary tasks: (a) chart de-rendering and (b) math reasoning. In chart de-rendering, given a plot or chart, the image-to-text model is required to generate its underlying data table or the code used to render it. For math reasoning pre-training, we pick textual numerical reasoning datasets and render the input into images, which the image-to-text model needs to decode for answers. We also propose “<a href="https://arxiv.org/abs/2212.10505?ref=localhost">DePlot: One-shot visual language reasoning by plot-to-table translation</a>”, a model built on top of MatCha for one-shot reasoning on charts via translation to tables. With these methods we surpass the previous state of the art in ChartQA by more than 20% and match the best summarization systems that have 1000 times more parameters. Both papers will be presented at&nbsp;<a href="https://2023.aclweb.org/?ref=localhost">ACL2023</a>.</p><h2 id="chart-de-rendering">Chart de-rendering</h2><p>Plots and charts are usually generated by an underlying data table and a piece of code. The code defines the overall layout of the figure (e.g., type, direction, color/shape scheme) and the underlying data table establishes the actual numbers and their groupings. Both the data and code are sent to a compiler/rendering engine to create the final image. To understand a chart, one needs to discover the visual patterns in the image and effectively parse and group them to extract the key information. Reversing the plot rendering process demands all such capabilities and can thus serve as an ideal pre-training task.</p>
+<!--kg-card-begin: html-->
+<table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container" style="box-sizing: inherit; border-collapse: collapse; border-spacing: 0px; word-break: initial; color: rgb(95, 99, 104); font-family: Roboto, Arial, Helvetica, sans-serif; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; margin-left: auto; margin-right: auto;"><tbody style="box-sizing: inherit;"><tr style="box-sizing: inherit;"><td style="box-sizing: inherit; padding: 0px; text-align: center;"><a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh0uJvVVTEGwHvrPqrbWpHw5YPJGU41c8zdH5FvVRUGnUqSSYn7Un3BFnOaDCBglhNEzbk5xeUzmBDCS8buExIp0qziz1AwUXf6ukGUM-_mufPWWpuEMD89LWUrx1XxVJ8o0lJBpJ8503WyLqMuSG8iBvddycooDvlzVSXkjwuOygW21Xmzf55sskzk_g/s624/image2.png?ref=localhost" imageanchor="1" style="box-sizing: inherit; background-color: transparent; color: rgb(26, 115, 232); font-weight: 500; position: relative; text-decoration: underline rgba(26, 115, 232, 0); transition: text-decoration-color 0.25s linear 0s, color 0.25s linear 0s; display: inline-block; margin-left: auto; margin-right: auto;"><img border="0" data-original-height="335" data-original-width="624" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh0uJvVVTEGwHvrPqrbWpHw5YPJGU41c8zdH5FvVRUGnUqSSYn7Un3BFnOaDCBglhNEzbk5xeUzmBDCS8buExIp0qziz1AwUXf6ukGUM-_mufPWWpuEMD89LWUrx1XxVJ8o0lJBpJ8503WyLqMuSG8iBvddycooDvlzVSXkjwuOygW21Xmzf55sskzk_g/s16000/image2.png" style="box-sizing: inherit; border: 0px; height: auto; margin: 48px 0px 16px; max-width: 100%;"></a></td></tr><tr style="box-sizing: inherit;"><td class="tr-caption" style="box-sizing: inherit; padding: 0px 25px 30px; font-family: Roboto, arial, helvetica, sans-serif; font-size: 14px; font-weight: 400; line-height: 20px; font-style: italic; text-align: center;">A chart created from a table in the<span>&nbsp;</span><a href="https://en.wikipedia.org/wiki/Airbus_A380?ref=localhost" style="box-sizing: inherit; background-color: transparent; color: rgb(26, 115, 232); font-weight: 500; position: relative; text-decoration: underline rgba(26, 115, 232, 0); transition: text-decoration-color 0.25s linear 0s, color 0.25s linear 0s;">Airbus A380 Wikipedia page</a><span>&nbsp;</span>using random plotting options. The pre-training task for MatCha consists of recovering the source table or the source code from the image.</td></tr></tbody></table>
+<!--kg-card-end: html-->
+<p>In practice, it is challenging to simultaneously obtain charts, their underlying data tables, and their rendering code. To collect sufficient pre-training data, we independently accumulate [chart, code] and [chart, table] pairs. For [chart, code], we crawl all GitHub IPython notebooks with appropriate licenses and extract blocks with figures. A figure and the code block right before it are saved as a [chart, code] pair. For [chart, table] pairs, we explored two sources. For the first source, synthetic data, we manually write code to convert web-crawled Wikipedia tables from the&nbsp;<a href="https://aclanthology.org/2020.acl-main.398/?ref=localhost">TaPas</a>&nbsp;codebase to charts. We sampled from and combined several plotting options depending on the column types. In addition, we also add [chart, table] pairs generated in PlotQA to diversify the pre-training corpus. The second source is web-crawled [chart, table] pairs. We directly use the [chart, table] pairs crawled in the ChartQA training set, containing around 20k pairs in total from four websites:&nbsp;<a href="https://blog.research.google/2023/05/statista.com?ref=localhost">Statista</a>,&nbsp;<a href="https://www.pewresearch.org/?ref=localhost">Pew</a>,&nbsp;<a href="https://ourworldindata.org/?ref=localhost">Our World in Data</a>, and&nbsp;<a href="https://www.oecd.org/?ref=localhost">OECD</a>.</p><h2 id="math-reasoning">Math reasoning</h2><p>We incorporate numerical reasoning knowledge into MatCha by learning math reasoning skills from textual math datasets. We use two existing textual math reasoning datasets,&nbsp;<a href="https://openreview.net/forum?id=H1gR5iR5FX&ref=localhost">MATH</a>&nbsp;and&nbsp;<a href="https://aclanthology.org/N19-1246/?ref=localhost">DROP</a>&nbsp;for pre-training. MATH is synthetically created, containing two million training examples per module (type) of questions. DROP is a reading-comprehension–style QA dataset where the input is a paragraph context and a question.</p><p>To solve questions in DROP, the model needs to read the paragraph, extract relevant numbers and perform numerical computation. We found both datasets to be complementary. MATH contains a large number of questions across different categories, which helps us identify math operations needed to explicitly inject into the model. DROP’s reading-comprehension format resembles the typical QA format wherein models simultaneously perform information extraction and reasoning. In practice, we render inputs of both datasets into images. The model is trained to decode the answer.</p>
+<!--kg-card-begin: html-->
+<table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container" style="box-sizing: inherit; border-collapse: collapse; border-spacing: 0px; word-break: initial; color: rgb(95, 99, 104); font-family: Roboto, Arial, Helvetica, sans-serif; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; margin-left: auto; margin-right: auto;"><tbody style="box-sizing: inherit;"><tr style="box-sizing: inherit;"><td style="box-sizing: inherit; padding: 0px; text-align: center;"><a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhyaSRY-BeSZ0qxOy3DqRqChADOFXkvYd5iI-sich3d5CZ7qSUh4gdGNoKj-XzCoOWCcGkTPOjlWPTUyrjFJVvgENyKKMTeSXjB39KlsOwC8lJJKHe_bNhjmPk6ewNJWObwENwPiyy_cCFK529eCRxqpXOeStkf2KlLLsn9zALUbJIBiOsTlwK06HlvNw/s624/image1.png?ref=localhost" imageanchor="1" style="box-sizing: inherit; background-color: transparent; color: rgb(26, 115, 232); font-weight: 500; position: relative; text-decoration: underline rgba(26, 115, 232, 0); transition: text-decoration-color 0.25s linear 0s, color 0.25s linear 0s; display: inline-block; margin-left: auto; margin-right: auto;"><img border="0" data-original-height="218" data-original-width="624" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhyaSRY-BeSZ0qxOy3DqRqChADOFXkvYd5iI-sich3d5CZ7qSUh4gdGNoKj-XzCoOWCcGkTPOjlWPTUyrjFJVvgENyKKMTeSXjB39KlsOwC8lJJKHe_bNhjmPk6ewNJWObwENwPiyy_cCFK529eCRxqpXOeStkf2KlLLsn9zALUbJIBiOsTlwK06HlvNw/s16000/image1.png" style="box-sizing: inherit; border: 0px; height: auto; margin: 48px 0px 16px; max-width: 100%;"></a></td></tr><tr style="box-sizing: inherit;"><td class="tr-caption" style="box-sizing: inherit; padding: 0px 25px 30px; font-family: Roboto, arial, helvetica, sans-serif; font-size: 14px; font-weight: 400; line-height: 20px; font-style: italic; text-align: center;">To improve the math reasoning skills of MatCha we incorporate examples from MATH and DROP into the pre-training objective, by rendering the input text as images.</td></tr></tbody></table>
+<!--kg-card-end: html-->
+<h2 id="end-to-end-results">End-to-end results</h2><p>We use a&nbsp;<a href="https://arxiv.org/abs/2210.03347?ref=localhost">Pix2Struct</a>&nbsp;model backbone, which is an image-to-text transformer tailored for website understanding, and pre-train it with the two tasks described above. We demonstrate the strengths of MatCha by fine-tuning it on several visual language tasks — tasks involving charts and plots for question answering and summarization where no access to the underlying table is possible. MatCha surpasses previous models’ performance by a large margin and also outperforms the previous state of the art, which assumes access to underlying tables.</p><p>In the figure below, we first evaluate two baseline models that incorporate information from an&nbsp;<a href="https://aclanthology.org/2022.findings-acl.177/?ref=localhost">OCR pipeline</a>, which until recently was the standard approach for working with charts. The first is based on&nbsp;<a href="https://ai.googleblog.com/2020/02/exploring-transfer-learning-with-t5.html?ref=localhost">T5</a>, the second on&nbsp;<a href="https://aclanthology.org/2022.findings-acl.177/?ref=localhost">VisionTaPas</a>. We also compare against&nbsp;<a href="https://ai.googleblog.com/2022/09/pali-scaling-language-image-learning-in.html?ref=localhost">PaLI-17B</a>, which is a large (~1000 times larger than the other models) image plus text-to-text transformer trained on a diverse set of tasks but with limited capabilities for reading text and other forms of visual language. Finally, we report the Pix2Struct and MatCha model results.</p>
+<!--kg-card-begin: html-->
+<table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container" style="box-sizing: inherit; border-collapse: collapse; border-spacing: 0px; word-break: initial; color: rgb(95, 99, 104); font-family: Roboto, Arial, Helvetica, sans-serif; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; margin-left: auto; margin-right: auto;"><tbody style="box-sizing: inherit;"><tr style="box-sizing: inherit;"><td style="box-sizing: inherit; padding: 0px; text-align: center;"><a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi2FufIovBgB3bz0ve8Zh3vVwONF4gkTNXQjPUX8wmYYS8N3M2opoQcn9aM5d8pjCNkF7puXds_qesakd6CysizEpk4jccOI57U4hsxXQPO4aR8ehU1MvQCiFr3rrcViJJTXu8o1aElkMuw5VBKi3R6OVoRHt25SNP-pPrxkPZv_36kEQDCimsvFek3zQ/s1646/image3.png?ref=localhost" imageanchor="1" style="box-sizing: inherit; background-color: transparent; color: rgb(26, 115, 232); font-weight: 500; position: relative; text-decoration: underline rgba(26, 115, 232, 0); transition: text-decoration-color 0.25s linear 0s, color 0.25s linear 0s; display: inline-block; margin-left: auto; margin-right: auto;"><img border="0" data-original-height="696" data-original-width="1646" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi2FufIovBgB3bz0ve8Zh3vVwONF4gkTNXQjPUX8wmYYS8N3M2opoQcn9aM5d8pjCNkF7puXds_qesakd6CysizEpk4jccOI57U4hsxXQPO4aR8ehU1MvQCiFr3rrcViJJTXu8o1aElkMuw5VBKi3R6OVoRHt25SNP-pPrxkPZv_36kEQDCimsvFek3zQ/s16000/image3.png" style="box-sizing: inherit; border: 0px; height: auto; margin: 48px 0px 16px; max-width: 100%;"></a></td></tr><tr style="box-sizing: inherit;"><td class="tr-caption" style="box-sizing: inherit; padding: 0px 25px 30px; font-family: Roboto, arial, helvetica, sans-serif; font-size: 14px; font-weight: 400; line-height: 20px; font-style: italic; text-align: center;">Experimental results on two chart QA benchmarks ChartQA &amp; PlotQA (using relaxed accuracy) and a chart summarization benchmark chart-to-text (using BLEU4). Matcha surpasses the state of the art by a large margin on QA, compared to larger models, and matches these larger models on summarization.</td></tr></tbody></table>
+<!--kg-card-end: html-->
+<p>For QA datasets, we use the&nbsp;<a href="https://github.com/google-research/pix2struct/blob/main/pix2struct/metrics.py?ref=localhost#L81">official relaxed accuracy metric</a>&nbsp;that allows for small relative errors in numerical outputs. For chart-to-text summarization, we report&nbsp;<a href="https://en.wikipedia.org/wiki/BLEU?ref=localhost">BLEU</a>&nbsp;scores. MatCha achieves noticeably improved results compared to baselines for question answering, and comparable results to PaLI in summarization, where large size and extensive long text/captioning generation pre-training are advantageous for this kind of long-form text generation.</p><h2 id="derendering-plus-large-language-model-chains">Derendering plus large language model chains</h2><p>While extremely performant for their number of parameters, particularly on extractive tasks, we observed that fine-tuned MatCha models could still struggle with end-to-end complex reasoning (e.g., mathematical operations involving large numbers or multiple steps). Thus, we also propose a two-step method to tackle this: 1) a model reads a chart, then outputs the underlying table, 2) a large language model (LLM) reads this output and then tries to answer the question solely based on the textual input.</p><p>For the first model, we fine-tuned MatCha solely on the chart-to-table task, increasing the output sequence length to guarantee it could recover all or most of the information in the chart.&nbsp;<a href="https://arxiv.org/abs/2212.10505?ref=localhost">DePlot</a>&nbsp;is the resulting model. In the second stage, any LLM (such as&nbsp;<a href="https://arxiv.org/abs/2210.11416?ref=localhost">FlanPaLM</a>&nbsp;or&nbsp;<a href="https://arxiv.org/abs/2107.03374?ref=localhost">Codex</a>) can be used for the task, and we can rely on the standard methods to increase performance on LLMs, for example&nbsp;<a href="https://ai.googleblog.com/2022/05/language-models-perform-reasoning-via.html?ref=localhost">chain-of-thought</a>&nbsp;and&nbsp;<a href="https://arxiv.org/abs/2203.11171?ref=localhost">self-consistency</a>. We also experimented with&nbsp;<a href="https://arxiv.org/abs/2211.12588?ref=localhost">program-of-thoughts</a>&nbsp;where the model produces executable Python code to offload complex computations.</p>
+<!--kg-card-begin: html-->
+<table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container" style="box-sizing: inherit; border-collapse: collapse; border-spacing: 0px; word-break: initial; color: rgb(95, 99, 104); font-family: Roboto, Arial, Helvetica, sans-serif; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; margin-left: auto; margin-right: auto;"><tbody style="box-sizing: inherit;"><tr style="box-sizing: inherit;"><td style="box-sizing: inherit; padding: 0px; text-align: center;"><a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEilCkMJE3ftohAt9BeIoISbNLl6W8qXMizYxbR-P4gusArAZI0WYCZgT3z_GwDE9e54V8SE0Hxob1lDr0tIOhpTfNqEFNEwETF3cvm5LbVooJ2sSFmx5QtLlVjNVjPT0n_WYk6d1gb1PKU87siVbNZFFs34UICnymyWxzkgtPt9HtRr7dLB_wa86wJNWA/s622/image4.png?ref=localhost" imageanchor="1" style="box-sizing: inherit; background-color: transparent; color: rgb(26, 115, 232); font-weight: 500; position: relative; text-decoration: underline rgba(26, 115, 232, 0); transition: text-decoration-color 0.25s linear 0s, color 0.25s linear 0s; display: inline-block; margin-left: auto; margin-right: auto;"><img border="0" data-original-height="408" data-original-width="622" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEilCkMJE3ftohAt9BeIoISbNLl6W8qXMizYxbR-P4gusArAZI0WYCZgT3z_GwDE9e54V8SE0Hxob1lDr0tIOhpTfNqEFNEwETF3cvm5LbVooJ2sSFmx5QtLlVjNVjPT0n_WYk6d1gb1PKU87siVbNZFFs34UICnymyWxzkgtPt9HtRr7dLB_wa86wJNWA/s16000/image4.png" style="box-sizing: inherit; border: 0px; height: auto; margin: 48px 0px 16px; max-width: 100%;"></a></td></tr><tr style="box-sizing: inherit;"><td class="tr-caption" style="box-sizing: inherit; padding: 0px 25px 30px; font-family: Roboto, arial, helvetica, sans-serif; font-size: 14px; font-weight: 400; line-height: 20px; font-style: italic; text-align: center;">An illustration of the DePlot+LLM method. This is a real example using<span>&nbsp;</span><a href="https://arxiv.org/abs/2210.11416?ref=localhost" style="box-sizing: inherit; background-color: transparent; color: rgb(26, 115, 232); font-weight: 500; position: relative; text-decoration: underline rgba(26, 115, 232, 0); transition: text-decoration-color 0.25s linear 0s, color 0.25s linear 0s;">FlanPaLM</a><span>&nbsp;</span>and<span>&nbsp;</span><a href="https://arxiv.org/abs/2107.03374?ref=localhost" style="box-sizing: inherit; background-color: transparent; color: rgb(26, 115, 232); font-weight: 500; position: relative; text-decoration: underline rgba(26, 115, 232, 0); transition: text-decoration-color 0.25s linear 0s, color 0.25s linear 0s;">Codex</a>. The blue boxes are input to the LLM and the red boxes contain the answer generated by the LLMs. We highlight some of the key reasoning steps in each answer.</td></tr></tbody></table>
+<!--kg-card-end: html-->
+<p>As shown in the example above, the DePlot model in combination with LLMs outperforms fine-tuned models by a significant margin, especially so in the human-sourced portion of ChartQA, where the questions are more natural but demand more difficult reasoning. Furthermore, DePlot+LLM can do so without access to any training data.</p><p>We have released the new models and code at our&nbsp;<a href="https://github.com/google-research/google-research/tree/master/deplot?ref=localhost">GitHub repo</a>, where you can try it out yourself in colab. Checkout the papers for&nbsp;<a href="https://arxiv.org/abs/2212.09662?ref=localhost">MatCha</a>&nbsp;and&nbsp;<a href="https://arxiv.org/abs/2212.10505?ref=localhost">DePlot</a>&nbsp;for more details on the experimental results. We hope that our results can benefit the research community and make the information in charts and plots more accessible to everyone.</p><h2 id="acknowledgements">Acknowledgements</h2><p><em>This work was carried out by Fangyu Liu, Julian Martin Eisenschlos, Francesco Piccinno, Syrine Krichene, Chenxi Pang, Kenton Lee, Mandar Joshi, Wenhu Chen and Yasemin Altun from our&nbsp;</em><a href="https://research.google/teams/language/?ref=localhost"><em>Language Team</em></a><em>&nbsp;as part of Fangyu's internship project. Nigel Collier from Cambridge also was a collaborator. We would like to thank Joshua Howland, Alex Polozov, Shrestha Basu Mallick, Massimo Nicosia and William Cohen for their valuable comments and suggestions.</em></p>
+        </section>
+
+    </article>
+
+
+</main>
+
+
+            <section class="gh-container is-grid gh-outer">
+                <div class="gh-container-inner gh-inner">
+                    <h2 class="gh-container-title">Read more</h2>
+                    <div class="gh-feed">
+                            <article class="gh-card post no-image">
+    <a class="gh-card-link" href="../learning-to-reason-over-tables-from-less-data/index.html">
+            <figure class="gh-card-image">
+                <img
+                    srcset="../content/images/size/w160/format/webp/2021/04/few-shot.png 160w,
+                           ../content/images/size/w320/format/webp/2021/04/few-shot.png 320w,
+                          ../content/images/size/w600/format/webp/2021/04/few-shot.png 600w,
+                         ../content/images/size/w960/format/webp/2021/04/few-shot.png 960w,
+                        ../content/images/size/w1200/format/webp/2021/04/few-shot.png 1200w,
+                       ../content/images/size/w2000/format/webp/2021/04/few-shot.pngt.png 2000w"
+                    sizes="320px"
+                    src="../content/images/size/w600/2021/04/few-shot.png"
+                    alt="Learning to Reason Over Tables from Less Data"
+                    loading="lazy"
+                >
+            </figure>
+        <div class="gh-card-wrapper">
+            <h3 class="gh-card-title is-title">Learning to Reason Over Tables from Less Data</h3>
+                <p class="gh-card-excerpt is-body">In &quot;Understanding tables with intermediate pre-training&quot;, published in Findings of EMNLP 2020, we introduce the first pre-training tasks customized for table parsing, enabling models to learn better, faster and from less data.</p>
+            <footer class="gh-card-meta">
+<!--
+             -->                    <time class="gh-card-date" datetime="2021-04-10">Apr 10, 2021</time>
+                <!--
+         --></footer>
+        </div>
+    </a>
+</article>                            <article class="gh-card post no-image">
+    <a class="gh-card-link" href="../multifit/index.html">
+            <figure class="gh-card-image">
+                <img
+                    srcset="../content/images/size/w160/format/webp/2020/08/multifit_bootstrapping.png 160w,
+                           ../content/images/size/w320/format/webp/2020/08/multifit_bootstrapping.png 320w,
+                          ../content/images/size/w600/format/webp/2020/08/multifit_bootstrapping.png 600w,
+                         ../content/images/size/w960/format/webp/2020/08/multifit_bootstrapping.png 960w,
+                        ../content/images/size/w1200/format/webp/2020/08/multifit_bootstrapping.png 1200w,
+                       ../content/images/size/w2000/format/webp/2020/08/multifit_bootstrapping.png.png 2000w"
+                    sizes="320px"
+                    src="../content/images/size/w600/2020/08/multifit_bootstrapping.png"
+                    alt="Efficient multi-lingual language model fine-tuning"
+                    loading="lazy"
+                >
+            </figure>
+        <div class="gh-card-wrapper">
+            <h3 class="gh-card-title is-title">Efficient multi-lingual language model fine-tuning</h3>
+                <p class="gh-card-excerpt is-body">Our latest paper studies multilingual text classification and introduces MultiFiT, a novel method based on ULMFiT. MultiFiT, trained on 100 labeled documents in the target language, outperforms multi-lingual BERT, and the LASER algorithm—even though LASER requires a corpus of parallel texts.</p>
+            <footer class="gh-card-meta">
+<!--
+             -->                    <time class="gh-card-date" datetime="2019-09-10">Sep 10, 2019</time>
+                <!--
+         --></footer>
+        </div>
+    </a>
+</article>                            <article class="gh-card post no-image">
+    <a class="gh-card-link" href="../deep-learning-in-100-lines/index.html">
+            <figure class="gh-card-image">
+                <img
+                    srcset="../content/images/size/w160/format/webp/2019/03/onion.jpg 160w,
+                           ../content/images/size/w320/format/webp/2019/03/onion.jpg 320w,
+                          ../content/images/size/w600/format/webp/2019/03/onion.jpg 600w,
+                         ../content/images/size/w960/format/webp/2019/03/onion.jpg 960w,
+                        ../content/images/size/w1200/format/webp/2019/03/onion.jpg 1200w,
+                       ../content/images/size/w2000/format/webp/2019/03/onion.jpgn.jpg 2000w"
+                    sizes="320px"
+                    src="../content/images/size/w600/2019/03/onion.jpg"
+                    alt="Neural Networks in 100 lines of pure Python"
+                    loading="lazy"
+                >
+            </figure>
+        <div class="gh-card-wrapper">
+            <h3 class="gh-card-title is-title">Neural Networks in 100 lines of pure Python</h3>
+                <p class="gh-card-excerpt is-body">Can we build a Deep learning framework in plain Python and Numpy? Can we make it compact, clear and extendable? Let&#x27;s set out to explore those ideas and see what we can create!</p>
+            <footer class="gh-card-meta">
+<!--
+             -->                    <time class="gh-card-date" datetime="2019-03-17">Mar 17, 2019</time>
+                <!--
+         --></footer>
+        </div>
+    </a>
+</article>                            <article class="gh-card post no-image">
+    <a class="gh-card-link" href="../text-classification-with-estimators/index.html">
+            <figure class="gh-card-image">
+                <img
+                    srcset="../content/images/size/w160/format/webp/2019/03/estimators_loss.png 160w,
+                           ../content/images/size/w320/format/webp/2019/03/estimators_loss.png 320w,
+                          ../content/images/size/w600/format/webp/2019/03/estimators_loss.png 600w,
+                         ../content/images/size/w960/format/webp/2019/03/estimators_loss.png 960w,
+                        ../content/images/size/w1200/format/webp/2019/03/estimators_loss.png 1200w,
+                       ../content/images/size/w2000/format/webp/2019/03/estimators_loss.pngs.png 2000w"
+                    sizes="320px"
+                    src="../content/images/size/w600/2019/03/estimators_loss.png"
+                    alt="Text Classification with TensorFlow Estimators"
+                    loading="lazy"
+                >
+            </figure>
+        <div class="gh-card-wrapper">
+            <h3 class="gh-card-title is-title">Text Classification with TensorFlow Estimators</h3>
+                <p class="gh-card-excerpt is-body">Throughout this post we will explain how to classify text using Estimators,  Datasets and Feature Columns, with a scalable high-level API in TensorFlow. </p>
+            <footer class="gh-card-meta">
+<!--
+             -->                    <time class="gh-card-date" datetime="2018-03-07">Mar 7, 2018</time>
+                <!--
+         --></footer>
+        </div>
+    </a>
+</article>                    </div>
+                </div>
+            </section>
+
+    
+    <footer class="gh-footer has-accent-color gh-outer">
+    <div class="gh-footer-inner gh-inner">
+
+        <div class="gh-footer-bar">
+            <span class="gh-footer-logo is-title">
+                    Julian Eisenschlos
+            </span>
+            <nav class="gh-footer-menu">
+                
+            </nav>
+            <div class="gh-footer-copyright">
+                Powered by <a href="https://ghost.org/" target="_blank" rel="noopener">Ghost</a>
+            </div>
+        </div>
+
+
+    </div>
+</footer>    
+</div>
+
+    <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="pswp__bg"></div>
+
+    <div class="pswp__scroll-wrap">
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/built/source.js%3Fv=f60aed1d93"></script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/prism.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/components/prism-lua.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/components/prism-c.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/components/prism-cpp.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/components/prism-latex.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/components/prism-python.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/components/prism-markdown.min.js"></script>
+
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [["$", "$"], ["\\(", "\\)"]],
+        processEscapes: true
+    }
+});
+</script>
+
+</body>
+</html>

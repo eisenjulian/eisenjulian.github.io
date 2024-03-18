@@ -3,41 +3,63 @@
 <head>
 
     <title>Neural Networks in 100 lines of pure Python</title>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="HandheldFriendly" content="True" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <link rel="stylesheet" type="text/css" href="../assets/built/screen.css@v=bc10f09b63.css" />
-
-    <link rel="canonical" href="index.html" />
-    <meta name="referrer" content="no-referrer-when-downgrade" />
-    <link rel="amphtml" href="amp/index.html" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <meta property="og:site_name" content="Julian Eisenschlos" />
-    <meta property="og:type" content="article" />
-    <meta property="og:title" content="Neural Networks in 100 lines of pure Python" />
-    <meta property="og:description" content="Can we build a Deep learning framework in plain Python and Numpy? Can we make it compact, clear and extendable? Let&#x27;s set out to explore those ideas and see what we can create!" />
-    <meta property="og:url" content="https://eisenjulian.github.io/deep-learning-in-100-lines/" />
-    <meta property="og:image" content="https://eisenjulian.github.io/content/images/2019/03/onion.jpg" />
-    <meta property="article:published_time" content="2019-03-17T15:33:37.000Z" />
-    <meta property="article:modified_time" content="2019-04-15T14:22:12.000Z" />
-    <meta property="article:tag" content="Automatic Differentiation" />
-    <meta property="article:tag" content="Math" />
-    <meta property="article:tag" content="Tutorials" />
+    <link rel="preload" as="style" href="../assets/built/screen.css%3Fv=f60aed1d93.css">
+    <link rel="preload" as="script" href="../assets/built/source.js%3Fv=f60aed1d93">
+
+    <link rel="stylesheet" type="text/css" href="../assets/built/screen.css%3Fv=f60aed1d93.css">
+
+    <style>
+        :root {
+            --background-color: #ffffff
+        }
+    </style>
+
+    <script>
+        /* The script for calculating the color contrast has been taken from
+        https://gomakethings.com/dynamically-changing-the-text-color-based-on-background-color-contrast-with-vanilla-js/ */
+        var accentColor = getComputedStyle(document.documentElement).getPropertyValue('--background-color');
+        accentColor = accentColor.trim().slice(1);
+        var r = parseInt(accentColor.substr(0, 2), 16);
+        var g = parseInt(accentColor.substr(2, 2), 16);
+        var b = parseInt(accentColor.substr(4, 2), 16);
+        var yiq = ((r * 299) + (g * 587) + (b * 114)) / 1000;
+        var textColor = (yiq >= 128) ? 'dark' : 'light';
+
+        document.documentElement.className = `has-${textColor}-text`;
+    </script>
+
+    <meta name="description" content="Can we build a Deep learning framework in plain Python and Numpy? Can we make it compact, clear and extendable? Let&#x27;s set out to explore those ideas and see what we can create!">
+    <link rel="canonical" href="index.html">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <link rel="amphtml" href="amp/index.html">
     
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Neural Networks in 100 lines of pure Python" />
-    <meta name="twitter:description" content="Can we build a Deep learning framework in plain Python and Numpy? Can we make it compact, clear and extendable? Let&#x27;s set out to explore those ideas and see what we can create!" />
-    <meta name="twitter:url" content="https://eisenjulian.github.io/deep-learning-in-100-lines/" />
-    <meta name="twitter:image" content="https://eisenjulian.github.io/content/images/2019/03/onion.jpg" />
-    <meta name="twitter:label1" content="Written by" />
-    <meta name="twitter:data1" content="Julian Eisenschlos" />
-    <meta name="twitter:label2" content="Filed under" />
-    <meta name="twitter:data2" content="Automatic Differentiation, Math, Tutorials" />
-    <meta name="twitter:site" content="@eisenjulian" />
-    <meta property="og:image:width" content="640" />
-    <meta property="og:image:height" content="360" />
+    <meta property="og:site_name" content="Julian Eisenschlos">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Neural Networks in 100 lines of pure Python">
+    <meta property="og:description" content="Can we build a Deep learning framework in plain Python and Numpy? Can we make it compact, clear and extendable? Let&#x27;s set out to explore those ideas and see what we can create!">
+    <meta property="og:url" content="https://eisenjulian.github.io/deep-learning-in-100-lines/">
+    <meta property="og:image" content="https://eisenjulian.github.io/content/images/2019/03/onion.jpg">
+    <meta property="article:published_time" content="2019-03-17T15:33:37.000Z">
+    <meta property="article:modified_time" content="2019-04-15T14:22:12.000Z">
+    <meta property="article:tag" content="Automatic Differentiation">
+    <meta property="article:tag" content="Math">
+    <meta property="article:tag" content="Tutorials">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Neural Networks in 100 lines of pure Python">
+    <meta name="twitter:description" content="Can we build a Deep learning framework in plain Python and Numpy? Can we make it compact, clear and extendable? Let&#x27;s set out to explore those ideas and see what we can create!">
+    <meta name="twitter:url" content="https://eisenjulian.github.io/deep-learning-in-100-lines/">
+    <meta name="twitter:image" content="https://eisenjulian.github.io/content/images/2019/03/onion.jpg">
+    <meta name="twitter:label1" content="Written by">
+    <meta name="twitter:data1" content="Julian Eisenschlos">
+    <meta name="twitter:label2" content="Filed under">
+    <meta name="twitter:data2" content="Automatic Differentiation, Math, Tutorials">
+    <meta name="twitter:site" content="@eisenjulian">
+    <meta property="og:image:width" content="640">
+    <meta property="og:image:height" content="360">
     
     <script type="application/ld+json">
 {
@@ -59,7 +81,7 @@
         "name": "Julian Eisenschlos",
         "image": {
             "@type": "ImageObject",
-            "url": "https://eisenjulian.github.io/content/images/2019/03/perfil-square.jpeg",
+            "url": "https://eisenjulian.github.io/content/images/2024/03/perfil-square.jpeg",
             "width": 710,
             "height": 710
         },
@@ -78,16 +100,18 @@
     },
     "keywords": "Automatic Differentiation, Math, Tutorials",
     "description": "Can we build a Deep learning framework in plain Python and Numpy? Can we make it compact, clear and extendable? Let&#x27;s set out to explore those ideas and see what we can create!",
-    "mainEntityOfPage": {
-        "@type": "WebPage",
-        "@id": "https://eisenjulian.github.io/"
-    }
+    "mainEntityOfPage": "https://eisenjulian.github.io/deep-learning-in-100-lines/"
 }
     </script>
 
-    <meta name="generator" content="Ghost 4.7" />
-    <link rel="alternate" type="application/rss+xml" title="Julian Eisenschlos" href="../rss/index.html" />
+    <meta name="generator" content="Ghost 5.80">
+    <link rel="alternate" type="application/rss+xml" title="Julian Eisenschlos" href="../rss/index.html">
     
+    <script defer src="https://cdn.jsdelivr.net/ghost/sodo-search@~1.1/umd/sodo-search.min.js" data-key="3948e65ad8bc7936f3efbbea1e" data-styles="https://cdn.jsdelivr.net/ghost/sodo-search@~1.1/umd/main.css" data-sodo-search="https://eisenjulian.github.io/" crossorigin="anonymous"></script>
+    
+    <link href="https://eisenjulian.github.io/webmentions/receive/" rel="webmention">
+    <script defer src="../public/cards.min.js%3Fv=f60aed1d93"></script>
+    <link rel="stylesheet" type="text/css" href="../public/cards.min.css%3Fv=f60aed1d93.css">
     <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-136394483-1"></script>
 <script>
@@ -99,107 +123,94 @@
 </script>
 
 <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/themes/prism-tomorrow.min.css" rel="stylesheet"/>
-<style type='text/css'>
-    .footer-cta,
-    a.gh-head-button,
-    .site-footer a[href^="https://ghost.org"] { display: none; }
+<style>
+  .gh-footer-bar {display: none; !important}
 </style><style>:root {--ghost-accent-color: #15171A;}</style>
 
 </head>
-<body class="post-template tag-automatic-differentiation tag-math tag-tutorials">
-<div class="viewport">
+<body class="post-template tag-automatic-differentiation tag-math tag-tutorials tag-hash-import-2024-03-17-18-37 has-sans-title has-sans-body">
 
-    <header id="gh-head" class="gh-head has-cover">
-        <nav class="gh-head-inner inner gh-container">
+<div class="gh-viewport">
+    
+    <header id="gh-navigation" class="gh-navigation is-left-logo has-accent-color gh-outer">
+    <div class="gh-navigation-inner gh-inner">
 
-            <div class="gh-head-brand">
-                <a class="gh-head-logo" href="../index.html">
-                        Julian Eisenschlos
-                </a>
-                <a class="gh-burger" role="button">
-                    <div class="gh-burger-box">
-                        <div class="gh-burger-inner"></div>
-                    </div>
-                </a>
-            </div>
-            <div class="gh-head-menu">
-                <ul class="nav">
-    <li class="nav-home"><a href="../index.html">Home</a></li>
+        <div class="gh-navigation-brand">
+            <a class="gh-navigation-logo is-title" href="../index.html">
+                    Julian Eisenschlos
+            </a>
+            <button class="gh-search gh-icon-button" aria-label="Search this site" data-ghost-search>
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" width="20" height="20"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg></button>            <button class="gh-burger gh-icon-button" aria-label="Menu">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 256 256"><path d="M224,128a8,8,0,0,1-8,8H40a8,8,0,0,1,0-16H216A8,8,0,0,1,224,128ZM40,72H216a8,8,0,0,0,0-16H40a8,8,0,0,0,0,16ZM216,184H40a8,8,0,0,0,0,16H216a8,8,0,0,0,0-16Z"></path></svg>                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 256 256"><path d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z"></path></svg>            </button>
+        </div>
+
+        <nav class="gh-navigation-menu">
+            <ul class="nav">
     <li class="nav-about"><a href="../about/index.html">About</a></li>
     <li class="nav-papers"><a href="../publications/index.html">Papers</a></li>
     <li class="nav-talks"><a href="../talks/index.html">Talks</a></li>
     <li class="nav-github"><a href="https://github.com/eisenjulian">GitHub</a></li>
     <li class="nav-linkedin"><a href="https://www.linkedin.com/in/eisenjulian">LinkedIn</a></li>
+    <li class="nav-x"><a href="https://x.com/eisenjulian">X</a></li>
 </ul>
 
-            </div>
-            <div class="gh-head-actions">
-                <div class="gh-social">
-                        <a class="gh-social-twitter" href="https://twitter.com/eisenjulian" title="Twitter" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
-</a>
-                </div>
-
-                    <a class="gh-head-button" href="index.html#/portal/signup">Subscribe</a>
-            </div>
         </nav>
-    </header>
 
-    <main>
-        
+        <div class="gh-navigation-actions">
+                    <button class="gh-search gh-icon-button" aria-label="Search this site" data-ghost-search>
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" width="20" height="20"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg></button>        </div>
 
+    </div>
+</header>
 
+    
 
-<article class="article post tag-automatic-differentiation tag-math tag-tutorials">
+<main class="gh-main">
 
-    <header class="article-header gh-canvas">
+    <article class="gh-article post tag-automatic-differentiation tag-math tag-tutorials tag-hash-import-2024-03-17-18-37">
 
-        <section class="article-tag">
-            <a href="../tag/automatic-differentiation/index.html">Automatic Differentiation</a>
-        </section>
+        <header class="gh-article-header gh-canvas">
 
-        <h1 class="article-title">Neural Networks in 100 lines of pure Python</h1>
+                <a class="gh-article-tag" href="../tag/automatic-differentiation/index.html">Automatic Differentiation</a>
+            <h1 class="gh-article-title is-title">Neural Networks in 100 lines of pure Python</h1>
+                <p class="gh-article-excerpt is-body">Can we build a Deep learning framework in plain Python and Numpy? Can we make it compact, clear and extendable? Let&#x27;s set out to explore those ideas and see what we can create!</p>
 
-        <p class="article-excerpt">Can we build a Deep learning framework in plain Python and Numpy? Can we make it compact, clear and extendable? Let&#x27;s set out to explore those ideas and see what we can create!</p>
-
-        <div class="article-byline">
-            <section class="article-byline-content">
-                <ul class="author-list">
-                    <li class="author-list-item">
-                        <a href="../author/julian/index.html" class="author-avatar">
-                            <img class="author-profile-image" src="../content/images/size/w100/2019/03/perfil-square.jpeg" alt="Julian Eisenschlos" />
-                        </a>
-                    </li>
-                </ul>
-                <div class="article-byline-meta">
-                    <h4 class="author-name"><a href="../author/julian/index.html">Julian Eisenschlos</a></h4>
-                    <div class="byline-meta-content">
-                        <time class="byline-meta-date" datetime="2019-03-17">Mar 17, 2019</time>
-                        <span class="byline-reading-time"><span class="bull">&bull;</span> 11 min read</span>
+            <div class="gh-article-meta">
+                <div class="gh-article-author-image">
+                            <a href="../author/julian/index.html">
+                                <img class="author-profile-image" src="../content/images/size/w160/2024/03/perfil-square.jpeg" alt="Julian Eisenschlos" />
+                            </a>
+                </div>
+                <div class="gh-article-meta-wrapper">
+                    <h4 class="gh-article-author-name"><a href="../author/julian/index.html">Julian Eisenschlos</a></h4>
+                    <div class="gh-article-meta-content">
+                        <time class="gh-article-meta-date" datetime="2019-03-17">Mar 17, 2019</time>
+                            <span class="gh-article-meta-length"><span class="bull">—</span> 11 min read</span>
                     </div>
                 </div>
-            </section>
-        </div>
+            </div>
 
-        <figure class="article-image">
-            <img
-                srcset="../content/images/size/w300/2019/03/onion.jpg 300w,
-                       ../content/images/size/w600/2019/03/onion.jpg 600w,
-                      ../content/images/size/w1000/2019/03/onion.jpg 1000w,
-                     ../content/images/size/w2000/2019/03/onion.jpg 2000w"
-                sizes="(min-width: 1400px) 1400px, 92vw"
-                src="../content/images/size/w2000/2019/03/onion.jpg"
-                alt="Neural Networks in 100 lines of pure Python"
-            />
-        </figure>
-    </header>
+                <figure class="gh-article-image">
+        <img
+            srcset="../content/images/size/w320/2019/03/onion.jpg 320w,
+                   ../content/images/size/w600/2019/03/onion.jpg 600w,
+                  ../content/images/size/w960/2019/03/onion.jpg 960w,
+                 ../content/images/size/w1200/2019/03/onion.jpg 1200w,
+                ../content/images/size/w2000/2019/03/onion.jpg 2000w"
+            src="../content/images/size/w1200/2019/03/onion.jpg"
+            alt="Neural Networks in 100 lines of pure Python"
+        >
+    </figure>
 
-    <section class="gh-content gh-canvas">
-        <p><em>Can we build a Deep learning framework in pure Python and Numpy? Can we make it compact, clear and extendable? Let's set out to explore those ideas and see what we can create!</em></p><hr><p>In today's day and age, there are multiple frameworks to choose from, with various important features such as auto-differentiation, graph-based optimized computation, and hardware acceleration. It's easy to take those features for granted, but every once in a while peeking under the hood can teach us what makes things work and what doesn't.</p><p>What we'll cover:</p><ul><li>Automatic back-propagation</li><li>How to implement a few basic layers</li><li>How to create a training loop</li></ul><p>If you want to jump straight to the code, feel free to scroll to the second half of the post or try it live in this <a href="https://colab.research.google.com/github/eisenjulian/slides/blob/master/NN_from_scratch/notebook.ipynb">Colab Notebook</a>.</p><p>The design choices are heavily based on <a href="https://github.com/explosion/thinc">Thinc</a>'s Deep Learning library since they came up with the smart idea of using  closures and the stack to share and keep track of intermediate results while calculating gradients. This post is also inspired by Jeremy Howard's great <a href="https://pytorch.org/tutorials/beginner/nn_tutorial.html">PyTorch tutorial</a>, but taking it one more step towards the bottom getting rid of <code>autograd</code>.</p><h2 id="a-word-on-notation">A word on notation</h2><p>Notation can often be a source of confusion, but it can also help us develop the right intuition. In the context of calculus for back propagation, we can focus on functions or on variables to think about derivatives. These are the edges and nodes in the computational graph. We will get to the same results either way, but I find that focusing on variables helps to make things more natural.</p><ul><li>Let $f:\mathbb{R}^n\to\mathbb{R}$ and $x\in\mathbb{R}^n$, then the gradient is the $n$-dimensional row vector of partial derivatives $\frac{\partial f}{\partial_j }(x)$</li><li>If $f:\mathbb{R}^n\to\mathbb{R}^m$ and $x\in\mathbb{R}^n$ then the Jacobian matrix is an $m\times n$ matrix such that the $i^{\text{th}}$ is the gradient of $f$ restricted to the $i$ coordinate:<br>$$Jf(x)_{ij} = \frac{\partial f_i}{\partial_j}(x)$$</li><li>For a function $f$ and two vectors $a$ and $b$ such that $a = f(b)$, whenever $f$ is clear from context we can write $\frac{\partial a}{\partial b}$ to denote the Jacobian $Jf$, or gradient if $a$ is a real number.</li></ul><h2 id="the-chain-rule">The chain rule</h2><p>If we have three vectors in three vector spaces $a\in A$, $b\in B$, and $c\in C$ and two differentiable functions $f:A\to B$ and $g:B\to C$ such that $f(a) = b$ and $g(b) = c$ we can get the Jacobian of the composition as a matrix product of the Jacobian of $f$ and $g$:</p><p>$$\frac{\partial c}{\partial a} = \frac{\partial c}{\partial b} \cdot \frac{\partial b}{\partial a}$$</p><p>That's the chain rule in all its glory. The back-propagation algorithm, originally described in the '60s and '70s is the application of the chain rule to calculate gradients of a real function with respect to its various parameters.</p><p>Keep in mind that our end goal is to find a minimum (hopefully global) of a function by taking steps in the opposite direction of the said gradient, because locally at least this will take it downwards. This is how it looks when we have two parameters to optimize.</p><figure class="kg-card kg-image-card kg-card-hascaption"><img src="../content/images/2019/03/gradient_descent.gif" class="kg-image" alt="Gradient Descent" loading="lazy"><figcaption>Source: <a href="https://jed-ai.github.io/py1_gd_animation/">7 Simple Steps To Visualize And Animate The Gradient Descent Algorithm</a></figcaption></figure><h2 id="reverse-mode-differentiation">Reverse mode differentiation</h2><p>If we compose many functions $f_i(a_i) = a_{i+1}$ instead of just two, then we can apply that formula repeatedly and conclude that</p><p>$$\frac{\partial a_n}{\partial a_1} = \frac{\partial a_n}{\partial a_{n-1}} \cdots \frac{\partial a_3}{\partial a_2}\cdot\frac{\partial a_2}{\partial a_1}$$</p><p>Of the many ways we can compute this product, the most common are from left to right or from right to left. </p><p>In practice, if $a_n$ is a scalar we will calculate the full gradient by starting with the row vector $\frac{\partial a_n}{\partial a_{n-1}}$ and multiplying by the Jacobians $\frac{\partial a_i}{\partial a_{i-1}}$ on the right one at a time. This operation is sometimes referred as <em>VJP</em>, or <em>Vector-Jacobian Product</em>. The whole process is known as <strong>reverse mode</strong> differentiation, because as intermediate results we gradually compute the gradients working from the last one $\frac{\partial a_n}{\partial a_{n-1}}$ backward through $\frac{\partial a_n}{\partial a_{n-2}}$, $\frac{\partial a_n}{\partial a_{n-3}}$, etc. In the end, we know the gradient of $a_n$ with respect to all other variables.</p><p>$$\frac{\partial a_n}{\partial a_{n-1}} \rightarrow \frac{\partial a_n}{\partial a_{n-2}} \rightarrow \cdots \rightarrow \frac{\partial a_n}{\partial a_1}$$</p><p>In contrast, <strong>forward mode</strong> does the exact opposite. It starts from one Jacobian like $\frac{\partial a_2}{\partial a_1}$ and multiplies on the left by $\frac{\partial a_3}{\partial a_2}$ to calculate $\frac{\partial a_3}{\partial a_1}$. If we keep multiplying by $\frac{\partial a_i}{\partial a_{i-1}}$ we'll gradually get the derivatives of all other variables with respect to $a_1$. When $a_1$ is a scalar, all the matrixes on the right side of the products are column vectors, and this is called a <em>Jacobian-Vector Product</em> (or <em>JVP</em>).</p><p>$$\frac{\partial a_n}{\partial a_1} \leftarrow\cdots\leftarrow \frac{\partial a_2}{\partial a_1} \leftarrow  \frac{\partial a_2}{\partial a_1}$$</p><p>For back propagation, as you might have guessed, we are interested in the first of this two, since there's a single value we want on top, the loss function, derived with respect to multiple variables, the weights. Forward mode could still be used to compute those gradients, but it would be far less efficient since we would have to repeat the process multiple times.</p><p>This sounds like a lot of high-dimensional matrix products, but the trick is that very often the Jacobian matrixes will be sparse, <a href="https://en.wikipedia.org/wiki/Block_matrix">block</a> or even diagonal and, because we only care about the result of multiplying it by a row vector on the left, we won't need to compute or store it explicitly</p><p>In this article, we are focusing on a sequential composition of layers, but the same ideas apply to any algorithm or computational graph that we use to get to the result. Yet another nice description of reverse and forward mode in a more general context is given <a href="http://colah.github.io/posts/2015-08-Backprop/">here</a>.</p><h2 id="link-to-deep-neural-networks">Link to deep neural networks</h2><p>In the typical setting for supervised machine learning, we have a big complex function that takes in a tensor of numerical features for our labeled samples, and several tensors that correspond to weights that characterize the model.</p><p>The loss, as a scalar function of both the samples and weights, is a measure of how far the model output was from the expected labels. We want to minimize it to find the most suitable weights. In deep learning, this function is expressed as a composition of simpler functions, each of which is easy to differentiate. All of them but the last are what we refer to as layers, and each layer usually has two sets of parameters: the inputs (which can be the output of the previous layer) and the weights. </p><p>The last function is the loss metric, which also has two sets of parameters: model output $y$ and the true labels $\hat{y}$. For example, if the loss metric $l$ is the mean square error then $\frac{\partial l}{\partial y}$ is $2\  \text{avg}(y - \hat{y})$. The gradient of the loss will be the starting row vector to apply reverse mode differentiation.</p><h2 id="autograd">Autograd</h2><p>The ideas behind Automatic Differentiation are quite mature. It can be done in runtime or during compilation, which can have a dramatic impact on performance. I recommend the <a href="https://github.com/HIPS/autograd">HIPS autograd</a> Python package for a thorough explanation of some of the concepts. </p><p>The core idea, however, is always the same, and we have known it ever since we started computing derivatives in school. If we can keep track of the computations that resulted in the final scalar output and we know how to differentiate each simple operation (sums and products, powers, exponentials, and logarithms, ...), we can recover the gradient of the output.</p><p>Let's say that we have some intermediate linear layer $f$ which is characterized by a matrix multiplication (let's leave the bias out for a sec):</p><p>$$y = f(x, w) = x\cdot w$$</p><p>In order to tune the values of $w$ with gradient descent, we need to compute the gradient $\frac{\partial l}{\partial w}$. The key observation that it's enough to know how changes in $y$ will affect $l$ to do that.</p><blockquote>The contract that any layer has to satisfy is the following: if I tell you the gradient of the loss with respect to your outputs, you can tell me the gradient with respect to your inputs, which are in turn the previous layer outputs.</blockquote><p>Now we can apply the chain rule twice: for the gradient with respect to $w$ we get that </p><p>$$\frac{\partial l}{\partial w} =\frac{\partial l}{\partial y}\cdot \frac{\partial y}{\partial w} = \frac{\partial l}{\partial y} \cdot x^t $$</p><p>and with respect to $x$</p><p>$$\frac{\partial l}{\partial x} =\frac{\partial l}{\partial y}\cdot \frac{\partial y}{\partial x} = \frac{\partial l}{\partial y} \cdot w $$ </p><p>So we can both pass a gradient backward to enable previous layers to update themselves and update the internal layer weights to optimize the loss, and that's it!</p><h2 id="implementation-time">Implementation time</h2><p>Let's look at the code, or try it live in this <a href="https://colab.research.google.com/github/eisenjulian/slides/blob/master/NN_from_scratch/notebook.ipynb">Colab Notebook</a>. We can start with a class that encapsulates a tensor and its gradients</p><!--kg-card-begin: markdown--><pre><code class="language-python">class Parameter():
+        </header>
+
+        <section class="gh-content gh-canvas is-body">
+            <p><em>Can we build a Deep learning framework in pure Python and Numpy? Can we make it compact, clear and extendable? Let's set out to explore those ideas and see what we can create!</em></p><hr><p>In today's day and age, there are multiple frameworks to choose from, with various important features such as auto-differentiation, graph-based optimized computation, and hardware acceleration. It's easy to take those features for granted, but every once in a while peeking under the hood can teach us what makes things work and what doesn't.</p><p>What we'll cover:</p><ul><li>Automatic back-propagation</li><li>How to implement a few basic layers</li><li>How to create a training loop</li></ul><p>If you want to jump straight to the code, feel free to scroll to the second half of the post or try it live in this <a href="https://colab.research.google.com/github/eisenjulian/slides/blob/master/NN_from_scratch/notebook.ipynb?ref=localhost">Colab Notebook</a>.</p><p>The design choices are heavily based on <a href="https://github.com/explosion/thinc?ref=localhost">Thinc</a>'s Deep Learning library since they came up with the smart idea of using  closures and the stack to share and keep track of intermediate results while calculating gradients. This post is also inspired by Jeremy Howard's great <a href="https://pytorch.org/tutorials/beginner/nn_tutorial.html?ref=localhost">PyTorch tutorial</a>, but taking it one more step towards the bottom getting rid of <code>autograd</code>.</p><h2 id="a-word-on-notation">A word on notation</h2><p>Notation can often be a source of confusion, but it can also help us develop the right intuition. In the context of calculus for back propagation, we can focus on functions or on variables to think about derivatives. These are the edges and nodes in the computational graph. We will get to the same results either way, but I find that focusing on variables helps to make things more natural.</p><ul><li>Let $f:\mathbb{R}^n\to\mathbb{R}$ and $x\in\mathbb{R}^n$, then the gradient is the $n$-dimensional row vector of partial derivatives $\frac{\partial f}{\partial_j }(x)$</li><li>If $f:\mathbb{R}^n\to\mathbb{R}^m$ and $x\in\mathbb{R}^n$ then the Jacobian matrix is an $m\times n$ matrix such that the $i^{\text{th}}$ is the gradient of $f$ restricted to the $i$ coordinate:<br>$$Jf(x)_{ij} = \frac{\partial f_i}{\partial_j}(x)$$</li><li>For a function $f$ and two vectors $a$ and $b$ such that $a = f(b)$, whenever $f$ is clear from context we can write $\frac{\partial a}{\partial b}$ to denote the Jacobian $Jf$, or gradient if $a$ is a real number.</li></ul><h2 id="the-chain-rule">The chain rule</h2><p>If we have three vectors in three vector spaces $a\in A$, $b\in B$, and $c\in C$ and two differentiable functions $f:A\to B$ and $g:B\to C$ such that $f(a) = b$ and $g(b) = c$ we can get the Jacobian of the composition as a matrix product of the Jacobian of $f$ and $g$:</p><p>$$\frac{\partial c}{\partial a} = \frac{\partial c}{\partial b} \cdot \frac{\partial b}{\partial a}$$</p><p>That's the chain rule in all its glory. The back-propagation algorithm, originally described in the '60s and '70s is the application of the chain rule to calculate gradients of a real function with respect to its various parameters.</p><p>Keep in mind that our end goal is to find a minimum (hopefully global) of a function by taking steps in the opposite direction of the said gradient, because locally at least this will take it downwards. This is how it looks when we have two parameters to optimize.</p><figure class="kg-card kg-image-card kg-card-hascaption"><img src="../content/images/2019/03/gradient_descent.gif" class="kg-image" alt="Gradient Descent" loading="lazy"><figcaption>Source: <a href="https://jed-ai.github.io/py1_gd_animation/?ref=localhost">7 Simple Steps To Visualize And Animate The Gradient Descent Algorithm</a></figcaption></figure><h2 id="reverse-mode-differentiation">Reverse mode differentiation</h2><p>If we compose many functions $f_i(a_i) = a_{i+1}$ instead of just two, then we can apply that formula repeatedly and conclude that</p><p>$$\frac{\partial a_n}{\partial a_1} = \frac{\partial a_n}{\partial a_{n-1}} \cdots \frac{\partial a_3}{\partial a_2}\cdot\frac{\partial a_2}{\partial a_1}$$</p><p>Of the many ways we can compute this product, the most common are from left to right or from right to left. </p><p>In practice, if $a_n$ is a scalar we will calculate the full gradient by starting with the row vector $\frac{\partial a_n}{\partial a_{n-1}}$ and multiplying by the Jacobians $\frac{\partial a_i}{\partial a_{i-1}}$ on the right one at a time. This operation is sometimes referred as <em>VJP</em>, or <em>Vector-Jacobian Product</em>. The whole process is known as <strong>reverse mode</strong> differentiation, because as intermediate results we gradually compute the gradients working from the last one $\frac{\partial a_n}{\partial a_{n-1}}$ backward through $\frac{\partial a_n}{\partial a_{n-2}}$, $\frac{\partial a_n}{\partial a_{n-3}}$, etc. In the end, we know the gradient of $a_n$ with respect to all other variables.</p><p>$$\frac{\partial a_n}{\partial a_{n-1}} \rightarrow \frac{\partial a_n}{\partial a_{n-2}} \rightarrow \cdots \rightarrow \frac{\partial a_n}{\partial a_1}$$</p><p>In contrast, <strong>forward mode</strong> does the exact opposite. It starts from one Jacobian like $\frac{\partial a_2}{\partial a_1}$ and multiplies on the left by $\frac{\partial a_3}{\partial a_2}$ to calculate $\frac{\partial a_3}{\partial a_1}$. If we keep multiplying by $\frac{\partial a_i}{\partial a_{i-1}}$ we'll gradually get the derivatives of all other variables with respect to $a_1$. When $a_1$ is a scalar, all the matrixes on the right side of the products are column vectors, and this is called a <em>Jacobian-Vector Product</em> (or <em>JVP</em>).</p><p>$$\frac{\partial a_n}{\partial a_1} \leftarrow\cdots\leftarrow \frac{\partial a_2}{\partial a_1} \leftarrow  \frac{\partial a_2}{\partial a_1}$$</p><p>For back propagation, as you might have guessed, we are interested in the first of this two, since there's a single value we want on top, the loss function, derived with respect to multiple variables, the weights. Forward mode could still be used to compute those gradients, but it would be far less efficient since we would have to repeat the process multiple times.</p><p>This sounds like a lot of high-dimensional matrix products, but the trick is that very often the Jacobian matrixes will be sparse, <a href="https://en.wikipedia.org/wiki/Block_matrix?ref=localhost">block</a> or even diagonal and, because we only care about the result of multiplying it by a row vector on the left, we won't need to compute or store it explicitly</p><p>In this article, we are focusing on a sequential composition of layers, but the same ideas apply to any algorithm or computational graph that we use to get to the result. Yet another nice description of reverse and forward mode in a more general context is given <a href="http://colah.github.io/posts/2015-08-Backprop/?ref=localhost">here</a>.</p><h2 id="link-to-deep-neural-networks">Link to deep neural networks</h2><p>In the typical setting for supervised machine learning, we have a big complex function that takes in a tensor of numerical features for our labeled samples, and several tensors that correspond to weights that characterize the model.</p><p>The loss, as a scalar function of both the samples and weights, is a measure of how far the model output was from the expected labels. We want to minimize it to find the most suitable weights. In deep learning, this function is expressed as a composition of simpler functions, each of which is easy to differentiate. All of them but the last are what we refer to as layers, and each layer usually has two sets of parameters: the inputs (which can be the output of the previous layer) and the weights. </p><p>The last function is the loss metric, which also has two sets of parameters: model output $y$ and the true labels $\hat{y}$. For example, if the loss metric $l$ is the mean square error then $\frac{\partial l}{\partial y}$ is $2\  \text{avg}(y - \hat{y})$. The gradient of the loss will be the starting row vector to apply reverse mode differentiation.</p><h2 id="autograd">Autograd</h2><p>The ideas behind Automatic Differentiation are quite mature. It can be done in runtime or during compilation, which can have a dramatic impact on performance. I recommend the <a href="https://github.com/HIPS/autograd?ref=localhost">HIPS autograd</a> Python package for a thorough explanation of some of the concepts. </p><p>The core idea, however, is always the same, and we have known it ever since we started computing derivatives in school. If we can keep track of the computations that resulted in the final scalar output and we know how to differentiate each simple operation (sums and products, powers, exponentials, and logarithms, ...), we can recover the gradient of the output.</p><p>Let's say that we have some intermediate linear layer $f$ which is characterized by a matrix multiplication (let's leave the bias out for a sec):</p><p>$$y = f(x, w) = x\cdot w$$</p><p>In order to tune the values of $w$ with gradient descent, we need to compute the gradient $\frac{\partial l}{\partial w}$. The key observation that it's enough to know how changes in $y$ will affect $l$ to do that.</p><blockquote>The contract that any layer has to satisfy is the following: if I tell you the gradient of the loss with respect to your outputs, you can tell me the gradient with respect to your inputs, which are in turn the previous layer outputs.</blockquote><p>Now we can apply the chain rule twice: for the gradient with respect to $w$ we get that </p><p>$$\frac{\partial l}{\partial w} =\frac{\partial l}{\partial y}\cdot \frac{\partial y}{\partial w} = \frac{\partial l}{\partial y} \cdot x^t $$</p><p>and with respect to $x$</p><p>$$\frac{\partial l}{\partial x} =\frac{\partial l}{\partial y}\cdot \frac{\partial y}{\partial x} = \frac{\partial l}{\partial y} \cdot w $$ </p><p>So we can both pass a gradient backward to enable previous layers to update themselves and update the internal layer weights to optimize the loss, and that's it!</p><h2 id="implementation-time">Implementation time</h2><p>Let's look at the code, or try it live in this <a href="https://colab.research.google.com/github/eisenjulian/slides/blob/master/NN_from_scratch/notebook.ipynb?ref=localhost">Colab Notebook</a>. We can start with a class that encapsulates a tensor and its gradients</p><!--kg-card-begin: markdown--><pre><code class="language-python">class Parameter():
   def __init__(self, tensor):
     self.tensor = tensor
     self.gradient = np.zeros_like(self.tensor)
 </code></pre>
-<!--kg-card-end: markdown--><p>Now we can create the layer class, the key idea is that during a forward pass we return both the layer output and function that can receive the gradient of the loss with respect to the outputs and can return the gradient with respect to the inputs, updating the weight gradients in the process.</p><p>This is because while evaluating the model layer by layer there's no way to calculate the gradients if we don't know the final loss yet, instead the best thing you can do is return a function that CAN calculate the gradient later. And that function will only be called after we completed the forward evaluation, when you know the loss and you have all the necessary info to compute the gradients in that layer.</p><p>The training process will then have three steps, calculate the forward step, then the backward steps accumulate the gradients, and finally updating the weights. It’s important to do this at the end	 since weights can be reused in multiple layers and we don’t want to mutate the weights before time.</p><!--kg-card-begin: markdown--><pre><code class="language-python">class Layer:
+<!--kg-card-end: markdown--><p>Now we can create the layer class, the key idea is that during a forward pass we return both the layer output and function that can receive the gradient of the loss with respect to the outputs and can return the gradient with respect to the inputs, updating the weight gradients in the process.</p><p>This is because while evaluating the model layer by layer there's no way to calculate the gradients if we don't know the final loss yet, instead the best thing you can do is return a function that CAN calculate the gradient later. And that function will only be called after we completed the forward evaluation, when you know the loss and you have all the necessary info to compute the gradients in that layer.</p><p>The training process will then have three steps, calculate the forward step, then the backward steps accumulate the gradients, and finally updating the weights. It’s important to do this at the end  since weights can be reused in multiple layers and we don’t want to mutate the weights before time.</p><!--kg-card-begin: markdown--><pre><code class="language-python">class Layer:
   def __init__(self):
     self.parameters = []
 
@@ -247,7 +258,7 @@
     mask = X &gt; 0
     return X * mask, lambda D: D * mask
 </code></pre>
-<!--kg-card-end: markdown--><p>A <a href="https://math.stackexchange.com/a/78578/325086">little harder</a> is to compute the derivative of a Sigmoid, which is again applied pointwise:</p><!--kg-card-begin: markdown--><pre><code class="language-python">class Sigmoid(Layer):
+<!--kg-card-end: markdown--><p>A <a href="https://math.stackexchange.com/a/78578/325086?ref=localhost">little harder</a> is to compute the derivative of a Sigmoid, which is again applied pointwise:</p><!--kg-card-begin: markdown--><pre><code class="language-python">class Sigmoid(Layer):
   def forward(self, X):
     S = 1 / (1 + np.exp(-X))
     def backward(D):
@@ -337,210 +348,190 @@ plt.plot(losses2)
 plt.legend(['1 Layer', '2 Layers'])
 plt.show()
 </code></pre>
-<!--kg-card-end: markdown--><figure class="kg-card kg-image-card kg-card-hascaption"><img src="../content/images/2019/03/non-linear.png" class="kg-image" alt loading="lazy"><figcaption>Training loss comparing a one layer model vs. a two layer model with a sigmoid activation</figcaption></figure><h2 id="wrapping-up">Wrapping Up</h2><p>I hope you have found this educative, we only defined three types of layers and one loss function, so there's much more to be done. In a follow-up post, we will implement binary cross entropy loss as well as other non-linear activations to start building more expressive models. Stay tuned...</p><p>Reach out on Twitter at <a>@eisenjulian</a> for questions and requests. Thanks for reading!</p><h2 id="references">References</h2><p>[1] Thinc Deep Learning Library <a href="https://github.com/explosion/thinc">https://github.com/explosion/thinc</a><br>[2] PyTorch Tutorial <a href="https://pytorch.org/tutorials/beginner/nn_tutorial.html">https://pytorch.org/tutorials/beginner/nn_tutorial.html</a><br>[3] Calculus on Computational Graphs <a href="http://colah.github.io/posts/2015-08-Backprop/">http://colah.github.io/posts/2015-08-Backprop/</a><br>[4] HIPS Autograd <a href="https://github.com/HIPS/autograd">https://github.com/HIPS/autograd</a><br></p>
-    </section>
+<!--kg-card-end: markdown--><figure class="kg-card kg-image-card kg-card-hascaption"><img src="../content/images/2019/03/non-linear.png" class="kg-image" alt loading="lazy"><figcaption>Training loss comparing a one layer model vs. a two layer model with a sigmoid activation</figcaption></figure><h2 id="wrapping-up">Wrapping Up</h2><p>I hope you have found this educative, we only defined three types of layers and one loss function, so there's much more to be done. In a follow-up post, we will implement binary cross entropy loss as well as other non-linear activations to start building more expressive models. Stay tuned...</p><p>Reach out on Twitter at <a>@eisenjulian</a> for questions and requests. Thanks for reading!</p><h2 id="references">References</h2><p>[1] Thinc Deep Learning Library <a href="https://github.com/explosion/thinc?ref=localhost">https://github.com/explosion/thinc</a><br>[2] PyTorch Tutorial <a href="https://pytorch.org/tutorials/beginner/nn_tutorial.html?ref=localhost">https://pytorch.org/tutorials/beginner/nn_tutorial.html</a><br>[3] Calculus on Computational Graphs <a href="http://colah.github.io/posts/2015-08-Backprop/?ref=localhost">http://colah.github.io/posts/2015-08-Backprop/</a><br>[4] HIPS Autograd <a href="https://github.com/HIPS/autograd?ref=localhost">https://github.com/HIPS/autograd</a><br></p>
+        </section>
 
-    <section class="article-comments gh-canvas">
-        <div id="disqus_thread"></div>
-        <script>
-            var disqus_config = function () {
-                this.page.url = "https://eisenjulian.github.io/deep-learning-in-100-lines/";
-                this.page.identifier = "ghost-5c8e67ae6d2ff81194b67a1c"
-            };
-            (function() {
-            var d = document, s = d.createElement('script');
-            s.src = 'https://eisenjulian.disqus.com/embed.js';
-            s.setAttribute('data-timestamp', +new Date());
-            (d.head || d.body).appendChild(s);
-            })();
-        </script>
-    </section>
-
-</article>
-
-<section class="footer-cta">
-    <div class="inner">
-        <h2>Sign up for more like this.</h2>
-        <a class="footer-cta-button" href="index.html#/portal">
-            <div>Enter your email</div>
-            <span>Subscribe</span>
-        </a>
-    </div>
-</section>
+    </article>
 
 
-<aside class="read-more-wrap">
-    <div class="read-more inner">
+</main>
 
 
-                    
-<article class="post-card post ">
-
-    <a class="post-card-image-link" href="../learning-to-reason-over-tables-from-less-data/index.html">
-        <img class="post-card-image"
-            srcset="../content/images/size/w300/2021/04/few-shot.png 300w,
-                   ../content/images/size/w600/2021/04/few-shot.png 600w,
-                  ../content/images/size/w1000/2021/04/few-shot.png 1000w,
-                 ../content/images/size/w2000/2021/04/few-shot.png 2000w"
-            sizes="(max-width: 1000px) 400px, 800px"
-            src="../content/images/size/w600/2021/04/few-shot.png"
-            alt="Learning to Reason Over Tables from Less Data"
-            loading="lazy"
-        />
+            <section class="gh-container is-grid gh-outer">
+                <div class="gh-container-inner gh-inner">
+                    <h2 class="gh-container-title">Read more</h2>
+                    <div class="gh-feed">
+                            <article class="gh-card post no-image">
+    <a class="gh-card-link" href="../foundation-models-for-reasoning-on-charts/index.html">
+            <figure class="gh-card-image">
+                <img
+                    srcset="../content/images/size/w160/format/webp/2024/03/deplot_front_page_self_referential_figure_v2.jpg 160w,
+                           ../content/images/size/w320/format/webp/2024/03/deplot_front_page_self_referential_figure_v2.jpg 320w,
+                          ../content/images/size/w600/format/webp/2024/03/deplot_front_page_self_referential_figure_v2.jpg 600w,
+                         ../content/images/size/w960/format/webp/2024/03/deplot_front_page_self_referential_figure_v2.jpg 960w,
+                        ../content/images/size/w1200/format/webp/2024/03/deplot_front_page_self_referential_figure_v2.jpg 1200w,
+                       ../content/images/size/w2000/format/webp/2024/03/deplot_front_page_self_referential_figure_v2.jpg2.jpg 2000w"
+                    sizes="320px"
+                    src="../content/images/size/w600/2024/03/deplot_front_page_self_referential_figure_v2.jpg"
+                    alt="Foundation models for reasoning on charts"
+                    loading="lazy"
+                >
+            </figure>
+        <div class="gh-card-wrapper">
+            <h3 class="gh-card-title is-title">Foundation models for reasoning on charts</h3>
+                    <p class="gh-card-excerpt is-body">Visual language is the form of communication that relies on pictorial symbols outside of text to convey information. It is ubiquitous in our digital life in the form of iconography, infographics, tables, plots, and charts, extending to the real world in street signs, comic books, food labels, etc. For that</p>
+            <footer class="gh-card-meta">
+<!--
+             -->                    <time class="gh-card-date" datetime="2024-03-17">Mar 17, 2024</time>
+                <!--
+         --></footer>
+        </div>
     </a>
-
-    <div class="post-card-content">
-
-        <a class="post-card-content-link" href="../learning-to-reason-over-tables-from-less-data/index.html">
-            <header class="post-card-header">
-                <h2 class="post-card-title">Learning to Reason Over Tables from Less Data</h2>
-            </header>
-            <section class="post-card-excerpt">
-                <p>In "Understanding tables with intermediate pre-training", published in Findings of EMNLP 2020, we introduce the first pre-training tasks customized for table parsing, enabling models to learn better, faster and from less data.</p>
-            </section>
-        </a>
-
-        <footer class="post-card-meta">
-            <ul class="author-list">
-                <li class="author-list-item">
-                    <a href="../author/julian/index.html" class="static-avatar">
-                        <img class="author-profile-image" src="../content/images/size/w100/2019/03/perfil-square.jpeg" alt="Julian Eisenschlos" />
-                    </a>
-                </li>
-            </ul>
-            <div class="post-card-byline-content">
-                <span><a href="../author/julian/index.html">Julian Eisenschlos</a></span>
-                <span class="post-card-byline-date"><time datetime="2021-04-10">Apr 10, 2021</time> <span class="bull">&bull;</span> 7 min read</span>
-            </div>
-        </footer>
-
-    </div>
-
-</article>
-                    
-<article class="post-card post ">
-
-    <a class="post-card-image-link" href="../multifit/index.html">
-        <img class="post-card-image"
-            srcset="../content/images/size/w300/2020/08/multifit_bootstrapping.png 300w,
-                   ../content/images/size/w600/2020/08/multifit_bootstrapping.png 600w,
-                  ../content/images/size/w1000/2020/08/multifit_bootstrapping.png 1000w,
-                 ../content/images/size/w2000/2020/08/multifit_bootstrapping.png 2000w"
-            sizes="(max-width: 1000px) 400px, 800px"
-            src="../content/images/size/w600/2020/08/multifit_bootstrapping.png"
-            alt="Efficient multi-lingual language model fine-tuning"
-            loading="lazy"
-        />
+</article>                            <article class="gh-card post no-image">
+    <a class="gh-card-link" href="../learning-to-reason-over-tables-from-less-data/index.html">
+            <figure class="gh-card-image">
+                <img
+                    srcset="../content/images/size/w160/format/webp/2021/04/few-shot.png 160w,
+                           ../content/images/size/w320/format/webp/2021/04/few-shot.png 320w,
+                          ../content/images/size/w600/format/webp/2021/04/few-shot.png 600w,
+                         ../content/images/size/w960/format/webp/2021/04/few-shot.png 960w,
+                        ../content/images/size/w1200/format/webp/2021/04/few-shot.png 1200w,
+                       ../content/images/size/w2000/format/webp/2021/04/few-shot.pngt.png 2000w"
+                    sizes="320px"
+                    src="../content/images/size/w600/2021/04/few-shot.png"
+                    alt="Learning to Reason Over Tables from Less Data"
+                    loading="lazy"
+                >
+            </figure>
+        <div class="gh-card-wrapper">
+            <h3 class="gh-card-title is-title">Learning to Reason Over Tables from Less Data</h3>
+                <p class="gh-card-excerpt is-body">In &quot;Understanding tables with intermediate pre-training&quot;, published in Findings of EMNLP 2020, we introduce the first pre-training tasks customized for table parsing, enabling models to learn better, faster and from less data.</p>
+            <footer class="gh-card-meta">
+<!--
+             -->                    <time class="gh-card-date" datetime="2021-04-10">Apr 10, 2021</time>
+                <!--
+         --></footer>
+        </div>
     </a>
-
-    <div class="post-card-content">
-
-        <a class="post-card-content-link" href="../multifit/index.html">
-            <header class="post-card-header">
-                <h2 class="post-card-title">Efficient multi-lingual language model fine-tuning</h2>
-            </header>
-            <section class="post-card-excerpt">
-                <p>Our latest paper studies multilingual text classification and introduces MultiFiT, a novel method based on ULMFiT. MultiFiT, trained on 100 labeled documents in the target language, outperforms multi-lingual BERT, and the LASER algorithm—even though LASER requires a corpus of parallel texts.</p>
-            </section>
-        </a>
-
-        <footer class="post-card-meta">
-            <ul class="author-list">
-                <li class="author-list-item">
-                    <a href="../author/julian/index.html" class="static-avatar">
-                        <img class="author-profile-image" src="../content/images/size/w100/2019/03/perfil-square.jpeg" alt="Julian Eisenschlos" />
-                    </a>
-                </li>
-            </ul>
-            <div class="post-card-byline-content">
-                <span><a href="../author/julian/index.html">Julian Eisenschlos</a></span>
-                <span class="post-card-byline-date"><time datetime="2019-09-10">Sep 10, 2019</time> <span class="bull">&bull;</span> 10 min read</span>
-            </div>
-        </footer>
-
-    </div>
-
-</article>
-                    
-<article class="post-card post ">
-
-    <a class="post-card-image-link" href="../text-classification-with-estimators/index.html">
-        <img class="post-card-image"
-            srcset="../content/images/size/w300/2019/03/estimators_loss.png 300w,
-                   ../content/images/size/w600/2019/03/estimators_loss.png 600w,
-                  ../content/images/size/w1000/2019/03/estimators_loss.png 1000w,
-                 ../content/images/size/w2000/2019/03/estimators_loss.png 2000w"
-            sizes="(max-width: 1000px) 400px, 800px"
-            src="../content/images/size/w600/2019/03/estimators_loss.png"
-            alt="Text Classification with TensorFlow Estimators"
-            loading="lazy"
-        />
+</article>                            <article class="gh-card post no-image">
+    <a class="gh-card-link" href="../multifit/index.html">
+            <figure class="gh-card-image">
+                <img
+                    srcset="../content/images/size/w160/format/webp/2020/08/multifit_bootstrapping.png 160w,
+                           ../content/images/size/w320/format/webp/2020/08/multifit_bootstrapping.png 320w,
+                          ../content/images/size/w600/format/webp/2020/08/multifit_bootstrapping.png 600w,
+                         ../content/images/size/w960/format/webp/2020/08/multifit_bootstrapping.png 960w,
+                        ../content/images/size/w1200/format/webp/2020/08/multifit_bootstrapping.png 1200w,
+                       ../content/images/size/w2000/format/webp/2020/08/multifit_bootstrapping.png.png 2000w"
+                    sizes="320px"
+                    src="../content/images/size/w600/2020/08/multifit_bootstrapping.png"
+                    alt="Efficient multi-lingual language model fine-tuning"
+                    loading="lazy"
+                >
+            </figure>
+        <div class="gh-card-wrapper">
+            <h3 class="gh-card-title is-title">Efficient multi-lingual language model fine-tuning</h3>
+                <p class="gh-card-excerpt is-body">Our latest paper studies multilingual text classification and introduces MultiFiT, a novel method based on ULMFiT. MultiFiT, trained on 100 labeled documents in the target language, outperforms multi-lingual BERT, and the LASER algorithm—even though LASER requires a corpus of parallel texts.</p>
+            <footer class="gh-card-meta">
+<!--
+             -->                    <time class="gh-card-date" datetime="2019-09-10">Sep 10, 2019</time>
+                <!--
+         --></footer>
+        </div>
     </a>
-
-    <div class="post-card-content">
-
-        <a class="post-card-content-link" href="../text-classification-with-estimators/index.html">
-            <header class="post-card-header">
-                <h2 class="post-card-title">Text Classification with TensorFlow Estimators</h2>
-            </header>
-            <section class="post-card-excerpt">
-                <p>Throughout this post we will explain how to classify text using Estimators,  Datasets and Feature Columns, with a scalable high-level API in TensorFlow.</p>
+</article>                            <article class="gh-card post no-image">
+    <a class="gh-card-link" href="../text-classification-with-estimators/index.html">
+            <figure class="gh-card-image">
+                <img
+                    srcset="../content/images/size/w160/format/webp/2019/03/estimators_loss.png 160w,
+                           ../content/images/size/w320/format/webp/2019/03/estimators_loss.png 320w,
+                          ../content/images/size/w600/format/webp/2019/03/estimators_loss.png 600w,
+                         ../content/images/size/w960/format/webp/2019/03/estimators_loss.png 960w,
+                        ../content/images/size/w1200/format/webp/2019/03/estimators_loss.png 1200w,
+                       ../content/images/size/w2000/format/webp/2019/03/estimators_loss.pngs.png 2000w"
+                    sizes="320px"
+                    src="../content/images/size/w600/2019/03/estimators_loss.png"
+                    alt="Text Classification with TensorFlow Estimators"
+                    loading="lazy"
+                >
+            </figure>
+        <div class="gh-card-wrapper">
+            <h3 class="gh-card-title is-title">Text Classification with TensorFlow Estimators</h3>
+                <p class="gh-card-excerpt is-body">Throughout this post we will explain how to classify text using Estimators,  Datasets and Feature Columns, with a scalable high-level API in TensorFlow. </p>
+            <footer class="gh-card-meta">
+<!--
+             -->                    <time class="gh-card-date" datetime="2018-03-07">Mar 7, 2018</time>
+                <!--
+         --></footer>
+        </div>
+    </a>
+</article>                    </div>
+                </div>
             </section>
-        </a>
 
-        <footer class="post-card-meta">
-            <ul class="author-list">
-                <li class="author-list-item">
-                    <a href="../author/julian/index.html" class="static-avatar">
-                        <img class="author-profile-image" src="../content/images/size/w100/2019/03/perfil-square.jpeg" alt="Julian Eisenschlos" />
-                    </a>
-                </li>
-            </ul>
-            <div class="post-card-byline-content">
-                <span><a href="../author/julian/index.html">Julian Eisenschlos</a></span>
-                <span class="post-card-byline-date"><time datetime="2018-03-07">Mar 7, 2018</time> <span class="bull">&bull;</span> 14 min read</span>
-            </div>
-        </footer>
+    
+    <footer class="gh-footer has-accent-color gh-outer">
+    <div class="gh-footer-inner gh-inner">
 
-    </div>
-
-</article>
-
-    </div>
-</aside>
-
-
-    </main>
-
-    <footer class="site-footer outer">
-        <div class="inner">
-            <section class="copyright"><a href="../index.html">Julian Eisenschlos</a> &copy; 2021</section>
-            <nav class="site-footer-nav">
+        <div class="gh-footer-bar">
+            <span class="gh-footer-logo is-title">
+                    Julian Eisenschlos
+            </span>
+            <nav class="gh-footer-menu">
                 
             </nav>
-            <div><a href="https://ghost.org/" target="_blank" rel="noopener">Powered by Ghost</a></div>
+            <div class="gh-footer-copyright">
+                Powered by <a href="https://ghost.org/" target="_blank" rel="noopener">Ghost</a>
+            </div>
         </div>
-    </footer>
 
+
+    </div>
+</footer>    
 </div>
 
+    <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="pswp__bg"></div>
 
-<script
-    src="https://code.jquery.com/jquery-3.5.1.min.js"
-    integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
-    crossorigin="anonymous">
-</script>
-<script src="../assets/built/casper.js@v=bc10f09b63"></script>
-<script>
-$(document).ready(function () {
-    // Mobile Menu Trigger
-    $('.gh-burger').click(function () {
-        $('body').toggleClass('gh-head-open');
-    });
-    // FitVids - Makes video embeds responsive
-    $(".gh-content").fitVids();
-});
-</script>
+    <div class="pswp__scroll-wrap">
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/built/source.js%3Fv=f60aed1d93"></script>
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/prism.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/components/prism-lua.min.js"></script>

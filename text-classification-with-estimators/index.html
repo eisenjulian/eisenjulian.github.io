@@ -3,41 +3,63 @@
 <head>
 
     <title>Text Classification with TensorFlow Estimators</title>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="HandheldFriendly" content="True" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <link rel="stylesheet" type="text/css" href="../assets/built/screen.css@v=bc10f09b63.css" />
-
-    <link rel="canonical" href="index.html" />
-    <meta name="referrer" content="no-referrer-when-downgrade" />
-    <link rel="amphtml" href="amp/index.html" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <meta property="og:site_name" content="Julian Eisenschlos" />
-    <meta property="og:type" content="article" />
-    <meta property="og:title" content="Text Classification with TensorFlow Estimators" />
-    <meta property="og:description" content="Throughout this post we will explain how to classify text using Estimators,  Datasets and Feature Columns, with a scalable high-level API in TensorFlow." />
-    <meta property="og:url" content="https://eisenjulian.github.io/text-classification-with-estimators/" />
-    <meta property="og:image" content="https://eisenjulian.github.io/content/images/2019/03/estimators_loss.png" />
-    <meta property="article:published_time" content="2018-03-07T04:50:00.000Z" />
-    <meta property="article:modified_time" content="2019-03-20T12:38:35.000Z" />
-    <meta property="article:tag" content="Natural Language Processing" />
-    <meta property="article:tag" content="TensorFlow" />
-    <meta property="article:tag" content="Tutorials" />
+    <link rel="preload" as="style" href="../assets/built/screen.css%3Fv=f60aed1d93.css">
+    <link rel="preload" as="script" href="../assets/built/source.js%3Fv=f60aed1d93">
+
+    <link rel="stylesheet" type="text/css" href="../assets/built/screen.css%3Fv=f60aed1d93.css">
+
+    <style>
+        :root {
+            --background-color: #ffffff
+        }
+    </style>
+
+    <script>
+        /* The script for calculating the color contrast has been taken from
+        https://gomakethings.com/dynamically-changing-the-text-color-based-on-background-color-contrast-with-vanilla-js/ */
+        var accentColor = getComputedStyle(document.documentElement).getPropertyValue('--background-color');
+        accentColor = accentColor.trim().slice(1);
+        var r = parseInt(accentColor.substr(0, 2), 16);
+        var g = parseInt(accentColor.substr(2, 2), 16);
+        var b = parseInt(accentColor.substr(4, 2), 16);
+        var yiq = ((r * 299) + (g * 587) + (b * 114)) / 1000;
+        var textColor = (yiq >= 128) ? 'dark' : 'light';
+
+        document.documentElement.className = `has-${textColor}-text`;
+    </script>
+
+    <meta name="description" content="Throughout this post we will explain how to classify text using Estimators,  Datasets and Feature Columns, with a scalable high-level API in TensorFlow.">
+    <link rel="canonical" href="index.html">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <link rel="amphtml" href="amp/index.html">
     
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Text Classification with TensorFlow Estimators" />
-    <meta name="twitter:description" content="Throughout this post we will explain how to classify text using Estimators,  Datasets and Feature Columns, with a scalable high-level API in TensorFlow." />
-    <meta name="twitter:url" content="https://eisenjulian.github.io/text-classification-with-estimators/" />
-    <meta name="twitter:image" content="https://eisenjulian.github.io/content/images/2019/03/estimators_loss.png" />
-    <meta name="twitter:label1" content="Written by" />
-    <meta name="twitter:data1" content="Julian Eisenschlos" />
-    <meta name="twitter:label2" content="Filed under" />
-    <meta name="twitter:data2" content="Natural Language Processing, TensorFlow, Tutorials" />
-    <meta name="twitter:site" content="@eisenjulian" />
-    <meta property="og:image:width" content="1403" />
-    <meta property="og:image:height" content="552" />
+    <meta property="og:site_name" content="Julian Eisenschlos">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Text Classification with TensorFlow Estimators">
+    <meta property="og:description" content="Throughout this post we will explain how to classify text using Estimators,  Datasets and Feature Columns, with a scalable high-level API in TensorFlow.">
+    <meta property="og:url" content="https://eisenjulian.github.io/text-classification-with-estimators/">
+    <meta property="og:image" content="https://eisenjulian.github.io/content/images/2019/03/estimators_loss.png">
+    <meta property="article:published_time" content="2018-03-07T04:50:00.000Z">
+    <meta property="article:modified_time" content="2019-03-20T12:38:35.000Z">
+    <meta property="article:tag" content="Natural Language Processing">
+    <meta property="article:tag" content="TensorFlow">
+    <meta property="article:tag" content="Tutorials">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Text Classification with TensorFlow Estimators">
+    <meta name="twitter:description" content="Throughout this post we will explain how to classify text using Estimators,  Datasets and Feature Columns, with a scalable high-level API in TensorFlow.">
+    <meta name="twitter:url" content="https://eisenjulian.github.io/text-classification-with-estimators/">
+    <meta name="twitter:image" content="https://eisenjulian.github.io/content/images/2019/03/estimators_loss.png">
+    <meta name="twitter:label1" content="Written by">
+    <meta name="twitter:data1" content="Julian Eisenschlos">
+    <meta name="twitter:label2" content="Filed under">
+    <meta name="twitter:data2" content="Natural Language Processing, TensorFlow, Tutorials">
+    <meta name="twitter:site" content="@eisenjulian">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="472">
     
     <script type="application/ld+json">
 {
@@ -59,7 +81,7 @@
         "name": "Julian Eisenschlos",
         "image": {
             "@type": "ImageObject",
-            "url": "https://eisenjulian.github.io/content/images/2019/03/perfil-square.jpeg",
+            "url": "https://eisenjulian.github.io/content/images/2024/03/perfil-square.jpeg",
             "width": 710,
             "height": 710
         },
@@ -73,21 +95,23 @@
     "image": {
         "@type": "ImageObject",
         "url": "https://eisenjulian.github.io/content/images/2019/03/estimators_loss.png",
-        "width": 1403,
-        "height": 552
+        "width": 1200,
+        "height": 472
     },
     "keywords": "Natural Language Processing, TensorFlow, Tutorials",
     "description": "Throughout this post we will explain how to classify text using Estimators,  Datasets and Feature Columns, with a scalable high-level API in TensorFlow. ",
-    "mainEntityOfPage": {
-        "@type": "WebPage",
-        "@id": "https://eisenjulian.github.io/"
-    }
+    "mainEntityOfPage": "https://eisenjulian.github.io/text-classification-with-estimators/"
 }
     </script>
 
-    <meta name="generator" content="Ghost 4.7" />
-    <link rel="alternate" type="application/rss+xml" title="Julian Eisenschlos" href="../rss/index.html" />
+    <meta name="generator" content="Ghost 5.80">
+    <link rel="alternate" type="application/rss+xml" title="Julian Eisenschlos" href="../rss/index.html">
     
+    <script defer src="https://cdn.jsdelivr.net/ghost/sodo-search@~1.1/umd/sodo-search.min.js" data-key="3948e65ad8bc7936f3efbbea1e" data-styles="https://cdn.jsdelivr.net/ghost/sodo-search@~1.1/umd/main.css" data-sodo-search="https://eisenjulian.github.io/" crossorigin="anonymous"></script>
+    
+    <link href="https://eisenjulian.github.io/webmentions/receive/" rel="webmention">
+    <script defer src="../public/cards.min.js%3Fv=f60aed1d93"></script>
+    <link rel="stylesheet" type="text/css" href="../public/cards.min.css%3Fv=f60aed1d93.css">
     <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-136394483-1"></script>
 <script>
@@ -99,102 +123,89 @@
 </script>
 
 <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/themes/prism-tomorrow.min.css" rel="stylesheet"/>
-<style type='text/css'>
-    .footer-cta,
-    a.gh-head-button,
-    .site-footer a[href^="https://ghost.org"] { display: none; }
+<style>
+  .gh-footer-bar {display: none; !important}
 </style><style>:root {--ghost-accent-color: #15171A;}</style>
 
 </head>
-<body class="post-template tag-natural-language-processing tag-tensorflow tag-tutorials">
-<div class="viewport">
+<body class="post-template tag-natural-language-processing tag-tensorflow tag-tutorials tag-hash-import-2024-03-17-18-37 has-sans-title has-sans-body">
 
-    <header id="gh-head" class="gh-head has-cover">
-        <nav class="gh-head-inner inner gh-container">
+<div class="gh-viewport">
+    
+    <header id="gh-navigation" class="gh-navigation is-left-logo has-accent-color gh-outer">
+    <div class="gh-navigation-inner gh-inner">
 
-            <div class="gh-head-brand">
-                <a class="gh-head-logo" href="../index.html">
-                        Julian Eisenschlos
-                </a>
-                <a class="gh-burger" role="button">
-                    <div class="gh-burger-box">
-                        <div class="gh-burger-inner"></div>
-                    </div>
-                </a>
-            </div>
-            <div class="gh-head-menu">
-                <ul class="nav">
-    <li class="nav-home"><a href="../index.html">Home</a></li>
+        <div class="gh-navigation-brand">
+            <a class="gh-navigation-logo is-title" href="../index.html">
+                    Julian Eisenschlos
+            </a>
+            <button class="gh-search gh-icon-button" aria-label="Search this site" data-ghost-search>
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" width="20" height="20"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg></button>            <button class="gh-burger gh-icon-button" aria-label="Menu">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 256 256"><path d="M224,128a8,8,0,0,1-8,8H40a8,8,0,0,1,0-16H216A8,8,0,0,1,224,128ZM40,72H216a8,8,0,0,0,0-16H40a8,8,0,0,0,0,16ZM216,184H40a8,8,0,0,0,0,16H216a8,8,0,0,0,0-16Z"></path></svg>                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 256 256"><path d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z"></path></svg>            </button>
+        </div>
+
+        <nav class="gh-navigation-menu">
+            <ul class="nav">
     <li class="nav-about"><a href="../about/index.html">About</a></li>
     <li class="nav-papers"><a href="../publications/index.html">Papers</a></li>
     <li class="nav-talks"><a href="../talks/index.html">Talks</a></li>
     <li class="nav-github"><a href="https://github.com/eisenjulian">GitHub</a></li>
     <li class="nav-linkedin"><a href="https://www.linkedin.com/in/eisenjulian">LinkedIn</a></li>
+    <li class="nav-x"><a href="https://x.com/eisenjulian">X</a></li>
 </ul>
 
-            </div>
-            <div class="gh-head-actions">
-                <div class="gh-social">
-                        <a class="gh-social-twitter" href="https://twitter.com/eisenjulian" title="Twitter" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
-</a>
-                </div>
-
-                    <a class="gh-head-button" href="index.html#/portal/signup">Subscribe</a>
-            </div>
         </nav>
-    </header>
 
-    <main>
-        
+        <div class="gh-navigation-actions">
+                    <button class="gh-search gh-icon-button" aria-label="Search this site" data-ghost-search>
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" width="20" height="20"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg></button>        </div>
 
+    </div>
+</header>
 
+    
 
-<article class="article post tag-natural-language-processing tag-tensorflow tag-tutorials">
+<main class="gh-main">
 
-    <header class="article-header gh-canvas">
+    <article class="gh-article post tag-natural-language-processing tag-tensorflow tag-tutorials tag-hash-import-2024-03-17-18-37">
 
-        <section class="article-tag">
-            <a href="../tag/natural-language-processing/index.html">Natural Language Processing</a>
-        </section>
+        <header class="gh-article-header gh-canvas">
 
-        <h1 class="article-title">Text Classification with TensorFlow Estimators</h1>
+                <a class="gh-article-tag" href="../tag/natural-language-processing/index.html">Natural Language Processing</a>
+            <h1 class="gh-article-title is-title">Text Classification with TensorFlow Estimators</h1>
+                <p class="gh-article-excerpt is-body">Throughout this post we will explain how to classify text using Estimators,  Datasets and Feature Columns, with a scalable high-level API in TensorFlow. </p>
 
-        <p class="article-excerpt">Throughout this post we will explain how to classify text using Estimators,  Datasets and Feature Columns, with a scalable high-level API in TensorFlow. </p>
-
-        <div class="article-byline">
-            <section class="article-byline-content">
-                <ul class="author-list">
-                    <li class="author-list-item">
-                        <a href="../author/julian/index.html" class="author-avatar">
-                            <img class="author-profile-image" src="../content/images/size/w100/2019/03/perfil-square.jpeg" alt="Julian Eisenschlos" />
-                        </a>
-                    </li>
-                </ul>
-                <div class="article-byline-meta">
-                    <h4 class="author-name"><a href="../author/julian/index.html">Julian Eisenschlos</a></h4>
-                    <div class="byline-meta-content">
-                        <time class="byline-meta-date" datetime="2018-03-07">Mar 7, 2018</time>
-                        <span class="byline-reading-time"><span class="bull">&bull;</span> 14 min read</span>
+            <div class="gh-article-meta">
+                <div class="gh-article-author-image">
+                            <a href="../author/julian/index.html">
+                                <img class="author-profile-image" src="../content/images/size/w160/2024/03/perfil-square.jpeg" alt="Julian Eisenschlos" />
+                            </a>
+                </div>
+                <div class="gh-article-meta-wrapper">
+                    <h4 class="gh-article-author-name"><a href="../author/julian/index.html">Julian Eisenschlos</a></h4>
+                    <div class="gh-article-meta-content">
+                        <time class="gh-article-meta-date" datetime="2018-03-07">Mar 7, 2018</time>
+                            <span class="gh-article-meta-length"><span class="bull">—</span> 14 min read</span>
                     </div>
                 </div>
-            </section>
-        </div>
+            </div>
 
-        <figure class="article-image">
-            <img
-                srcset="../content/images/size/w300/2019/03/estimators_loss.png 300w,
-                       ../content/images/size/w600/2019/03/estimators_loss.png 600w,
-                      ../content/images/size/w1000/2019/03/estimators_loss.png 1000w,
-                     ../content/images/size/w2000/2019/03/estimators_loss.png 2000w"
-                sizes="(min-width: 1400px) 1400px, 92vw"
-                src="../content/images/size/w2000/2019/03/estimators_loss.png"
-                alt="Text Classification with TensorFlow Estimators"
-            />
-        </figure>
-    </header>
+                <figure class="gh-article-image">
+        <img
+            srcset="../content/images/size/w320/2019/03/estimators_loss.png 320w,
+                   ../content/images/size/w600/2019/03/estimators_loss.png 600w,
+                  ../content/images/size/w960/2019/03/estimators_loss.png 960w,
+                 ../content/images/size/w1200/2019/03/estimators_loss.png 1200w,
+                ../content/images/size/w2000/2019/03/estimators_loss.png 2000w"
+            src="../content/images/size/w1200/2019/03/estimators_loss.png"
+            alt="Text Classification with TensorFlow Estimators"
+        >
+    </figure>
 
-    <section class="gh-content gh-canvas">
-        <p>Throughout this post we will explain how to classify text using Estimators,  Datasets and Feature Columns, with a scalable high-level API in TensorFlow. </p><p><em>Posted by Sebastian Ruder and Julian Eisenschlos, Google Developer Experts</em></p><p>Here’s the outline of what we’ll cover:</p><ul><li>Loading data using Datasets.</li><li>Building baselines using pre-canned estimators.</li><li>Using word embeddings.</li><li>Building custom estimators with convolution and LSTM layers.</li><li>Loading pre-trained word vectors.</li><li>Evaluating and comparing models using TensorBoard.</li></ul><p>Welcome to Part 4 of a blog series that introduces TensorFlow Datasets and Estimators. You don’t need to read all of the previous material, but take a look if you want to refresh any of the following concepts. <a href="https://developers.googleblog.com/2017/09/introducing-tensorflow-datasets.html" rel="nofollow noopener">Part 1</a> focused on pre-made Estimators, <a href="https://developers.googleblog.com/2017/11/introducing-tensorflow-feature-columns.html" rel="nofollow noopener">Part 2</a> discussed feature columns, and <a href="https://developers.googleblog.com/2017/12/creating-custom-estimators-in-tensorflow.html" rel="nofollow noopener">Part 3</a> how to create custom Estimators.</p><p>Here in Part 4, we will build on top of all the above to tackle a different family of problems in Natural Language Processing (NLP). In particular, this article demonstrates how to solve a text classification task using custom TensorFlow estimators, embeddings, and the <a href="https://www.tensorflow.org/api_docs/python/tf/layers" rel="nofollow noopener">tf.layers</a> module. Along the way, we’ll learn about word2vec and transfer learning as a technique to bootstrap model performance when labeled data is a scarce resource.</p><p>We will show you relevant code snippets. <a href="https://github.com/eisenjulian/nlp_estimator_tutorial/blob/master/nlp_estimators.ipynb" rel="nofollow noopener">Here</a>’s the complete Jupyter Notebook that you can run locally or on <a href="https://goo.gl/fXsCra" rel="nofollow noopener">Google Colaboratory</a>. The plain <code>.py</code> source file is also available <a href="https://github.com/eisenjulian/nlp_estimator_tutorial/blob/master/nlp_estimators.py" rel="nofollow noopener">here</a>. Note that the code was written to demonstrate how Estimators work functionally and was not optimized for maximum performance.</p><h3 id="the-task">The Task</h3><p>The dataset we will be using is the IMDB <a href="http://ai.stanford.edu/~amaas/data/sentiment/" rel="nofollow noopener">Large Movie Review Dataset</a>, which consists of 25,000 highly polar movie reviews for training, and 25,000 for testing. We will use this dataset to train a binary classification model, able to predict whether a review is positive or negative.</p><p>For illustration, here’s a piece of a negative review (with 2 stars) in the dataset:</p><blockquote><em><em><em>Now, I LOVE Italian horror films. The cheesier they are, the better. However, this is not cheesy Italian. This is week-old spaghetti sauce with rotting meatballs. It is amateur hour on every level. There is no suspense, no horror, with just a few drops of blood scattered around to remind you that you are in fact watching a horror film.</em></em></em></blockquote><p><em>Keras</em> provides a convenient handler for importing the dataset which is also available as a serialized numpy array <code>.npz</code> file to download <a href="https://s3.amazonaws.com/text-datasets/imdb.npz" rel="nofollow noopener">here</a>. For text classification, it is standard to limit the size of the vocabulary to prevent the dataset from becoming too sparse and high dimensional, causing potential overfitting. For this reason, each review consists of a series of word indexes that go from 4 (the most frequent word in the dataset: <strong><strong>the</strong></strong>) to 4999, which corresponds to <strong><strong>orange</strong></strong>. Index 1 represents the beginning of the sentence and the index 2 is assigned to all unknown (also known as <em>out-of-vocabulary</em> or <em>OOV</em>) tokens. These indexes have been obtained by pre-processing the text data in a pipeline that cleans, normalizes and tokenizes each sentence first and then builds a dictionary indexing each of the tokens by frequency.</p><p>After we’ve loaded the data in memory we pad each of the sentences with 0 to a fixed size (here: 200) so that we have two $2$-dimensional $25000\times 200$ arrays for training and testing respectively.</p><!--kg-card-begin: markdown--><pre><code class="language-python">vocab_size = 5000
+        </header>
+
+        <section class="gh-content gh-canvas is-body">
+            <p>Throughout this post we will explain how to classify text using Estimators,  Datasets and Feature Columns, with a scalable high-level API in TensorFlow. </p><p><em>Posted by Sebastian Ruder and Julian Eisenschlos, Google Developer Experts</em></p><p>Here’s the outline of what we’ll cover:</p><ul><li>Loading data using Datasets.</li><li>Building baselines using pre-canned estimators.</li><li>Using word embeddings.</li><li>Building custom estimators with convolution and LSTM layers.</li><li>Loading pre-trained word vectors.</li><li>Evaluating and comparing models using TensorBoard.</li></ul><p>Welcome to Part 4 of a blog series that introduces TensorFlow Datasets and Estimators. You don’t need to read all of the previous material, but take a look if you want to refresh any of the following concepts. <a href="https://developers.googleblog.com/2017/09/introducing-tensorflow-datasets.html?ref=localhost" rel="nofollow noopener">Part 1</a> focused on pre-made Estimators, <a href="https://developers.googleblog.com/2017/11/introducing-tensorflow-feature-columns.html?ref=localhost" rel="nofollow noopener">Part 2</a> discussed feature columns, and <a href="https://developers.googleblog.com/2017/12/creating-custom-estimators-in-tensorflow.html?ref=localhost" rel="nofollow noopener">Part 3</a> how to create custom Estimators.</p><p>Here in Part 4, we will build on top of all the above to tackle a different family of problems in Natural Language Processing (NLP). In particular, this article demonstrates how to solve a text classification task using custom TensorFlow estimators, embeddings, and the <a href="https://www.tensorflow.org/api_docs/python/tf/layers?ref=localhost" rel="nofollow noopener">tf.layers</a> module. Along the way, we’ll learn about word2vec and transfer learning as a technique to bootstrap model performance when labeled data is a scarce resource.</p><p>We will show you relevant code snippets. <a href="https://github.com/eisenjulian/nlp_estimator_tutorial/blob/master/nlp_estimators.ipynb?ref=localhost" rel="nofollow noopener">Here</a>’s the complete Jupyter Notebook that you can run locally or on <a href="https://goo.gl/fXsCra?ref=localhost" rel="nofollow noopener">Google Colaboratory</a>. The plain <code>.py</code> source file is also available <a href="https://github.com/eisenjulian/nlp_estimator_tutorial/blob/master/nlp_estimators.py?ref=localhost" rel="nofollow noopener">here</a>. Note that the code was written to demonstrate how Estimators work functionally and was not optimized for maximum performance.</p><h3 id="the-task">The Task</h3><p>The dataset we will be using is the IMDB <a href="http://ai.stanford.edu/~amaas/data/sentiment/?ref=localhost" rel="nofollow noopener">Large Movie Review Dataset</a>, which consists of 25,000 highly polar movie reviews for training, and 25,000 for testing. We will use this dataset to train a binary classification model, able to predict whether a review is positive or negative.</p><p>For illustration, here’s a piece of a negative review (with 2 stars) in the dataset:</p><blockquote><em><em><em>Now, I LOVE Italian horror films. The cheesier they are, the better. However, this is not cheesy Italian. This is week-old spaghetti sauce with rotting meatballs. It is amateur hour on every level. There is no suspense, no horror, with just a few drops of blood scattered around to remind you that you are in fact watching a horror film.</em></em></em></blockquote><p><em>Keras</em> provides a convenient handler for importing the dataset which is also available as a serialized numpy array <code>.npz</code> file to download <a href="https://s3.amazonaws.com/text-datasets/imdb.npz?ref=localhost" rel="nofollow noopener">here</a>. For text classification, it is standard to limit the size of the vocabulary to prevent the dataset from becoming too sparse and high dimensional, causing potential overfitting. For this reason, each review consists of a series of word indexes that go from 4 (the most frequent word in the dataset: <strong><strong>the</strong></strong>) to 4999, which corresponds to <strong><strong>orange</strong></strong>. Index 1 represents the beginning of the sentence and the index 2 is assigned to all unknown (also known as <em>out-of-vocabulary</em> or <em>OOV</em>) tokens. These indexes have been obtained by pre-processing the text data in a pipeline that cleans, normalizes and tokenizes each sentence first and then builds a dictionary indexing each of the tokens by frequency.</p><p>After we’ve loaded the data in memory we pad each of the sentences with 0 to a fixed size (here: 200) so that we have two $2$-dimensional $25000\times 200$ arrays for training and testing respectively.</p><!--kg-card-begin: markdown--><pre><code class="language-python">vocab_size = 5000
 sentence_size = 200
 (x_train_variable, y_train), (x_test_variable, y_test) = imdb.load_data(num_words=vocab_size)
 x_train = sequence.pad_sequences(
@@ -231,7 +242,7 @@ def eval_input_fn():
     iterator = dataset.make_one_shot_iterator()
     return iterator.get_next()
 </code></pre>
-<!--kg-card-end: markdown--><p>We shuffle the training data and do not predefine the number of epochs we want to train, while we only need one epoch of the test data for evaluation. We also add an additional <code>"len"</code> key that captures the length of the original, unpadded sequence, which we will use later.</p><p>Datasets can work with out-of-memory sources (not needed in this case) by streaming them record by record, and the <code>shuffle</code> method uses a <code>buffer_size</code> to continuously sample from fixed sized set without loading the entire thing into memory.</p><h3 id="building-a-baseline">Building a baseline</h3><p>It’s good practice to start any machine learning project trying basic baselines. The simpler the better as having a simple and robust baseline is key to understanding exactly how much we are gaining in terms of performance by adding extra complexity. It may very well be the case that a simple solution is good enough for our requirements.</p><p>With that in mind, let us start by trying out one of the simplest models for text classification. That would be a sparse linear model that gives a weight to each token and adds up all of the results, regardless of the order. As this model does not care about the order of words in a sentence, we normally refer to it as a <em>Bag-of-Words</em> approach. Let’s see how we can implement this model using an <code>Estimator</code>.</p><p>We start out by defining the feature column that is used as input to our classifier. As we have seen in <a href="https://developers.googleblog.com/2017/11/introducing-tensorflow-feature-columns.html" rel="nofollow noopener">Part 2</a>, <code>categorical_column_with_identity</code> is the right choice for this pre-processed text input. If we were feeding raw text tokens other <code>feature_columns</code> could do a lot of the pre-processing for us. We can now use the pre-made <code>LinearClassifier</code>.</p><!--kg-card-begin: markdown--><pre><code class="language-python">column = tf.feature_column.categorical_column_with_identity('x', vocab_size)
+<!--kg-card-end: markdown--><p>We shuffle the training data and do not predefine the number of epochs we want to train, while we only need one epoch of the test data for evaluation. We also add an additional <code>"len"</code> key that captures the length of the original, unpadded sequence, which we will use later.</p><p>Datasets can work with out-of-memory sources (not needed in this case) by streaming them record by record, and the <code>shuffle</code> method uses a <code>buffer_size</code> to continuously sample from fixed sized set without loading the entire thing into memory.</p><h3 id="building-a-baseline">Building a baseline</h3><p>It’s good practice to start any machine learning project trying basic baselines. The simpler the better as having a simple and robust baseline is key to understanding exactly how much we are gaining in terms of performance by adding extra complexity. It may very well be the case that a simple solution is good enough for our requirements.</p><p>With that in mind, let us start by trying out one of the simplest models for text classification. That would be a sparse linear model that gives a weight to each token and adds up all of the results, regardless of the order. As this model does not care about the order of words in a sentence, we normally refer to it as a <em>Bag-of-Words</em> approach. Let’s see how we can implement this model using an <code>Estimator</code>.</p><p>We start out by defining the feature column that is used as input to our classifier. As we have seen in <a href="https://developers.googleblog.com/2017/11/introducing-tensorflow-feature-columns.html?ref=localhost" rel="nofollow noopener">Part 2</a>, <code>categorical_column_with_identity</code> is the right choice for this pre-processed text input. If we were feeding raw text tokens other <code>feature_columns</code> could do a lot of the pre-processing for us. We can now use the pre-made <code>LinearClassifier</code>.</p><!--kg-card-begin: markdown--><pre><code class="language-python">column = tf.feature_column.categorical_column_with_identity('x', vocab_size)
 classifier = tf.estimator.LinearClassifier(
     feature_columns=[column], 
     model_dir=os.path.join(model_dir, 'bow_sparse'))
@@ -265,7 +276,7 @@ plt.ylabel('Weight')
 plt.title('Most significant tokens') 
 plt.show()
 </code></pre>
-<!--kg-card-end: markdown--><figure class="kg-card kg-image-card"><img src="https://cdn-images-1.medium.com/max/1000/0*tCGMsIAQ9PTb9lml.png" class="kg-image" alt loading="lazy"></figure><p>As we can see, tokens with the most positive weight such as ‘refreshing’ are clearly associated with positive sentiment, while tokens that have a large negative weight unarguably evoke negative emotions. A simple but powerful modification that one can do to improve this model is weighting the tokens by their <a href="https://en.wikipedia.org/wiki/Tf%E2%80%93idf" rel="nofollow noopener">tf-idf</a> scores.</p><h3 id="embeddings">Embeddings</h3><p>The next step of complexity we can add are word embeddings. Embeddings are a dense low-dimensional representation of sparse high-dimensional data. This allows our model to learn a more meaningful representation of each token, rather than just an index. While an individual dimension is not meaningful, the low-dimensional space — when learned from a large enough corpus — has been shown to capture relations such as tense, plural, gender, thematic relatedness, and many more. We can add word embeddings by converting our existing feature column into an <code>embedding_column</code>. The representation seen by the model is the mean of the embeddings for each token (see the <code>combiner</code> argument in the <a href="https://www.tensorflow.org/api_docs/python/tf/feature_column/embedding_column" rel="nofollow noopener">docs</a>). We can plug in the embedded features into a pre-canned <code>DNNClassifier</code>.</p><p>A note for the keen observer: an <code>embedding_column</code> is just an efficient way of applying a fully connected layer to the sparse binary feature vector of tokens, which is multiplied by a constant depending of the chosen combiner. A direct consequence of this is that it wouldn’t make sense to use an <code>embedding_column</code>directly in a <code>LinearClassifier</code> because two consecutive linear layers without non-linearities in between add no prediction power to the model, unless of course the embeddings are pre-trained.</p><!--kg-card-begin: markdown--><pre><code class="language-python">embedding_size = 50
+<!--kg-card-end: markdown--><figure class="kg-card kg-image-card"><img src="https://cdn-images-1.medium.com/max/1000/0*tCGMsIAQ9PTb9lml.png" class="kg-image" alt loading="lazy"></figure><p>As we can see, tokens with the most positive weight such as ‘refreshing’ are clearly associated with positive sentiment, while tokens that have a large negative weight unarguably evoke negative emotions. A simple but powerful modification that one can do to improve this model is weighting the tokens by their <a href="https://en.wikipedia.org/wiki/Tf%E2%80%93idf?ref=localhost" rel="nofollow noopener">tf-idf</a> scores.</p><h3 id="embeddings">Embeddings</h3><p>The next step of complexity we can add are word embeddings. Embeddings are a dense low-dimensional representation of sparse high-dimensional data. This allows our model to learn a more meaningful representation of each token, rather than just an index. While an individual dimension is not meaningful, the low-dimensional space — when learned from a large enough corpus — has been shown to capture relations such as tense, plural, gender, thematic relatedness, and many more. We can add word embeddings by converting our existing feature column into an <code>embedding_column</code>. The representation seen by the model is the mean of the embeddings for each token (see the <code>combiner</code> argument in the <a href="https://www.tensorflow.org/api_docs/python/tf/feature_column/embedding_column?ref=localhost" rel="nofollow noopener">docs</a>). We can plug in the embedded features into a pre-canned <code>DNNClassifier</code>.</p><p>A note for the keen observer: an <code>embedding_column</code> is just an efficient way of applying a fully connected layer to the sparse binary feature vector of tokens, which is multiplied by a constant depending of the chosen combiner. A direct consequence of this is that it wouldn’t make sense to use an <code>embedding_column</code>directly in a <code>LinearClassifier</code> because two consecutive linear layers without non-linearities in between add no prediction power to the model, unless of course the embeddings are pre-trained.</p><!--kg-card-begin: markdown--><pre><code class="language-python">embedding_size = 50
 word_embedding_column = tf.feature_column.embedding_column(
     column, dimension=embedding_size)
 classifier = tf.estimator.DNNClassifier(
@@ -274,7 +285,7 @@ classifier = tf.estimator.DNNClassifier(
     model_dir=os.path.join(model_dir, 'bow_embeddings'))
 train_and_evaluate(classifier)
 </code></pre>
-<!--kg-card-end: markdown--><p>We can use TensorBoard to visualize our 50-dimensional word vectors projected into $\mathbb{R}^3$ using <a href="https://en.wikipedia.org/wiki/T-distributed_stochastic_neighbor_embedding" rel="nofollow noopener">t-SNE</a>. We expect similar words to be close to each other. This can be a useful way to inspect our model weights and find unexpected behaviors.</p><figure class="kg-card kg-image-card"><img src="https://cdn-images-1.medium.com/max/1000/0*lxcE4sPyHteV4lVH.gif" class="kg-image" alt loading="lazy"></figure><p>At this point one possible approach would be to go deeper, further adding more fully connected layers and playing around with layer sizes and training functions. However, by doing that we would add extra complexity and ignore important structure in our sentences. Words do not live in a vacuum and meaning is compositional, formed by words and its neighbors.</p><p>Convolutions are one way to take advantage of this structure, similar to how we can model salient clusters of pixels for <a href="https://www.tensorflow.org/tutorials/layers" rel="nofollow noopener">image classification</a>. The intuition is that certain sequences of words, or <em>n-grams</em>, usually have the same meaning regardless of their overall position in the sentence. Introducing a structural prior via the convolution operation allows us to model the interaction between neighboring words and consequently gives us a better way to represent such meaning.</p><p>The following image shows how a filter matrix <em>F</em> of shape <em>d</em>×<em>m</em> slides across each 3-gram window of tokens to build a new feature map. Afterwards a <em>pooling</em> layer is usually applied to combine adjacent results.</p><figure class="kg-card kg-image-card kg-card-hascaption"><img src="https://cdn-images-1.medium.com/max/1000/1*TsW55MIvzHwb-GRA21Q7Zw.png" class="kg-image" alt loading="lazy"><figcaption>Source: <a href="https://www.semanticscholar.org/paper/Learning-to-Rank-Short-Text-Pairs-with-Convolution-Severyn-Moschitti/452f7411af7d471dd3ba84c2b06b2aaffc38cdb9" data-href="https://www.semanticscholar.org/paper/Learning-to-Rank-Short-Text-Pairs-with-Convolution-Severyn-Moschitti/452f7411af7d471dd3ba84c2b06b2aaffc38cdb9" class="markup--anchor markup--figure-anchor" rel="nofollow noopener" target="_blank" style="background-color: transparent; color: inherit; text-decoration: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0.54); background-repeat: repeat-x; background-image: url(&quot;data:image/svg+xml;utf8,<svg preserveAspectRatio=\&quot;none\&quot; viewBox=\&quot;0 0 1 1\&quot; xmlns=\&quot;http://www.w3.org/2000/svg\&quot;><line x1=\&quot;0\&quot; y1=\&quot;0\&quot; x2=\&quot;1\&quot; y2=\&quot;1\&quot; stroke=\&quot;currentColor\&quot; /></svg>&quot;); background-size: 1px 1px; background-position: 0px calc(1em + 1px);">Learning to Rank Short Text Pairs with Convolutional Deep Neural Networks</a> by <strong class="markup--strong markup--figure-strong" style="font-weight: 700;">Severyn</strong> et al.&nbsp;[2015]</figcaption></figure><p>Let us look at the full model architecture. The use of dropout layers is a regularization technique that makes the model less likely to overfit.</p><figure class="kg-card kg-image-card"><img src="https://cdn-images-1.medium.com/max/1000/1*zwj1G4Hem-PX1I54j_9gAw.png" class="kg-image" alt loading="lazy"></figure><p>As seen in previous blog posts, the <code>tf.estimator</code> framework provides a high-level API for training machine learning models, defining <code>train()</code>, <code>evaluate()</code> and <code>predict()</code> operations, handling checkpointing, loading, initializing, serving, building the graph and the session out of the box. There is a small family of pre-made estimators, like the ones we used earlier, but it’s most likely that you will need to <a href="https://www.tensorflow.org/extend/estimators" rel="nofollow noopener">build your own</a>.</p><p>Writing a custom estimator means writing a <code>model_fn(features, labels, mode, params)</code> that returns an <code>EstimatorSpec</code>. The first step will be mapping the features into our embedding layer:</p><!--kg-card-begin: markdown--><pre><code class="language-python">input_layer = tf.contrib.layers.embed_sequence(
+<!--kg-card-end: markdown--><p>We can use TensorBoard to visualize our 50-dimensional word vectors projected into $\mathbb{R}^3$ using <a href="https://en.wikipedia.org/wiki/T-distributed_stochastic_neighbor_embedding?ref=localhost" rel="nofollow noopener">t-SNE</a>. We expect similar words to be close to each other. This can be a useful way to inspect our model weights and find unexpected behaviors.</p><figure class="kg-card kg-image-card"><img src="https://cdn-images-1.medium.com/max/1000/0*lxcE4sPyHteV4lVH.gif" class="kg-image" alt loading="lazy"></figure><p>At this point one possible approach would be to go deeper, further adding more fully connected layers and playing around with layer sizes and training functions. However, by doing that we would add extra complexity and ignore important structure in our sentences. Words do not live in a vacuum and meaning is compositional, formed by words and its neighbors.</p><p>Convolutions are one way to take advantage of this structure, similar to how we can model salient clusters of pixels for <a href="https://www.tensorflow.org/tutorials/layers?ref=localhost" rel="nofollow noopener">image classification</a>. The intuition is that certain sequences of words, or <em>n-grams</em>, usually have the same meaning regardless of their overall position in the sentence. Introducing a structural prior via the convolution operation allows us to model the interaction between neighboring words and consequently gives us a better way to represent such meaning.</p><p>The following image shows how a filter matrix <em>F</em> of shape <em>d</em>×<em>m</em> slides across each 3-gram window of tokens to build a new feature map. Afterwards a <em>pooling</em> layer is usually applied to combine adjacent results.</p><figure class="kg-card kg-image-card kg-card-hascaption"><img src="https://cdn-images-1.medium.com/max/1000/1*TsW55MIvzHwb-GRA21Q7Zw.png" class="kg-image" alt loading="lazy"><figcaption>Source: <a href="https://www.semanticscholar.org/paper/Learning-to-Rank-Short-Text-Pairs-with-Convolution-Severyn-Moschitti/452f7411af7d471dd3ba84c2b06b2aaffc38cdb9?ref=localhost" data-href="https://www.semanticscholar.org/paper/Learning-to-Rank-Short-Text-Pairs-with-Convolution-Severyn-Moschitti/452f7411af7d471dd3ba84c2b06b2aaffc38cdb9" class="markup--anchor markup--figure-anchor" rel="nofollow noopener" target="_blank" style="background-color: transparent; color: inherit; text-decoration: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0.54); background-repeat: repeat-x; background-image: url(&quot;data:image/svg+xml;utf8,<svg preserveAspectRatio=\&quot;none\&quot; viewBox=\&quot;0 0 1 1\&quot; xmlns=\&quot;http://www.w3.org/2000/svg\&quot;><line x1=\&quot;0\&quot; y1=\&quot;0\&quot; x2=\&quot;1\&quot; y2=\&quot;1\&quot; stroke=\&quot;currentColor\&quot; /></svg>&quot;); background-size: 1px 1px; background-position: 0px calc(1em + 1px);">Learning to Rank Short Text Pairs with Convolutional Deep Neural Networks</a> by <strong class="markup--strong markup--figure-strong" style="font-weight: 700;">Severyn</strong> et al.&nbsp;[2015]</figcaption></figure><p>Let us look at the full model architecture. The use of dropout layers is a regularization technique that makes the model less likely to overfit.</p><figure class="kg-card kg-image-card"><img src="https://cdn-images-1.medium.com/max/1000/1*zwj1G4Hem-PX1I54j_9gAw.png" class="kg-image" alt loading="lazy"></figure><p>As seen in previous blog posts, the <code>tf.estimator</code> framework provides a high-level API for training machine learning models, defining <code>train()</code>, <code>evaluate()</code> and <code>predict()</code> operations, handling checkpointing, loading, initializing, serving, building the graph and the session out of the box. There is a small family of pre-made estimators, like the ones we used earlier, but it’s most likely that you will need to <a href="https://www.tensorflow.org/extend/estimators?ref=localhost" rel="nofollow noopener">build your own</a>.</p><p>Writing a custom estimator means writing a <code>model_fn(features, labels, mode, params)</code> that returns an <code>EstimatorSpec</code>. The first step will be mapping the features into our embedding layer:</p><!--kg-card-begin: markdown--><pre><code class="language-python">input_layer = tf.contrib.layers.embed_sequence(
     features['x'], 
     vocab_size, 
     embedding_size,
@@ -317,12 +328,12 @@ cnn_classifier = tf.estimator.Estimator(model_fn=model_fn,
                                         params=params)
 train_and_evaluate(cnn_classifier)
 </code></pre>
-<!--kg-card-end: markdown--><h3 id="lstm-networks">LSTM Networks</h3><p>Using the <code>Estimator</code> API and the same model <code>head</code>, we can also create a classifier that uses a <em>Long Short-Term Memory</em> (<em>LSTM</em>) cell instead of convolutions. Recurrent models such as this are some of the most successful building blocks for NLP applications. An LSTM processes the entire document sequentially, recursing over the sequence with its cell while storing the current state of the sequence in its memory.</p><p>One of the drawbacks of recurrent models compared to CNNs is that, because of the nature of recursion, models turn out deeper and more complex, which usually produces slower training time and worse convergence. LSTMs (and RNNs in general) can suffer convergence issues like vanishing or exploding gradients, that said, with sufficient tuning they can obtain state-of-the-art results for many problems. As a rule of thumb CNNs are good at feature extraction, while RNNs excel at tasks that depend on the meaning of the whole sentence, like question answering or machine translation.</p><p>Each cell processes one token embedding at a time and updates its internal state based on a differentiable computation that depends on both the embedding vector <em>x</em> at time <em>t</em>​ and the previous state <em>h</em> at time <em>t−1</em>​. In order to get a better understanding of how LSTMs work, you can refer to Chris Olah’s <a href="https://colah.github.io/posts/2015-08-Understanding-LSTMs/" rel="nofollow noopener">blog post</a>.</p><figure class="kg-card kg-image-card kg-card-hascaption"><img src="https://cdn-images-1.medium.com/max/1000/0*_lp7l6lhNBhETERr.png" class="kg-image" alt loading="lazy"><figcaption>Source: <a href="https://colah.github.io/posts/2015-08-Understanding-LSTMs/" data-href="https://colah.github.io/posts/2015-08-Understanding-LSTMs/" class="markup--anchor markup--figure-anchor" rel="nofollow noopener" target="_blank" style="background-color: transparent; color: inherit; text-decoration: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0.54); background-repeat: repeat-x; background-image: url(&quot;data:image/svg+xml;utf8,<svg preserveAspectRatio=\&quot;none\&quot; viewBox=\&quot;0 0 1 1\&quot; xmlns=\&quot;http://www.w3.org/2000/svg\&quot;><line x1=\&quot;0\&quot; y1=\&quot;0\&quot; x2=\&quot;1\&quot; y2=\&quot;1\&quot; stroke=\&quot;currentColor\&quot; /></svg>&quot;); background-size: 1px 1px; background-position: 0px calc(1em + 1px);">Understanding LSTM Networks</a> by <strong class="markup--strong markup--figure-strong" style="font-weight: 700;">Chris&nbsp;Olah</strong></figcaption></figure><p>The complete LSTM model can be expressed by the following simple flowchart:</p><figure class="kg-card kg-image-card"><img src="https://cdn-images-1.medium.com/max/1000/1*y3w54qFX7D2P0I4FKHUddQ.png" class="kg-image" alt loading="lazy"></figure><p>In the beginning of this post, we padded all documents up to 200 tokens, which is necessary to build a proper tensor. However, when a document contains fewer than 200 words, we don’t want the LSTM to continue processing padding tokens as it does not add information and degrades performance. For this reason, we additionally want to provide our network with the length of the original sequence before it was padded. Internally, the model then copies the last state through to the sequence’s end. We can do this by using the <code>"len"</code> feature in our input functions. We can now use the same logic as above and simply replace the convolutional, pooling, and flatten layers with our LSTM cell.</p><!--kg-card-begin: markdown--><pre><code class="language-python">lstm_cell = tf.nn.rnn_cell.BasicLSTMCell(100)
+<!--kg-card-end: markdown--><h3 id="lstm-networks">LSTM Networks</h3><p>Using the <code>Estimator</code> API and the same model <code>head</code>, we can also create a classifier that uses a <em>Long Short-Term Memory</em> (<em>LSTM</em>) cell instead of convolutions. Recurrent models such as this are some of the most successful building blocks for NLP applications. An LSTM processes the entire document sequentially, recursing over the sequence with its cell while storing the current state of the sequence in its memory.</p><p>One of the drawbacks of recurrent models compared to CNNs is that, because of the nature of recursion, models turn out deeper and more complex, which usually produces slower training time and worse convergence. LSTMs (and RNNs in general) can suffer convergence issues like vanishing or exploding gradients, that said, with sufficient tuning they can obtain state-of-the-art results for many problems. As a rule of thumb CNNs are good at feature extraction, while RNNs excel at tasks that depend on the meaning of the whole sentence, like question answering or machine translation.</p><p>Each cell processes one token embedding at a time and updates its internal state based on a differentiable computation that depends on both the embedding vector <em>x</em> at time <em>t</em>​ and the previous state <em>h</em> at time <em>t−1</em>​. In order to get a better understanding of how LSTMs work, you can refer to Chris Olah’s <a href="https://colah.github.io/posts/2015-08-Understanding-LSTMs/?ref=localhost" rel="nofollow noopener">blog post</a>.</p><figure class="kg-card kg-image-card kg-card-hascaption"><img src="https://cdn-images-1.medium.com/max/1000/0*_lp7l6lhNBhETERr.png" class="kg-image" alt loading="lazy"><figcaption>Source: <a href="https://colah.github.io/posts/2015-08-Understanding-LSTMs/?ref=localhost" data-href="https://colah.github.io/posts/2015-08-Understanding-LSTMs/" class="markup--anchor markup--figure-anchor" rel="nofollow noopener" target="_blank" style="background-color: transparent; color: inherit; text-decoration: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0.54); background-repeat: repeat-x; background-image: url(&quot;data:image/svg+xml;utf8,<svg preserveAspectRatio=\&quot;none\&quot; viewBox=\&quot;0 0 1 1\&quot; xmlns=\&quot;http://www.w3.org/2000/svg\&quot;><line x1=\&quot;0\&quot; y1=\&quot;0\&quot; x2=\&quot;1\&quot; y2=\&quot;1\&quot; stroke=\&quot;currentColor\&quot; /></svg>&quot;); background-size: 1px 1px; background-position: 0px calc(1em + 1px);">Understanding LSTM Networks</a> by <strong class="markup--strong markup--figure-strong" style="font-weight: 700;">Chris&nbsp;Olah</strong></figcaption></figure><p>The complete LSTM model can be expressed by the following simple flowchart:</p><figure class="kg-card kg-image-card"><img src="https://cdn-images-1.medium.com/max/1000/1*y3w54qFX7D2P0I4FKHUddQ.png" class="kg-image" alt loading="lazy"></figure><p>In the beginning of this post, we padded all documents up to 200 tokens, which is necessary to build a proper tensor. However, when a document contains fewer than 200 words, we don’t want the LSTM to continue processing padding tokens as it does not add information and degrades performance. For this reason, we additionally want to provide our network with the length of the original sequence before it was padded. Internally, the model then copies the last state through to the sequence’s end. We can do this by using the <code>"len"</code> feature in our input functions. We can now use the same logic as above and simply replace the convolutional, pooling, and flatten layers with our LSTM cell.</p><!--kg-card-begin: markdown--><pre><code class="language-python">lstm_cell = tf.nn.rnn_cell.BasicLSTMCell(100)
 _, final_states = tf.nn.dynamic_rnn(
         lstm_cell, inputs, sequence_length=features['len'], dtype=tf.float32)
 logits = tf.layers.dense(inputs=final_states.h, units=1)
 </code></pre>
-<!--kg-card-end: markdown--><p></p><h3 id="pre-trained-vectors">Pre-trained vectors</h3><p>Most of the models that we have shown before rely on word embeddings as a first layer. So far, we have initialized this embedding layer randomly. However, <a href="https://arxiv.org/abs/1607.01759" rel="nofollow noopener">much</a> <a href="https://arxiv.org/abs/1301.3781" rel="nofollow noopener">previous</a> <a href="https://arxiv.org/abs/1103.0398" rel="nofollow noopener">work</a> has shown that using embeddings pre-trained on a large unlabeled corpus as initialization is beneficial, particularly when training on only a small number of labeled examples. The most popular pre-trained embedding is <a href="https://www.tensorflow.org/tutorials/word2vec" rel="nofollow noopener">word2vec</a>. Leveraging knowledge from unlabeled data via pre-trained embeddings is an instance of <a href="http://ruder.io/transfer-learning/" rel="nofollow noopener"><em>transfer learning</em></a>.</p><p>To this end, we will show you how to use them in an <code>Estimator</code>. We will use the pre-trained vectors from another popular model, <a href="https://nlp.stanford.edu/projects/glove/" rel="nofollow noopener">GloVe</a>.</p><!--kg-card-begin: markdown--><pre><code class="language-python">embeddings = {}
+<!--kg-card-end: markdown--><p></p><h3 id="pre-trained-vectors">Pre-trained vectors</h3><p>Most of the models that we have shown before rely on word embeddings as a first layer. So far, we have initialized this embedding layer randomly. However, <a href="https://arxiv.org/abs/1607.01759?ref=localhost" rel="nofollow noopener">much</a> <a href="https://arxiv.org/abs/1301.3781?ref=localhost" rel="nofollow noopener">previous</a> <a href="https://arxiv.org/abs/1103.0398?ref=localhost" rel="nofollow noopener">work</a> has shown that using embeddings pre-trained on a large unlabeled corpus as initialization is beneficial, particularly when training on only a small number of labeled examples. The most popular pre-trained embedding is <a href="https://www.tensorflow.org/tutorials/word2vec?ref=localhost" rel="nofollow noopener">word2vec</a>. Leveraging knowledge from unlabeled data via pre-trained embeddings is an instance of <a href="http://ruder.io/transfer-learning/?ref=localhost" rel="nofollow noopener"><em>transfer learning</em></a>.</p><p>To this end, we will show you how to use them in an <code>Estimator</code>. We will use the pre-trained vectors from another popular model, <a href="https://nlp.stanford.edu/projects/glove/?ref=localhost" rel="nofollow noopener">GloVe</a>.</p><!--kg-card-begin: markdown--><pre><code class="language-python">embeddings = {}
 with open('glove.6B.50d.txt', 'r', encoding='utf-8') as f:
     for line in f:
         values = line.strip().split()
@@ -364,210 +375,190 @@ def print_predictions(sentences, classifier):
     predictions = [p['logistic'][0] for p in classifier.predict(input_fn=predict_input_fn)]
     print(predictions)
 </code></pre>
-<!--kg-card-end: markdown--><p>It is worth noting that the checkpoint itself is not sufficient to make predictions; the actual code used to build the estimator is necessary as well in order to map the saved weights to the corresponding tensors. It’s a good practice to associate saved checkpoints with the branch of code with which they were created.</p><p>If you are interested in exporting the models to disk in a fully recoverable way, you might want to look into the <a href="https://www.tensorflow.org/programmers_guide/saved_model#using_savedmodel_with_estimators" rel="nofollow noopener">SavedModel</a> class, which is especially useful for serving your model through an API using <a href="https://github.com/tensorflow/serving" rel="nofollow noopener">TensorFlow Serving</a> or loading it in the browser with <a href="https://js.tensorflow.org/" rel="nofollow noopener">TensorFlow.js</a>.</p><p>In this blog post, we explored how to use estimators for text classification, in particular for the IMDB Reviews Dataset. We trained and visualized our own embeddings, as well as loaded pre-trained ones. We started from a simple baseline and made our way to convolutional neural networks and LSTMs.</p><p>For more details, be sure to check out:</p><ul><li>A <a href="https://github.com/eisenjulian/nlp_estimator_tutorial/blob/master/nlp_estimators.ipynb" rel="nofollow noopener">Jupyter Notebook</a> that can run locally, or on <a href="https://goo.gl/fXsCra" rel="nofollow noopener">Colaboratory</a>.</li><li>The complete <a href="https://github.com/eisenjulian/nlp_estimator_tutorial/blob/master/nlp_estimators.py" rel="nofollow noopener">source code</a> for this blog post.</li><li>The TensorFlow <a href="https://www.tensorflow.org/programmers_guide/embedding" rel="nofollow noopener">Embedding</a> guide.</li><li>The TensorFlow <a href="https://www.tensorflow.org/tutorials/word2vec" rel="nofollow noopener">Vector Representation of Words</a> tutorial.</li><li>The <em>NLTK</em> <a href="http://www.nltk.org/book/ch03.html" rel="nofollow noopener">Processing Raw Text</a> chapter on how to design langage pipelines.</li></ul><hr><p>Thanks for reading! If you like you can find us online at <a href="http://ruder.io/" rel="nofollow noopener nofollow noopener nofollow noopener">ruder.io</a> and <a href="https://twitter.com/eisenjulian" rel="nofollow noopener nofollow noopener">@eisenjulian</a>. Send our way all your feedback and questions.</p>
-    </section>
+<!--kg-card-end: markdown--><p>It is worth noting that the checkpoint itself is not sufficient to make predictions; the actual code used to build the estimator is necessary as well in order to map the saved weights to the corresponding tensors. It’s a good practice to associate saved checkpoints with the branch of code with which they were created.</p><p>If you are interested in exporting the models to disk in a fully recoverable way, you might want to look into the <a href="https://www.tensorflow.org/programmers_guide/saved_model?ref=localhost#using_savedmodel_with_estimators" rel="nofollow noopener">SavedModel</a> class, which is especially useful for serving your model through an API using <a href="https://github.com/tensorflow/serving?ref=localhost" rel="nofollow noopener">TensorFlow Serving</a> or loading it in the browser with <a href="https://js.tensorflow.org/?ref=localhost" rel="nofollow noopener">TensorFlow.js</a>.</p><p>In this blog post, we explored how to use estimators for text classification, in particular for the IMDB Reviews Dataset. We trained and visualized our own embeddings, as well as loaded pre-trained ones. We started from a simple baseline and made our way to convolutional neural networks and LSTMs.</p><p>For more details, be sure to check out:</p><ul><li>A <a href="https://github.com/eisenjulian/nlp_estimator_tutorial/blob/master/nlp_estimators.ipynb?ref=localhost" rel="nofollow noopener">Jupyter Notebook</a> that can run locally, or on <a href="https://goo.gl/fXsCra?ref=localhost" rel="nofollow noopener">Colaboratory</a>.</li><li>The complete <a href="https://github.com/eisenjulian/nlp_estimator_tutorial/blob/master/nlp_estimators.py?ref=localhost" rel="nofollow noopener">source code</a> for this blog post.</li><li>The TensorFlow <a href="https://www.tensorflow.org/programmers_guide/embedding?ref=localhost" rel="nofollow noopener">Embedding</a> guide.</li><li>The TensorFlow <a href="https://www.tensorflow.org/tutorials/word2vec?ref=localhost" rel="nofollow noopener">Vector Representation of Words</a> tutorial.</li><li>The <em>NLTK</em> <a href="http://www.nltk.org/book/ch03.html?ref=localhost" rel="nofollow noopener">Processing Raw Text</a> chapter on how to design langage pipelines.</li></ul><hr><p>Thanks for reading! If you like you can find us online at <a href="http://ruder.io/?ref=localhost" rel="nofollow noopener nofollow noopener nofollow noopener">ruder.io</a> and <a href="https://twitter.com/eisenjulian?ref=localhost" rel="nofollow noopener nofollow noopener">@eisenjulian</a>. Send our way all your feedback and questions.</p>
+        </section>
 
-    <section class="article-comments gh-canvas">
-        <div id="disqus_thread"></div>
-        <script>
-            var disqus_config = function () {
-                this.page.url = "https://eisenjulian.github.io/text-classification-with-estimators/";
-                this.page.identifier = "ghost-5c8f230f6d2ff81194b67a4f"
-            };
-            (function() {
-            var d = document, s = d.createElement('script');
-            s.src = 'https://eisenjulian.disqus.com/embed.js';
-            s.setAttribute('data-timestamp', +new Date());
-            (d.head || d.body).appendChild(s);
-            })();
-        </script>
-    </section>
-
-</article>
-
-<section class="footer-cta">
-    <div class="inner">
-        <h2>Sign up for more like this.</h2>
-        <a class="footer-cta-button" href="index.html#/portal">
-            <div>Enter your email</div>
-            <span>Subscribe</span>
-        </a>
-    </div>
-</section>
+    </article>
 
 
-<aside class="read-more-wrap">
-    <div class="read-more inner">
+</main>
 
 
-                    
-<article class="post-card post ">
-
-    <a class="post-card-image-link" href="../learning-to-reason-over-tables-from-less-data/index.html">
-        <img class="post-card-image"
-            srcset="../content/images/size/w300/2021/04/few-shot.png 300w,
-                   ../content/images/size/w600/2021/04/few-shot.png 600w,
-                  ../content/images/size/w1000/2021/04/few-shot.png 1000w,
-                 ../content/images/size/w2000/2021/04/few-shot.png 2000w"
-            sizes="(max-width: 1000px) 400px, 800px"
-            src="../content/images/size/w600/2021/04/few-shot.png"
-            alt="Learning to Reason Over Tables from Less Data"
-            loading="lazy"
-        />
+            <section class="gh-container is-grid gh-outer">
+                <div class="gh-container-inner gh-inner">
+                    <h2 class="gh-container-title">Read more</h2>
+                    <div class="gh-feed">
+                            <article class="gh-card post no-image">
+    <a class="gh-card-link" href="../foundation-models-for-reasoning-on-charts/index.html">
+            <figure class="gh-card-image">
+                <img
+                    srcset="../content/images/size/w160/format/webp/2024/03/deplot_front_page_self_referential_figure_v2.jpg 160w,
+                           ../content/images/size/w320/format/webp/2024/03/deplot_front_page_self_referential_figure_v2.jpg 320w,
+                          ../content/images/size/w600/format/webp/2024/03/deplot_front_page_self_referential_figure_v2.jpg 600w,
+                         ../content/images/size/w960/format/webp/2024/03/deplot_front_page_self_referential_figure_v2.jpg 960w,
+                        ../content/images/size/w1200/format/webp/2024/03/deplot_front_page_self_referential_figure_v2.jpg 1200w,
+                       ../content/images/size/w2000/format/webp/2024/03/deplot_front_page_self_referential_figure_v2.jpg2.jpg 2000w"
+                    sizes="320px"
+                    src="../content/images/size/w600/2024/03/deplot_front_page_self_referential_figure_v2.jpg"
+                    alt="Foundation models for reasoning on charts"
+                    loading="lazy"
+                >
+            </figure>
+        <div class="gh-card-wrapper">
+            <h3 class="gh-card-title is-title">Foundation models for reasoning on charts</h3>
+                    <p class="gh-card-excerpt is-body">Visual language is the form of communication that relies on pictorial symbols outside of text to convey information. It is ubiquitous in our digital life in the form of iconography, infographics, tables, plots, and charts, extending to the real world in street signs, comic books, food labels, etc. For that</p>
+            <footer class="gh-card-meta">
+<!--
+             -->                    <time class="gh-card-date" datetime="2024-03-17">Mar 17, 2024</time>
+                <!--
+         --></footer>
+        </div>
     </a>
-
-    <div class="post-card-content">
-
-        <a class="post-card-content-link" href="../learning-to-reason-over-tables-from-less-data/index.html">
-            <header class="post-card-header">
-                <h2 class="post-card-title">Learning to Reason Over Tables from Less Data</h2>
-            </header>
-            <section class="post-card-excerpt">
-                <p>In "Understanding tables with intermediate pre-training", published in Findings of EMNLP 2020, we introduce the first pre-training tasks customized for table parsing, enabling models to learn better, faster and from less data.</p>
-            </section>
-        </a>
-
-        <footer class="post-card-meta">
-            <ul class="author-list">
-                <li class="author-list-item">
-                    <a href="../author/julian/index.html" class="static-avatar">
-                        <img class="author-profile-image" src="../content/images/size/w100/2019/03/perfil-square.jpeg" alt="Julian Eisenschlos" />
-                    </a>
-                </li>
-            </ul>
-            <div class="post-card-byline-content">
-                <span><a href="../author/julian/index.html">Julian Eisenschlos</a></span>
-                <span class="post-card-byline-date"><time datetime="2021-04-10">Apr 10, 2021</time> <span class="bull">&bull;</span> 7 min read</span>
-            </div>
-        </footer>
-
-    </div>
-
-</article>
-                    
-<article class="post-card post ">
-
-    <a class="post-card-image-link" href="../multifit/index.html">
-        <img class="post-card-image"
-            srcset="../content/images/size/w300/2020/08/multifit_bootstrapping.png 300w,
-                   ../content/images/size/w600/2020/08/multifit_bootstrapping.png 600w,
-                  ../content/images/size/w1000/2020/08/multifit_bootstrapping.png 1000w,
-                 ../content/images/size/w2000/2020/08/multifit_bootstrapping.png 2000w"
-            sizes="(max-width: 1000px) 400px, 800px"
-            src="../content/images/size/w600/2020/08/multifit_bootstrapping.png"
-            alt="Efficient multi-lingual language model fine-tuning"
-            loading="lazy"
-        />
+</article>                            <article class="gh-card post no-image">
+    <a class="gh-card-link" href="../learning-to-reason-over-tables-from-less-data/index.html">
+            <figure class="gh-card-image">
+                <img
+                    srcset="../content/images/size/w160/format/webp/2021/04/few-shot.png 160w,
+                           ../content/images/size/w320/format/webp/2021/04/few-shot.png 320w,
+                          ../content/images/size/w600/format/webp/2021/04/few-shot.png 600w,
+                         ../content/images/size/w960/format/webp/2021/04/few-shot.png 960w,
+                        ../content/images/size/w1200/format/webp/2021/04/few-shot.png 1200w,
+                       ../content/images/size/w2000/format/webp/2021/04/few-shot.pngt.png 2000w"
+                    sizes="320px"
+                    src="../content/images/size/w600/2021/04/few-shot.png"
+                    alt="Learning to Reason Over Tables from Less Data"
+                    loading="lazy"
+                >
+            </figure>
+        <div class="gh-card-wrapper">
+            <h3 class="gh-card-title is-title">Learning to Reason Over Tables from Less Data</h3>
+                <p class="gh-card-excerpt is-body">In &quot;Understanding tables with intermediate pre-training&quot;, published in Findings of EMNLP 2020, we introduce the first pre-training tasks customized for table parsing, enabling models to learn better, faster and from less data.</p>
+            <footer class="gh-card-meta">
+<!--
+             -->                    <time class="gh-card-date" datetime="2021-04-10">Apr 10, 2021</time>
+                <!--
+         --></footer>
+        </div>
     </a>
-
-    <div class="post-card-content">
-
-        <a class="post-card-content-link" href="../multifit/index.html">
-            <header class="post-card-header">
-                <h2 class="post-card-title">Efficient multi-lingual language model fine-tuning</h2>
-            </header>
-            <section class="post-card-excerpt">
-                <p>Our latest paper studies multilingual text classification and introduces MultiFiT, a novel method based on ULMFiT. MultiFiT, trained on 100 labeled documents in the target language, outperforms multi-lingual BERT, and the LASER algorithm—even though LASER requires a corpus of parallel texts.</p>
-            </section>
-        </a>
-
-        <footer class="post-card-meta">
-            <ul class="author-list">
-                <li class="author-list-item">
-                    <a href="../author/julian/index.html" class="static-avatar">
-                        <img class="author-profile-image" src="../content/images/size/w100/2019/03/perfil-square.jpeg" alt="Julian Eisenschlos" />
-                    </a>
-                </li>
-            </ul>
-            <div class="post-card-byline-content">
-                <span><a href="../author/julian/index.html">Julian Eisenschlos</a></span>
-                <span class="post-card-byline-date"><time datetime="2019-09-10">Sep 10, 2019</time> <span class="bull">&bull;</span> 10 min read</span>
-            </div>
-        </footer>
-
-    </div>
-
-</article>
-                    
-<article class="post-card post ">
-
-    <a class="post-card-image-link" href="../deep-learning-in-100-lines/index.html">
-        <img class="post-card-image"
-            srcset="../content/images/size/w300/2019/03/onion.jpg 300w,
-                   ../content/images/size/w600/2019/03/onion.jpg 600w,
-                  ../content/images/size/w1000/2019/03/onion.jpg 1000w,
-                 ../content/images/size/w2000/2019/03/onion.jpg 2000w"
-            sizes="(max-width: 1000px) 400px, 800px"
-            src="../content/images/size/w600/2019/03/onion.jpg"
-            alt="Neural Networks in 100 lines of pure Python"
-            loading="lazy"
-        />
+</article>                            <article class="gh-card post no-image">
+    <a class="gh-card-link" href="../multifit/index.html">
+            <figure class="gh-card-image">
+                <img
+                    srcset="../content/images/size/w160/format/webp/2020/08/multifit_bootstrapping.png 160w,
+                           ../content/images/size/w320/format/webp/2020/08/multifit_bootstrapping.png 320w,
+                          ../content/images/size/w600/format/webp/2020/08/multifit_bootstrapping.png 600w,
+                         ../content/images/size/w960/format/webp/2020/08/multifit_bootstrapping.png 960w,
+                        ../content/images/size/w1200/format/webp/2020/08/multifit_bootstrapping.png 1200w,
+                       ../content/images/size/w2000/format/webp/2020/08/multifit_bootstrapping.png.png 2000w"
+                    sizes="320px"
+                    src="../content/images/size/w600/2020/08/multifit_bootstrapping.png"
+                    alt="Efficient multi-lingual language model fine-tuning"
+                    loading="lazy"
+                >
+            </figure>
+        <div class="gh-card-wrapper">
+            <h3 class="gh-card-title is-title">Efficient multi-lingual language model fine-tuning</h3>
+                <p class="gh-card-excerpt is-body">Our latest paper studies multilingual text classification and introduces MultiFiT, a novel method based on ULMFiT. MultiFiT, trained on 100 labeled documents in the target language, outperforms multi-lingual BERT, and the LASER algorithm—even though LASER requires a corpus of parallel texts.</p>
+            <footer class="gh-card-meta">
+<!--
+             -->                    <time class="gh-card-date" datetime="2019-09-10">Sep 10, 2019</time>
+                <!--
+         --></footer>
+        </div>
     </a>
-
-    <div class="post-card-content">
-
-        <a class="post-card-content-link" href="../deep-learning-in-100-lines/index.html">
-            <header class="post-card-header">
-                <h2 class="post-card-title">Neural Networks in 100 lines of pure Python</h2>
-            </header>
-            <section class="post-card-excerpt">
-                <p>Can we build a Deep learning framework in plain Python and Numpy? Can we make it compact, clear and extendable? Let's set out to explore those ideas and see what we can create!</p>
+</article>                            <article class="gh-card post no-image">
+    <a class="gh-card-link" href="../deep-learning-in-100-lines/index.html">
+            <figure class="gh-card-image">
+                <img
+                    srcset="../content/images/size/w160/format/webp/2019/03/onion.jpg 160w,
+                           ../content/images/size/w320/format/webp/2019/03/onion.jpg 320w,
+                          ../content/images/size/w600/format/webp/2019/03/onion.jpg 600w,
+                         ../content/images/size/w960/format/webp/2019/03/onion.jpg 960w,
+                        ../content/images/size/w1200/format/webp/2019/03/onion.jpg 1200w,
+                       ../content/images/size/w2000/format/webp/2019/03/onion.jpgn.jpg 2000w"
+                    sizes="320px"
+                    src="../content/images/size/w600/2019/03/onion.jpg"
+                    alt="Neural Networks in 100 lines of pure Python"
+                    loading="lazy"
+                >
+            </figure>
+        <div class="gh-card-wrapper">
+            <h3 class="gh-card-title is-title">Neural Networks in 100 lines of pure Python</h3>
+                <p class="gh-card-excerpt is-body">Can we build a Deep learning framework in plain Python and Numpy? Can we make it compact, clear and extendable? Let&#x27;s set out to explore those ideas and see what we can create!</p>
+            <footer class="gh-card-meta">
+<!--
+             -->                    <time class="gh-card-date" datetime="2019-03-17">Mar 17, 2019</time>
+                <!--
+         --></footer>
+        </div>
+    </a>
+</article>                    </div>
+                </div>
             </section>
-        </a>
 
-        <footer class="post-card-meta">
-            <ul class="author-list">
-                <li class="author-list-item">
-                    <a href="../author/julian/index.html" class="static-avatar">
-                        <img class="author-profile-image" src="../content/images/size/w100/2019/03/perfil-square.jpeg" alt="Julian Eisenschlos" />
-                    </a>
-                </li>
-            </ul>
-            <div class="post-card-byline-content">
-                <span><a href="../author/julian/index.html">Julian Eisenschlos</a></span>
-                <span class="post-card-byline-date"><time datetime="2019-03-17">Mar 17, 2019</time> <span class="bull">&bull;</span> 11 min read</span>
-            </div>
-        </footer>
+    
+    <footer class="gh-footer has-accent-color gh-outer">
+    <div class="gh-footer-inner gh-inner">
 
-    </div>
-
-</article>
-
-    </div>
-</aside>
-
-
-    </main>
-
-    <footer class="site-footer outer">
-        <div class="inner">
-            <section class="copyright"><a href="../index.html">Julian Eisenschlos</a> &copy; 2021</section>
-            <nav class="site-footer-nav">
+        <div class="gh-footer-bar">
+            <span class="gh-footer-logo is-title">
+                    Julian Eisenschlos
+            </span>
+            <nav class="gh-footer-menu">
                 
             </nav>
-            <div><a href="https://ghost.org/" target="_blank" rel="noopener">Powered by Ghost</a></div>
+            <div class="gh-footer-copyright">
+                Powered by <a href="https://ghost.org/" target="_blank" rel="noopener">Ghost</a>
+            </div>
         </div>
-    </footer>
 
+
+    </div>
+</footer>    
 </div>
 
+    <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="pswp__bg"></div>
 
-<script
-    src="https://code.jquery.com/jquery-3.5.1.min.js"
-    integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
-    crossorigin="anonymous">
-</script>
-<script src="../assets/built/casper.js@v=bc10f09b63"></script>
-<script>
-$(document).ready(function () {
-    // Mobile Menu Trigger
-    $('.gh-burger').click(function () {
-        $('body').toggleClass('gh-head-open');
-    });
-    // FitVids - Makes video embeds responsive
-    $(".gh-content").fitVids();
-});
-</script>
+    <div class="pswp__scroll-wrap">
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/built/source.js%3Fv=f60aed1d93"></script>
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/prism.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/components/prism-lua.min.js"></script>
