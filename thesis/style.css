@@ -1,0 +1,638 @@
+/* ======================================= */
+/*  PhD Defense — Reveal.js Custom Theme    */
+/* ======================================= */
+
+:root {
+  --unc-blue: #004b87;
+  --unc-gold: #cfb87c;
+  --accent: #38bdf8;
+  --accent2: #a78bfa;
+  --success: #34d399;
+  --warn: #fb923c;
+  --bg: #0f172a;
+  --bg-card: rgba(255, 255, 255, 0.06);
+  --bg-card-accent: rgba(56, 189, 248, 0.10);
+  --text: #e2e8f0;
+  --text-dim: #94a3b8;
+  --text-bright: #f8fafc;
+  --ch-tables: #3b82f6;
+  --ch-charts: #10b981;
+  --ch-uncert: #f59e0b;
+  --ch-vocab: #a78bfa;
+  --ch-time: #ec4899;
+}
+
+.reveal {
+  font-family: 'Inter', sans-serif;
+  font-size: 22px;
+  color: var(--text);
+}
+
+.reveal h1,
+.reveal h2,
+.reveal h3,
+.reveal h4 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  color: var(--text-bright);
+  text-transform: none;
+  letter-spacing: -0.02em;
+}
+
+.reveal h2 {
+  font-size: 1.6em;
+  margin-bottom: 0.5em;
+}
+
+.reveal h4 {
+  font-size: 1em;
+  margin-bottom: 0.3em;
+}
+
+/* ----------- Title Slide ----------- */
+.title-slide {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.title-logo {
+  width: 80px;
+  margin-bottom: 1em;
+}
+
+.title-main {
+  font-size: 2em !important;
+  line-height: 1.2;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 0.3em;
+}
+
+.thank-you {
+  font-size: 3em !important;
+}
+
+.title-subtitle {
+  font-size: 1.1em;
+  color: var(--text-dim);
+  margin: 0.2em 0;
+}
+
+.title-author {
+  font-size: 1.3em;
+  color: var(--text-bright);
+  font-weight: 600;
+  margin: 0.5em 0 0.1em;
+}
+
+.title-affiliation {
+  color: var(--text-dim);
+  font-size: 0.95em;
+}
+
+.title-date {
+  color: var(--unc-gold);
+  font-size: 0.9em;
+  margin-top: 0.5em;
+}
+
+/* ----------- Section Titles ----------- */
+.section-title {
+  font-size: 2.2em !important;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.section-chapter {
+  color: var(--text-dim);
+  font-size: 1.1em;
+}
+
+.section-papers {
+  color: var(--unc-gold);
+  font-size: 0.85em;
+  margin-top: 0.3em;
+}
+
+/* ----------- Subtitle ----------- */
+.subtitle {
+  color: var(--text-dim);
+  font-size: 0.95em;
+  margin-top: -0.3em;
+  margin-bottom: 0.8em;
+}
+
+/* ----------- Columns ----------- */
+.columns {
+  display: flex;
+  gap: 1.5em;
+  align-items: flex-start;
+  margin-top: 0.5em;
+}
+
+.col {
+  flex: 1;
+}
+
+/* ----------- Boxes ----------- */
+.info-box,
+.method-box,
+.approach-box,
+.example-box {
+  background: var(--bg-card);
+  border-radius: 12px;
+  padding: 0.8em 1em;
+  margin-bottom: 0.6em;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.info-box.accent,
+.method-box.accent {
+  background: var(--bg-card-accent);
+  border-color: rgba(56, 189, 248, 0.3);
+}
+
+.info-box h4 {
+  margin-top: 0;
+}
+
+.info-box p,
+.method-box p {
+  font-size: 0.85em;
+  color: var(--text-dim);
+  margin: 0.2em 0;
+}
+
+.approach-box {
+  text-align: center;
+  padding: 1.2em;
+}
+
+.approach-box.end2end {
+  border-left: 4px solid var(--ch-charts);
+}
+
+.approach-box.modular {
+  border-left: 4px solid var(--accent);
+}
+
+.example-box {
+  background: rgba(167, 139, 250, 0.08);
+  border-color: rgba(167, 139, 250, 0.3);
+  font-size: 0.85em;
+}
+
+/* ----------- Objectives ----------- */
+.objective-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6em;
+  margin-top: 0.5em;
+}
+
+.objective {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.8em;
+  background: var(--bg-card);
+  border-radius: 12px;
+  padding: 0.8em 1em;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.obj-num {
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  color: var(--bg);
+  font-weight: 800;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  flex-shrink: 0;
+  font-size: 1em;
+}
+
+.objective h4 {
+  margin: 0;
+  text-align: left;
+}
+
+.objective p {
+  font-size: 0.85em;
+  color: var(--text-dim);
+  margin: 0.15em 0 0;
+}
+
+/* ----------- Roadmap ----------- */
+.roadmap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4em;
+  margin: 1.5em auto;
+  flex-wrap: wrap;
+}
+
+.roadmap-item {
+  padding: 0.5em 0.8em;
+  border-radius: 8px;
+  font-size: 0.8em;
+  text-align: center;
+  min-width: 90px;
+}
+
+.roadmap-item span {
+  display: block;
+  font-weight: 700;
+  font-size: 0.8em;
+  opacity: 0.7;
+}
+
+.roadmap-arrow {
+  color: var(--text-dim);
+  font-size: 1.2em;
+}
+
+.roadmap-note {
+  color: var(--text-dim);
+  font-size: 0.85em;
+  text-align: center;
+  margin-top: 1em;
+}
+
+.ch-prelim {
+  background: rgba(148, 163, 184, 0.15);
+  border: 1px solid rgba(148, 163, 184, 0.3);
+}
+
+.ch-tables {
+  background: rgba(59, 130, 246, 0.15);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+.ch-charts {
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.ch-uncert {
+  background: rgba(245, 158, 11, 0.15);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.ch-vocab {
+  background: rgba(167, 139, 250, 0.15);
+  border: 1px solid rgba(167, 139, 250, 0.3);
+}
+
+.ch-time {
+  background: rgba(236, 72, 153, 0.15);
+  border: 1px solid rgba(236, 72, 153, 0.3);
+}
+
+/* ----------- Architecture Grid ----------- */
+.arch-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.8em;
+  margin-top: 0.8em;
+}
+
+.arch-card {
+  background: var(--bg-card);
+  border-radius: 12px;
+  padding: 0.8em;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  text-align: center;
+}
+
+.arch-card.highlight {
+  border-color: var(--accent);
+  background: var(--bg-card-accent);
+}
+
+.model-name {
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 1.1em;
+}
+
+.arch-card p {
+  font-size: 0.8em;
+  color: var(--text-dim);
+}
+
+/* ----------- Recipe Flow ----------- */
+.recipe-flow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1em;
+  margin: 1em 0;
+}
+
+.recipe-step {
+  background: var(--bg-card);
+  border-radius: 12px;
+  padding: 1em 1.5em;
+  flex: 1;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.recipe-step.gen {
+  border-left: 4px solid var(--accent2);
+}
+
+.recipe-step.disc {
+  border-left: 4px solid var(--success);
+}
+
+.recipe-arrow {
+  font-size: 2em;
+  color: var(--text-dim);
+}
+
+.recipe-step .small {
+  font-size: 0.8em;
+  color: var(--text-dim);
+}
+
+.recipe-step .emphasis {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* ----------- Figures ----------- */
+.reveal section img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border: none;
+  box-shadow: none;
+}
+
+.reveal section img.fig-large {
+  max-width: 75% !important;
+  max-height: 300px !important;
+  margin: 0.5em auto;
+  border-radius: 8px;
+  background: #ffffff;
+  padding: 0.5em;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3) !important;
+}
+
+.reveal section img.fig-medium {
+  max-width: 50% !important;
+  max-height: 260px !important;
+  margin: 0.5em auto;
+  border-radius: 8px;
+  background: #ffffff;
+  padding: 0.5em;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3) !important;
+}
+
+.reveal section img.fig-fill {
+  width: 100% !important;
+  max-height: 240px !important;
+  object-fit: contain;
+  border-radius: 8px;
+  background: #ffffff;
+  padding: 0.4em;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3) !important;
+}
+
+.reveal section img.fig-small {
+  max-width: 45% !important;
+  max-height: 200px !important;
+  margin: 0.5em auto;
+  border-radius: 8px;
+  background: #ffffff;
+  padding: 0.4em;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3) !important;
+}
+
+.fig-caption {
+  text-align: center;
+  font-size: 0.75em;
+  color: var(--text-dim);
+  margin-top: 0.3em;
+}
+
+/* Logo images should NOT get white bg */
+.title-logo {
+  background: transparent !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+}
+
+/* ----------- Charts ----------- */
+.chart-container {
+  position: relative;
+  max-width: 750px;
+  max-height: 360px;
+  margin: 0.5em auto;
+}
+
+/* ----------- Results ----------- */
+.result-highlight {
+  text-align: center;
+  font-weight: 700;
+  color: var(--success);
+  font-size: 1em;
+  margin-top: 0.5em;
+}
+
+/* ----------- Takeaway Box ----------- */
+.takeaway {
+  background: var(--bg-card);
+  border-radius: 12px;
+  padding: 1em 1.5em;
+  border-left: 4px solid var(--accent);
+  margin-top: 0.8em;
+}
+
+.takeaway ul {
+  margin: 0;
+}
+
+.takeaway li {
+  margin-bottom: 0.3em;
+}
+
+/* ----------- Quote ----------- */
+.reveal blockquote {
+  background: rgba(167, 139, 250, 0.08);
+  border-left: 4px solid var(--accent2);
+  padding: 0.6em 1em;
+  border-radius: 0 8px 8px 0;
+  font-style: italic;
+  color: var(--text);
+  width: auto;
+  margin: 0.8em auto;
+  font-size: 0.9em;
+}
+
+.feynman {
+  border-left-color: var(--unc-gold);
+  background: rgba(207, 184, 124, 0.08);
+}
+
+/* ----------- Learning Grid ----------- */
+.learning-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.8em;
+  margin-top: 0.5em;
+}
+
+.learning {
+  background: var(--bg-card);
+  border-radius: 12px;
+  padding: 0.8em 1em;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.learning h4 {
+  font-size: 0.9em;
+  margin: 0 0 0.2em;
+}
+
+.learning p {
+  font-size: 0.8em;
+  color: var(--text-dim);
+  margin: 0;
+}
+
+/* ----------- Big Picture ----------- */
+.big-picture {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5em;
+  margin: 1em 0;
+}
+
+.bp-row {
+  display: flex;
+  gap: 1em;
+}
+
+.bp-box {
+  padding: 0.8em 1.2em;
+  border-radius: 12px;
+  text-align: center;
+  min-width: 240px;
+  font-weight: 600;
+}
+
+.bp-box span {
+  font-size: 0.75em;
+  font-weight: 400;
+  color: var(--text-dim);
+  display: block;
+  margin-top: 0.2em;
+}
+
+.bp-box.ch-tables {
+  background: rgba(59, 130, 246, 0.15);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+.bp-box.ch-charts {
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.bp-box.ch-uncert {
+  background: rgba(245, 158, 11, 0.15);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.bp-box.ch-vocab-time {
+  background: rgba(167, 139, 250, 0.15);
+  border: 1px solid rgba(167, 139, 250, 0.3);
+}
+
+.bp-center {
+  font-size: 1.2em;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  padding: 0.3em;
+}
+
+/* ----------- Papers ----------- */
+.papers-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35em;
+  margin-top: 0.5em;
+}
+
+.paper {
+  background: var(--bg-card);
+  border-radius: 8px;
+  padding: 0.4em 0.8em;
+  font-size: 0.78em;
+  display: flex;
+  align-items: center;
+  gap: 0.8em;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.venue {
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  color: var(--bg);
+  font-weight: 700;
+  font-size: 0.8em;
+  padding: 0.15em 0.5em;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+.paper a {
+  color: var(--text);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.paper a:hover {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+/* ----------- Lists ----------- */
+.reveal ul {
+  margin-left: 0.8em;
+}
+
+.reveal li {
+  margin-bottom: 0.3em;
+  font-size: 0.9em;
+}
+
+.reveal li.emphasis {
+  color: var(--accent);
+}
+
+.small {
+  font-size: 0.8em;
+  color: var(--text-dim);
+}
+
+/* ----------- Slide Numbers ----------- */
+.reveal .slide-number {
+  font-size: 14px;
+  color: var(--text-dim);
+}

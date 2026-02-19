@@ -1,0 +1,1211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Integrating Structured Content in Visual Language Reasoning — PhD Defense</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css" id="theme">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/monokai.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- ============================================================ -->
+      <!-- PART 0: OPENING -->
+      <!-- ============================================================ -->
+
+      <section>
+        <div class="title-slide">
+          <img src="imgs/UNC.png" alt="UNC" class="title-logo">
+          <h1 class="title-main">Integrating Structured Content in<br>Visual Language Reasoning</h1>
+          <p class="title-subtitle">PhD Dissertation Defense</p>
+          <p class="title-author">Julian Martin Eisenschlos</p>
+          <p class="title-affiliation">FAMAF — Universidad Nacional de Córdoba</p>
+          <p class="title-affiliation" style="font-size:0.85em; margin-top:0.2em;">Advisor: Dr. Luciana Benotti</p>
+          <p class="title-date">2026</p>
+        </div>
+        <aside class="notes">
+          Welcome everyone and thank you for being here. Today I'll present my doctoral work on integrating structured
+          content — tables, charts, and other visual languages — into language models.
+          This thesis spans 10 publications across top NLP venues and resulted in widely-used open-source tools.
+        </aside>
+      </section>
+
+      <section>
+        <h2>The Problem</h2>
+        <p class="subtitle">Information is everywhere. Understanding is scarce.</p>
+        <div class="columns">
+          <div class="col">
+            <div class="info-box">
+              <h4>📊 Tables</h4>
+              <p>Financial reports, spreadsheets, scientific data</p>
+            </div>
+            <div class="info-box">
+              <h4>📈 Charts</h4>
+              <p>Graphs, plots, infographics, dashboards</p>
+            </div>
+          </div>
+          <div class="col">
+            <div class="info-box">
+              <h4>📄 Documents</h4>
+              <p>PDFs, forms, invoices, web pages</p>
+            </div>
+            <div class="info-box accent">
+              <h4>🔮 Visual Language</h4>
+              <p>Text + layout + images = meaning</p>
+            </div>
+          </div>
+        </div>
+        <blockquote class="fragment">"Information is only useful when it can be understood."</blockquote>
+        <aside class="notes">
+          A huge amount of the world's knowledge lives in semi-structured formats: tables, charts, documents.
+          These combine text, layout, and visual cues to convey meaning — what we call "visual language."
+          Standard NLP models struggle here because they were designed for flat, running text.
+          Our goal is to close this gap.
+        </aside>
+      </section>
+
+      <section>
+        <h2>Thesis Objectives</h2>
+        <div class="objective-list">
+          <div class="objective fragment">
+            <span class="obj-num">1</span>
+            <div>
+              <h4>Bridge Text, Image &amp; Structured Data</h4>
+              <p>Establish a research program that measures and improves visual language understanding</p>
+            </div>
+          </div>
+          <div class="objective fragment">
+            <span class="obj-num">2</span>
+            <div>
+              <h4>Transfer Learning via Generation → Understanding</h4>
+              <p>Demonstrate that generative pre-training improves discriminative downstream tasks</p>
+            </div>
+          </div>
+          <div class="objective fragment">
+            <span class="obj-num">3</span>
+            <div>
+              <h4>Open-Source Tools for the Community</h4>
+              <p>Build and release efficient, accessible models and datasets</p>
+            </div>
+          </div>
+        </div>
+        <aside class="notes">
+          The thesis has three intertwined objectives.
+          First, bridging text, image, and structured data — tables and charts are neither pure text nor pure images.
+          Second, showing that generative pre-training benefits discriminative tasks — the "modern recipe" that runs
+          through every chapter.
+          Third, open-sourcing everything: TAPAS, DePlot, MatCha — all freely available.
+        </aside>
+      </section>
+
+      <!-- Roadmap -->
+      <section>
+        <h2>Roadmap</h2>
+        <div class="roadmap">
+          <div class="roadmap-item ch-prelim"><span>Ch 2</span> Foundations</div>
+          <div class="roadmap-arrow">→</div>
+          <div class="roadmap-item ch-tables"><span>Ch 3</span> Tables</div>
+          <div class="roadmap-arrow">→</div>
+          <div class="roadmap-item ch-charts"><span>Ch 4</span> Charts</div>
+          <div class="roadmap-arrow">→</div>
+          <div class="roadmap-item ch-uncert"><span>Ch 5</span> Uncertainty</div>
+          <div class="roadmap-arrow">→</div>
+          <div class="roadmap-item ch-vocab"><span>Ch 6</span> Vocabulary</div>
+          <div class="roadmap-arrow">→</div>
+          <div class="roadmap-item ch-time"><span>Ch 7</span> Time</div>
+        </div>
+        <p class="roadmap-note">Each chapter <em>incorporates</em> a new dimension into language models</p>
+        <aside class="notes">
+          Here's the roadmap. After a foundations chapter, each subsequent chapter incorporates a new modality or
+          dimension:
+          tables, then charts, then uncertainty quantification, then novel vocabulary, and finally temporal knowledge.
+          The unifying theme is that each contribution extends language models to handle a new kind of structured
+          content.
+          I'll touch on the key ideas and results from each.
+        </aside>
+      </section>
+
+      <!-- ============================================================ -->
+      <!-- PART 1: FOUNDATIONS -->
+      <!-- ============================================================ -->
+
+      <section>
+        <h2 class="section-title">Foundations</h2>
+        <p class="section-chapter">Chapter 2 — Preliminaries</p>
+        <aside class="notes">
+          Let me start with the scientific foundations that underpin the rest of the thesis.
+        </aside>
+      </section>
+
+      <section>
+        <h2>Discriminative vs. Generative</h2>
+        <div class="columns">
+          <div class="col">
+            <h4>Discriminative</h4>
+            <p>Model \(P(y|x)\) directly</p>
+            <ul>
+              <li>Lower asymptotic error</li>
+              <li>Needs more labeled data</li>
+              <li>Logistic Regression, SVM, BERT</li>
+            </ul>
+          </div>
+          <div class="col">
+            <h4>Generative</h4>
+            <p>Model \(P(x,y) = P(x|y)P(y)\)</p>
+            <ul>
+              <li>Faster convergence</li>
+              <li>Works with fewer examples</li>
+              <li>Naive Bayes, HMMs, GPT</li>
+            </ul>
+          </div>
+        </div>
+        <div class="fragment">
+          <img src="imgs/generative_discriminative.png" alt="Two regimes" class="fig-medium">
+          <p class="fig-caption">The "two regimes" (Ng &amp; Jordan, 2002)</p>
+        </div>
+        <aside class="notes">
+          The classical distinction between discriminative and generative models is central to this thesis.
+          Ng and Jordan showed two regimes: generative models converge faster with limited data, but discriminative
+          models eventually achieve lower error.
+          This observation motivates the "modern recipe" we use throughout: pre-train generatively, then fine-tune
+          discriminatively.
+        </aside>
+      </section>
+
+      <section>
+        <h2>The Modern Recipe</h2>
+        <p class="subtitle">Generative Pre-training → Discriminative Fine-tuning</p>
+        <div class="recipe-flow">
+          <div class="recipe-step gen">
+            <h4>Phase 1: Pre-train</h4>
+            <p>Generative objective on massive unlabeled data</p>
+            <p class="small">MLM, next-token prediction, de-rendering</p>
+            <p class="small emphasis">→ Learns robust representations</p>
+          </div>
+          <div class="recipe-arrow">⟹</div>
+          <div class="recipe-step disc">
+            <h4>Phase 2: Fine-tune</h4>
+            <p>Discriminative objective on labeled data</p>
+            <p class="small">Classification, QA, fact verification</p>
+            <p class="small emphasis">→ Lower asymptotic error</p>
+          </div>
+        </div>
+        <p class="fragment"><strong>Best of both worlds:</strong> generative phase provides the "prior," discriminative
+          phase optimizes the decision boundary</p>
+        <aside class="notes">
+          This is the recipe we follow in every chapter.
+          Phase 1 uses a generative objective — masked language modeling, next-token prediction, or chart de-rendering —
+          on large unlabeled corpora.
+          Phase 2 fine-tunes on the target task with a discriminative head.
+          The key insight: the generative phase learns general representations that transfer; the discriminative phase
+          refines them for the specific task.
+          We show this works for tables, charts, and even temporal knowledge.
+        </aside>
+      </section>
+
+      <section>
+        <h2>Architectures at a Glance</h2>
+        <div class="arch-grid">
+          <div class="arch-card">
+            <h4>Encoder-Only</h4>
+            <p class="model-name">BERT</p>
+            <p>Bidirectional attention → understanding</p>
+          </div>
+          <div class="arch-card">
+            <h4>Decoder-Only</h4>
+            <p class="model-name">GPT</p>
+            <p>Causal attention → generation</p>
+          </div>
+          <div class="arch-card">
+            <h4>Encoder-Decoder</h4>
+            <p class="model-name">T5</p>
+            <p>Both → sequence-to-sequence</p>
+          </div>
+          <div class="arch-card highlight">
+            <h4>Vision Transformer</h4>
+            <p class="model-name">ViT</p>
+            <p>Image patches as tokens → unified architecture</p>
+          </div>
+        </div>
+        <p class="fragment">If text = tokens and images = patch-tokens, a single Transformer can process both</p>
+        <aside class="notes">
+          Our work spans all three text architectures.
+          TAPAS and MATE use BERT (encoder-only), TabT5 uses T5 (encoder-decoder), and the charts work builds on
+          Pix2Struct and PaLI (encoder-decoder with vision).
+          The key insight from Vision Transformers is that images can be represented as sequences of patches, enabling a
+          unified architecture.
+          This is foundational for our charts chapter, where we process chart images directly.
+        </aside>
+      </section>
+
+      <section>
+        <h2>Visual Language &amp; the Gap</h2>
+        <div class="columns">
+          <div class="col">
+            <h4>What existed</h4>
+            <ul>
+              <li>LayoutLM: 2D positional embeddings for documents</li>
+              <li>VisualBERT: cross-modal attention on natural images</li>
+              <li>Focus on photographs, not structured content</li>
+            </ul>
+          </div>
+          <div class="col">
+            <h4>The gap we address</h4>
+            <ul>
+              <li class="emphasis">Tables in documents</li>
+              <li class="emphasis">Charts and plots</li>
+              <li class="emphasis">Reliability and uncertainty</li>
+              <li class="emphasis">Evolving vocabulary &amp; facts</li>
+            </ul>
+          </div>
+        </div>
+        <aside class="notes">
+          Prior work on multimodal models focused heavily on natural images — photo captions, visual question answering
+          on photographs.
+          The gap we address is the structured visual language: tables, charts, infographics — content where layout and
+          structure carry meaning.
+          We also address two often-overlooked aspects: reliability (when should a model abstain?) and temporal validity
+          (facts change over time).
+        </aside>
+      </section>
+
+      <!-- ============================================================ -->
+      <!-- PART 2: TABLES -->
+      <!-- ============================================================ -->
+
+      <section>
+        <h2 class="section-title">Incorporating Tables<br>into Models</h2>
+        <p class="section-chapter">Chapter 3</p>
+        <p class="section-papers">EMNLP 2020 · EMNLP 2021 · EMNLP 2022 · ACL 2024</p>
+        <aside class="notes">
+          Let's start with Chapter 3 on tables — this is where the thesis began.
+          Four papers spanning from 2020 to 2024, covering understanding, efficiency, and generation.
+        </aside>
+      </section>
+
+      <section>
+        <h2>The Challenge</h2>
+        <p>Language models are pre-trained on <strong>flat text</strong>, but tables have <strong>2D structure</strong>
+        </p>
+        <img src="imgs/bert_input_example.png" alt="TAPAS input" class="fig-large">
+        <p class="fig-caption">TAPAS: Adding row, column, and rank embeddings to BERT for table understanding</p>
+        <aside class="notes">
+          The core challenge: BERT sees a flat sequence of tokens, but tables have rows, columns, and hierarchical
+          headers.
+          TAPAS addresses this by adding specialized positional embeddings — row ID, column ID, and rank within each
+          column.
+          These structural signals let the model distinguish between cells in different positions without changing the
+          underlying architecture.
+          Importantly, TAPAS is initialized from a standard BERT checkpoint, adding only the new embedding layers.
+        </aside>
+      </section>
+
+      <section>
+        <h2>Intermediate Pre-training</h2>
+        <p class="subtitle">Teaching models to reason about tables before fine-tuning</p>
+        <div class="columns">
+          <div class="col">
+            <div class="method-box">
+              <h4>Counterfactual Statements</h4>
+              <p>Corrupt real sentences about Wikipedia tables by swapping entities with plausible alternatives</p>
+              <p class="small">"Australia won 5 medals" → "Canada won 5 medals"</p>
+            </div>
+          </div>
+          <div class="col">
+            <div class="method-box">
+              <h4>Synthetic Statements</h4>
+              <p>Generate sentences from logical expressions that filter, combine, and compare table data</p>
+              <p class="small">argmax, sum, count, compare → natural language</p>
+            </div>
+          </div>
+        </div>
+        <aside class="notes">
+          Our key contribution is intermediate pre-training: an extra stage between general pre-training and task
+          fine-tuning.
+          We create two types of synthetic training data from Wikipedia tables.
+          Counterfactual statements take real sentences and corrupt them — swapping an entity to make the statement
+          false. This teaches the model to verify facts against tables.
+          Synthetic statements programmatically generate true/false assertions using SQL-like operations, teaching
+          numerical and logical reasoning.
+          This synthetic data costs nothing to generate and provides massive improvements.
+        </aside>
+      </section>
+
+      <section>
+        <h2>TabFact Results</h2>
+        <p class="subtitle">Table Fact Verification</p>
+        <div class="chart-container">
+          <canvas id="tabfactChart"></canvas>
+        </div>
+        <p class="fragment result-highlight">+6 pts (BERT-base) · +9 pts (BERT-large) over previous SOTA</p>
+        <aside class="notes">
+          On TabFact — the main table fact verification benchmark — our intermediate pre-training with counterfactual
+          and synthetic data gives dramatic improvements.
+          Plus 6 points with BERT-base and plus 9 with BERT-large over the previous state of the art.
+          These are substantial gains for what is essentially a data augmentation strategy with zero additional
+          annotation cost.
+        </aside>
+      </section>
+
+      <section>
+        <h2>Data Efficiency</h2>
+        <img src="imgs/size_plot.png" alt="Low resource results" class="fig-large">
+        <p class="fig-caption">Pre-training with counterfactual + synthetic data matches Table-BERT using only 10% of
+          the fine-tuning data</p>
+        <aside class="notes">
+          This plot shows perhaps the most important finding.
+          With our intermediate pre-training, the model reaches Table-BERT's full-data accuracy using only 10 percent of
+          the fine-tuning data.
+          This is the Ng and Jordan insight in action: the generative-style synthetic pre-training provides a strong
+          prior, so less labeled data is needed downstream.
+          This has real practical implications — you don't always have large labeled datasets for every table task.
+        </aside>
+      </section>
+
+      <section>
+        <h2>Analysis: What Did the Model Learn?</h2>
+        <div class="columns">
+          <div class="col">
+            <img src="imgs/examples_distribution.png" alt="Distribution" class="fig-fill">
+            <p class="fig-caption">Salient group analysis</p>
+          </div>
+          <div class="col">
+            <img src="imgs/agreement_plot.png" alt="Agreement" class="fig-fill">
+            <p class="fig-caption">Model agreement with specialized methods</p>
+          </div>
+        </div>
+        <aside class="notes">
+          We conducted a fine-grained analysis of what the model actually learned.
+          The left plot shows the distribution of difficulty groups — our pre-training helps most on the hardest
+          examples that require numerical reasoning.
+          The right plot shows agreement with specialized systems: the model implicitly learns to perform operations
+          like counting, comparisons, and superlatives, despite never being explicitly programmed to do so.
+        </aside>
+      </section>
+
+      <section>
+        <h2>MATE: Efficient Attention for Tables</h2>
+        <p class="subtitle">Multi-view Attention for Table Transformer Efficiency</p>
+        <div class="columns">
+          <div class="col">
+            <img src="imgs/mate_attention.png" alt="MATE attention" class="fig-fill">
+            <p class="fig-caption">Restrict attention to row/column views</p>
+          </div>
+          <div class="col">
+            <ul>
+              <li>Sparse attention → linear cost in sequence length</li>
+              <li class="fragment">Drop-in replacement for BERT attention</li>
+              <li class="fragment">Provably universal approximation</li>
+              <li class="fragment">2× faster inference at &lt;1 pt accuracy loss</li>
+            </ul>
+          </div>
+        </div>
+        <aside class="notes">
+          MATE addresses the efficiency bottleneck. Standard Transformer attention is quadratic in sequence length,
+          which is problematic for large tables.
+          Our idea: restrict attention to structural views — each token attends only to tokens in the same row OR same
+          column, alternating across layers.
+          This reduces complexity from quadratic to linear while preserving the model's expressive power — we proved
+          universal approximation.
+          Practically, it doubles inference speed with less than 1 point accuracy loss, and it's a drop-in replacement
+          for standard BERT attention.
+        </aside>
+      </section>
+
+      <section>
+        <h2>MATE: Efficiency Gains</h2>
+        <div class="columns">
+          <div class="col">
+            <img src="imgs/flops.png" alt="FLOPs" class="fig-fill">
+            <p class="fig-caption">FLOPs comparison vs. sequence length</p>
+          </div>
+          <div class="col">
+            <img src="imgs/memory.png" alt="Memory" class="fig-fill">
+            <p class="fig-caption">Peak memory usage</p>
+          </div>
+        </div>
+        <aside class="notes">
+          These plots confirm the theoretical gains.
+          On the left: FLOPs grow linearly with MATE versus quadratically with full attention. The gap widens
+          significantly for longer sequences.
+          On the right: memory usage follows the same trend. This makes MATE practical for processing large tables that
+          would otherwise exceed memory limits.
+        </aside>
+      </section>
+
+      <section>
+        <h2>TabT5: From Understanding to Generation</h2>
+        <img src="imgs/tabt5.png" alt="TabT5 architecture" class="fig-large">
+        <p class="fig-caption">Encoder-decoder architecture with structural embeddings for table-to-text generation</p>
+        <aside class="notes">
+          TabT5 shifts from understanding to generation. We extend the T5 encoder-decoder model with the same structural
+          embeddings as TAPAS.
+          The key innovation is the pre-training: de-noising corrupted tables AND "ToTTification" — learning to generate
+          natural text descriptions from web tables.
+          This again follows our "generation for understanding" recipe: learning to describe tables makes the model
+          better at understanding them.
+        </aside>
+      </section>
+
+      <section>
+        <h2>TabT5 Pre-training &amp; Results</h2>
+        <div class="columns">
+          <div class="col">
+            <h4>Pre-training Strategies</h4>
+            <ul>
+              <li><strong>De-noising:</strong> reconstruct corrupted tables</li>
+              <li><strong>ToTTification:</strong> generate related text from web tables</li>
+            </ul>
+          </div>
+          <div class="col">
+            <h4>Results</h4>
+            <ul>
+              <li>Consistent gains on 4 benchmarks</li>
+              <li>Improved ToTTo, SQA, TabFact, FeTaQA</li>
+            </ul>
+          </div>
+        </div>
+        <div class="takeaway fragment">
+          <strong>Chapter Takeaway:</strong> Structural embeddings + intermediate pre-training + encoder-decoder
+          generation = comprehensive table understanding.
+        </div>
+        <aside class="notes">
+          To summarize the tables chapter: we showed three complementary contributions.
+          First, intermediate pre-training with synthetic data dramatically improves table fact verification.
+          Second, MATE makes attention efficient for structured inputs with theoretical guarantees.
+          Third, TabT5 demonstrates that generative pre-training on tables improves both generation and understanding
+          tasks.
+          The code for all three is publicly available in the google-research/tapas repository.
+        </aside>
+      </section>
+
+      <!-- ============================================================ -->
+      <!-- PART 3: CHARTS -->
+      <!-- ============================================================ -->
+
+      <section>
+        <h2 class="section-title">Incorporating Charts<br>into Models</h2>
+        <p class="section-chapter">Chapter 4</p>
+        <p class="section-papers">ACL 2023 (×2) · ACL 2024</p>
+        <aside class="notes">
+          Chapter 4 moves from structured text to truly visual inputs: charts and plots.
+          Here we face an additional challenge — the data is embedded in pixels, not text tokens.
+          We present two complementary approaches published at ACL 2023 and a follow-up at ACL 2024.
+        </aside>
+      </section>
+
+      <section>
+        <h2>From Tables to Charts</h2>
+        <p class="subtitle">Two complementary approaches</p>
+        <div class="columns">
+          <div class="col">
+            <div class="approach-box end2end">
+              <h4>End-to-End</h4>
+              <p>Image → Model → Answer</p>
+              <p class="model-name">MatCha</p>
+            </div>
+          </div>
+          <div class="col">
+            <div class="approach-box modular">
+              <h4>Modular</h4>
+              <p>Image → Table → LLM → Answer</p>
+              <p class="model-name">DePlot</p>
+            </div>
+          </div>
+        </div>
+        <aside class="notes">
+          We explored two paradigms for chart understanding.
+          MatCha is end-to-end: it processes chart images directly and produces answers. It's efficient and strong on
+          extractive queries.
+          DePlot is modular: it first converts the chart image into a structured data table, then hands it to any LLM
+          for reasoning. This enables leveraging the LLM's reasoning capabilities — including few-shot and
+          chain-of-thought.
+          As we'll see, each excels in different scenarios, and they're complementary.
+        </aside>
+      </section>
+
+      <section>
+        <h2>MatCha: Pre-training for Charts</h2>
+        <img src="imgs/matcha_front_page.png" alt="MatCha" class="fig-large">
+        <div class="columns fragment">
+          <div class="col">
+            <h4>Chart De-rendering</h4>
+            <p>Image → underlying data table</p>
+          </div>
+          <div class="col">
+            <h4>Math Reasoning</h4>
+            <p>MATH + DROP datasets for numerical computation</p>
+          </div>
+        </div>
+        <aside class="notes">
+          MatCha builds on the Pix2Struct architecture — an image-to-text model pre-trained by parsing web screenshots.
+          We add two novel pre-training objectives.
+          Chart de-rendering: given a chart image, output the underlying data table. This teaches the model to "read"
+          visual encodings — bar heights, line slopes, pie slices.
+          Math reasoning: trained on MATH and DROP datasets to improve numerical computation, which is essential for
+          answering quantitative questions about charts.
+        </aside>
+      </section>
+
+      <section>
+        <h2>MatCha: Main Results</h2>
+        <div class="chart-container">
+          <canvas id="matchaChart"></canvas>
+        </div>
+        <p class="fragment result-highlight">MatCha (300M params) outperforms PaLI-17B on chart tasks</p>
+        <aside class="notes">
+          The results are striking. MatCha, with only 300 million parameters, outperforms PaLI — a 17-billion parameter
+          model — on chart-specific tasks.
+          This is a 56× size difference. It demonstrates that specialized pre-training with the right inductive biases
+          beats brute-force scale.
+          This validates our thesis: specialized, efficient models have enduring value.
+        </aside>
+      </section>
+
+      <section>
+        <h2>MatCha: Ablation Study</h2>
+        <div class="chart-container">
+          <canvas id="ablationChart"></canvas>
+        </div>
+        <p class="fig-caption">Each pre-training component contributes; chart de-rendering has the largest impact</p>
+        <aside class="notes">
+          The ablation study shows that both pre-training components contribute, with chart de-rendering providing the
+          largest gains.
+          This makes sense: de-rendering forces the model to truly understand the visual encoding, acting as a strong
+          self-supervised signal.
+          Math reasoning adds complementary gains, especially on questions requiring computation.
+          Again, generation (de-rendering) improving understanding — the recurring theme of this thesis.
+        </aside>
+      </section>
+
+      <section>
+        <h2>MatCha: Fine-grained Analysis</h2>
+        <img src="imgs/matcha_perf_per_cat_v2.png" alt="Per category" class="fig-medium">
+        <p class="fig-caption">MatCha excels at data extraction and math reasoning; visual attributes remain challenging
+        </p>
+        <aside class="notes">
+          Breaking down by question category reveals an interesting pattern.
+          MatCha excels on data extraction and math reasoning — exactly the capabilities targeted by our pre-training
+          objectives.
+          Plot attribute questions — such as "what color is the line?" or "how many legend entries?" — remain harder.
+          These require low-level visual perception rather than data reasoning.
+          This points to future work in richer visual encoding schemes.
+        </aside>
+      </section>
+
+      <section>
+        <h2>DePlot: Modular Chart Reasoning</h2>
+        <img src="imgs/deplot_llm_front_page.png" alt="DePlot pipeline" class="fig-large">
+        <p class="fig-caption">Translate chart → linearized table, then use any LLM for reasoning</p>
+        <aside class="notes">
+          DePlot takes a fundamentally different approach.
+          Instead of answering directly, it translates the chart image into a linearized data table — essentially doing
+          "chart de-rendering" as the primary task.
+          Then any LLM can reason over the table. This is elegant because it decouples visual perception from reasoning,
+          and allows leveraging the latest LLMs without retraining.
+          Crucially, this enables one-shot and few-shot capabilities that end-to-end models can't easily achieve.
+        </aside>
+      </section>
+
+      <section>
+        <h2>DePlot: Results</h2>
+        <div class="chart-container">
+          <canvas id="deplotChart"></canvas>
+        </div>
+        <p class="fragment result-highlight">DePlot + LLM achieves 67.6% on ChartQA-Human (vs. 38.2% MatCha) with just
+          one example</p>
+        <aside class="notes">
+          The results highlight the power of modularity.
+          On human-authored questions — which require complex, multi-step reasoning — DePlot plus an LLM achieves 67.6%,
+          nearly doubling MatCha's score.
+          The key is that LLMs excel at compositional reasoning once they have structured data to work with.
+          On simpler extractive questions, MatCha is more competitive. The two approaches are truly complementary.
+        </aside>
+      </section>
+
+      <section>
+        <h2>ChaTS-Pi: Faithful Chart Summarization</h2>
+        <img src="imgs/chatspi_wide.png" alt="ChaTS-Pi" class="fig-large">
+        <p class="fig-caption">Extract data via DePlot, then verify entailment between summary and underlying table</p>
+        <aside class="notes">
+          ChaTS-Pi addresses a downstream application: chart summarization.
+          The problem is that LLM-generated summaries of charts can contain hallucinated or unfaithful claims.
+          Our solution uses DePlot to extract the data table, then checks whether each claim in the summary is entailed
+          by the extracted data.
+          This gives a faithfulness score — a measure of how trustworthy the summary is.
+          This connects to the next chapter on uncertainty: knowing when to trust model outputs.
+        </aside>
+      </section>
+
+      <section>
+        <h2>Charts Chapter Summary</h2>
+        <div class="takeaway">
+          <ul>
+            <li><strong>MatCha:</strong> End-to-end → strong on extractive &amp; synthetic queries</li>
+            <li><strong>DePlot:</strong> Modular → excels on complex human queries with LLM reasoning</li>
+            <li><strong>ChaTS-Pi:</strong> Faithfulness scoring → reliable chart summaries</li>
+          </ul>
+          <blockquote class="fragment feynman">"What I cannot create, I do not understand" — R. Feynman</blockquote>
+        </div>
+        <aside class="notes">
+          To summarize: MatCha and DePlot are complementary — one is efficient and end-to-end, the other is modular and
+          leverages LLM reasoning.
+          ChaTS-Pi shows a practical application combining both ideas.
+          The Feynman quote captures the essence: by learning to de-render — to "create" the data from pixels — the
+          model demonstrates genuine understanding.
+          This completes the first half of the thesis: tables and charts. Now we turn to reliability and robustness.
+        </aside>
+      </section>
+
+      <!-- ============================================================ -->
+      <!-- PART 4: UNCERTAINTY -->
+      <!-- ============================================================ -->
+
+      <section>
+        <h2 class="section-title">Incorporating Multimodal<br>Uncertainty</h2>
+        <p class="section-chapter">Chapter 5</p>
+        <p class="section-papers">EMNLP 2023 · ACL 2024</p>
+        <aside class="notes">
+          Chapter 5 asks a different question: even when models are accurate, can we trust their answers?
+          High accuracy on benchmarks doesn't mean the model knows when it's wrong.
+          This is critical for real-world deployment, especially for assistive technology serving visually impaired
+          users.
+        </aside>
+      </section>
+
+      <section>
+        <h2>When Models Should Say "I Don't Know"</h2>
+        <img src="imgs/selective_vqa.png" alt="Selective VQA" class="fig-small">
+        <p class="fig-caption">Sampled outputs from an LMM on a VizWiz-VQA example used to measure calibration</p>
+        <aside class="notes">
+          This figure illustrates the core idea. Given an ambiguous image and question, we sample multiple outputs from
+          the model.
+          If the samples are consistent — the model is confident. If they diverge — the model is uncertain and should
+          abstain.
+          The VizWiz-VQA dataset is particularly relevant here: it was created by visually impaired users taking photos
+          with their phones. The images are often blurry or poorly framed, making many questions genuinely unanswerable.
+        </aside>
+      </section>
+
+      <section>
+        <h2>Scoring Methods</h2>
+        <div class="columns">
+          <div class="col">
+            <h4>Existing Methods</h4>
+            <ul>
+              <li><strong>Likelihood:</strong> \(P(y|x)\) from the model</li>
+              <li><strong>Sampling Repetition:</strong> most frequent answer ratio</li>
+              <li><strong>Sampling Diversity:</strong> proportion of distinct answers</li>
+            </ul>
+          </div>
+          <div class="col">
+            <h4>Our Proposal</h4>
+            <div class="method-box accent">
+              <h4>Avg BLEU</h4>
+              <p>Average pairwise semantic similarity among sampled outputs</p>
+              <p>\(\text{Score} = \frac{1}{\binom{n}{2}} \sum_{i < j} \text{BLEU}(s_i, s_j)\)</p>
+            </div>
+          </div>
+        </div>
+        <aside class="notes">
+          We compared several confidence scoring methods.
+          Model likelihood seems natural but is poorly calibrated in practice — models are often overconfident.
+          Sampling repetition and diversity are better but brittle to surface-level variation.
+          Our proposal, Avg BLEU, computes the average pairwise BLEU score among sampled outputs. It captures semantic
+          agreement rather than exact string matching.
+          The intuition: if all samples say similar things in different words, the model is confident. If they say
+          completely different things, it's uncertain.
+        </aside>
+      </section>
+
+      <section>
+        <h2>Calibration Results</h2>
+        <div class="chart-container">
+          <canvas id="calibrationChart"></canvas>
+        </div>
+        <p class="fragment result-highlight">Avg BLEU consistently outperforms alternatives across ECE, ROC-AUC, and
+          Coverage@Acc</p>
+        <aside class="notes">
+          Avg BLEU consistently outperforms all alternatives across three calibration metrics: expected calibration
+          error, ROC-AUC, and coverage at a fixed accuracy threshold.
+          Importantly, it works across different model types — both large multimodal models and text-only LLMs — and
+          across different scales.
+          It's also simple to implement and requires no access to model internals, making it applicable even to
+          black-box APIs.
+        </aside>
+      </section>
+
+      <section>
+        <h2>LMMs vs. LLMs: Calibration</h2>
+        <img src="imgs/calibration.png" alt="Calibration comparison" class="fig-large">
+        <p class="fig-caption">Visual modalities introduce new sources of ambiguity compared to text-only LLMs</p>
+        <aside class="notes">
+          This figure compares calibration between large multimodal models and text-only LLMs.
+          A key finding: adding the visual modality introduces new sources of uncertainty — image quality, visual
+          ambiguity, layout complexity.
+          LMMs are generally less well-calibrated than LLMs on equivalent tasks, which makes uncertainty quantification
+          even more important for multimodal systems.
+          This has direct implications for deploying these models in assistive technology for visually impaired users.
+        </aside>
+      </section>
+
+      <section>
+        <h2>Uncertainty Chapter Summary</h2>
+        <div class="takeaway">
+          <ul>
+            <li>High accuracy ≠ reliable — calibration matters for real users</li>
+            <li><strong>Avg BLEU:</strong> simple, effective, sampling-based uncertainty metric</li>
+            <li>Critical for assistive technology (visually impaired users)</li>
+          </ul>
+          <p class="fragment"><strong>Key Insight:</strong> Knowing what you don't know is as important as knowing.</p>
+        </div>
+        <aside class="notes">
+          The takeaway: building models that can say "I don't know" is just as important as building accurate models.
+          Avg BLEU provides a practical, easy-to-implement solution.
+          This work was partly motivated by real users — VizWiz is created by visually impaired people who rely on these
+          models daily.
+          Getting a wrong answer confidently is worse than getting no answer at all.
+        </aside>
+      </section>
+
+      <!-- ============================================================ -->
+      <!-- PART 5: VOCABULARY -->
+      <!-- ============================================================ -->
+
+      <section>
+        <h2 class="section-title">Incorporating Novel<br>Vocabulary</h2>
+        <p class="section-chapter">Chapter 6</p>
+        <p class="section-papers">EACL 2023</p>
+        <aside class="notes">
+          The final two chapters address temporal aspects of language.
+          Chapter 6 asks: can language models learn new words from definitions provided in context?
+        </aside>
+      </section>
+
+      <section>
+        <h2>WinoDict: Can Models Learn New Words?</h2>
+        <div class="columns">
+          <div class="col">
+            <h4>The Problem</h4>
+            <p>LLMs' vocabularies are frozen at training time, but new words emerge constantly.</p>
+            <h4 class="fragment">The Benchmark</h4>
+            <p class="fragment">Take Winograd-style coreference problems and replace the key word with a novel word +
+              its dictionary definition</p>
+          </div>
+          <div class="col fragment">
+            <div class="example-box">
+              <p><strong>Original:</strong> "The <u>trophy</u> doesn't fit in the suitcase because <u>it</u> is too
+                large."</p>
+              <p><strong>WinoDict:</strong> "The <u>glorp</u> doesn't fit in the suitcase because <u>it</u> is too
+                large."<br><em>glorp (n): a shiny metal award</em></p>
+            </div>
+          </div>
+        </div>
+        <aside class="notes">
+          WinoDict probes a fundamental limitation: can models use a dictionary definition to understand a word they've
+          never seen?
+          We take Winograd schemas — sentence pairs where coreference depends on world knowledge — and replace the key
+          noun with a made-up but phonologically plausible word.
+          In this example, if you know a "trophy" is a large physical object, you can resolve "it" to the trophy. But if
+          you only have the definition "a shiny metal award," can the model still do it?
+          This is in-context word acquisition — something humans do effortlessly but models find surprisingly hard.
+        </aside>
+      </section>
+
+      <section>
+        <h2>WinoDict Results</h2>
+        <img src="imgs/winodict_breakdown.png" alt="WinoDict breakdown" class="fig-large">
+        <p class="fig-caption">Accuracy drops dramatically when key concepts are replaced with novel words, even with
+          definitions provided</p>
+        <aside class="notes">
+          The results are sobering. All models tested — from GPT-3 to PaLM — show significant accuracy drops when key
+          words are replaced with novel ones, even with correct definitions provided.
+          This demonstrates that LLMs rely heavily on lexical associations learned during training rather than genuinely
+          reasoning from definitions.
+          Human performance remains stable, confirming that the task is solvable with the provided information.
+          This has implications beyond benchmarks: it reveals a systematic limitation of current LLMs in handling
+          neologisms, technical jargon, and evolving language.
+        </aside>
+      </section>
+
+      <section>
+        <h2>Vocabulary Chapter Summary</h2>
+        <div class="takeaway">
+          <ul>
+            <li>LLMs struggle with in-context word acquisition</li>
+            <li>WinoDict provides a controlled benchmark for measuring this limitation</li>
+            <li>Human evaluation confirms the gap between human and model performance</li>
+          </ul>
+          <p class="fragment">This limitation motivates the next chapter: not just words, but <em>facts</em> evolve over
+            time.</p>
+        </div>
+        <aside class="notes">
+          WinoDict reveals that models have brittle lexical representations.
+          This connects to a broader theme: language and knowledge are not static.
+          If models can't handle new words, can they handle changing facts? That's what we explore next.
+        </aside>
+      </section>
+
+      <!-- ============================================================ -->
+      <!-- PART 6: TIME -->
+      <!-- ============================================================ -->
+
+      <section>
+        <h2 class="section-title">Incorporating<br>Time-Stamped Facts</h2>
+        <p class="section-chapter">Chapter 7</p>
+        <p class="section-papers">TACL 2022</p>
+        <aside class="notes">
+          Chapter 7 addresses temporal knowledge. Language models are trained on data from a specific time period, but
+          the world changes.
+          What happens when facts expire?
+        </aside>
+      </section>
+
+      <section>
+        <h2>Facts Have Expiration Dates</h2>
+        <div class="columns">
+          <div class="col">
+            <h4>The Problem</h4>
+            <p>"Who is the president of [country]?" — the answer changes over time</p>
+            <p>LMs trained on static snapshots → stale knowledge</p>
+          </div>
+          <div class="col">
+            <img src="imgs/tlm_data_diagram.png" alt="TimeLM data" class="fig-fill">
+            <p class="fig-caption">TempLAMA benchmark structure</p>
+          </div>
+        </div>
+        <aside class="notes">
+          Many factual assertions have temporal scope: political leaders change, sports records get broken, scientific
+          consensus evolves.
+          Models trained on a 2020 snapshot might say "Donald Trump is the president" regardless of when they're asked.
+          TempLAMA is our benchmark: knowledge base triples with explicit time annotations, allowing us to test whether
+          models can track factual changes.
+        </aside>
+      </section>
+
+      <section>
+        <h2>Jointly Modeling Text and Time</h2>
+        <div class="columns">
+          <div class="col">
+            <div class="method-box">
+              <h4><em>Yearly</em></h4>
+              <p>Train separate model per time period</p>
+              <p class="small">More expensive, better at memorization</p>
+            </div>
+          </div>
+          <div class="col">
+            <div class="method-box accent">
+              <h4><em>Temporal</em></h4>
+              <p>Single model with time metadata in input</p>
+              <p class="small">Efficient, better calibration for future</p>
+            </div>
+          </div>
+        </div>
+        <aside class="notes">
+          We compared two approaches for incorporating time.
+          The Yearly approach trains a separate model for each time period — expensive but good at memorizing
+          period-specific facts.
+          The Temporal approach uses a single model with time metadata prepended to the input — much more efficient, and
+          it generalizes better to unseen future time periods.
+          The Temporal model learns an implicit representation of how facts change, enabling better calibration: it
+          naturally becomes less confident about facts far from its training period.
+        </aside>
+      </section>
+
+      <section>
+        <h2>Memorizing Facts Across Time</h2>
+        <img src="imgs/templama_acrossyears.png" alt="TempLAMA across years" class="fig-large">
+        <p class="fig-caption">Temporal models improve memorization of seen facts and scale better to new time periods
+        </p>
+        <aside class="notes">
+          This chart shows fact recall accuracy across time periods.
+          The temporal model consistently outperforms the baseline across years and shows smoother degradation for
+          distant time periods.
+          Importantly, it doesn't just memorize a single snapshot — it learns temporal patterns, understanding that some
+          facts are stable while others change frequently.
+        </aside>
+      </section>
+
+      <section>
+        <h2>Better Calibration &amp; Cheaper Adaptation</h2>
+        <div class="columns">
+          <div class="col">
+            <img src="imgs/tlm_confidence.png" alt="Confidence" class="fig-fill">
+            <p class="fig-caption">Graceful degradation on unseen future facts</p>
+          </div>
+          <div class="col">
+            <img src="imgs/tlm_adaptation.png" alt="Adaptation" class="fig-fill">
+            <p class="fig-caption">Efficient adaptation with new data, without full retraining</p>
+          </div>
+        </div>
+        <aside class="notes">
+          Two additional benefits emerge.
+          Left: the temporal model naturally becomes less confident about facts from distant time periods — graceful
+          degradation rather than confident hallucination. This connects to Chapter 5 on uncertainty.
+          Right: updating the model with new data is cheap — you only need to fine-tune on the new time period rather
+          than retraining from scratch. This makes the model practical for continuous deployment.
+        </aside>
+      </section>
+
+      <section>
+        <h2>Time Chapter Summary</h2>
+        <div class="takeaway">
+          <ul>
+            <li>Adding temporal metadata is simple but powerful</li>
+            <li>Improves memorization, calibration, and efficient adaptation</li>
+            <li>Together with WinoDict: both words and facts evolve — static models are incomplete</li>
+          </ul>
+        </div>
+        <aside class="notes">
+          Chapters 6 and 7 together make the case that language models need to be dynamic.
+          Words evolve (WinoDict) and facts evolve (TimeLM).
+          Static training on a single snapshot is fundamentally insufficient for reliable systems.
+          This completes the technical contributions. Let me now summarize the thesis-level findings.
+        </aside>
+      </section>
+
+      <!-- ============================================================ -->
+      <!-- PART 7: CONCLUSION -->
+      <!-- ============================================================ -->
+
+      <section>
+        <h2 class="section-title">Conclusion</h2>
+        <p class="section-chapter">Chapter 8</p>
+        <aside class="notes">
+          Let me bring everything together.
+        </aside>
+      </section>
+
+      <section>
+        <h2>Cross-Cutting Learnings</h2>
+        <div class="learning-grid">
+          <div class="learning fragment">
+            <h4>🔄 Symbiosis of Understanding &amp; Generation</h4>
+            <p>The ability to generate is consistently the best proxy for comprehension</p>
+          </div>
+          <div class="learning fragment">
+            <h4>🌐 Web-Scale Structured Content</h4>
+            <p>HTML tables, charts, timestamps → powerful self-supervised signals</p>
+          </div>
+          <div class="learning fragment">
+            <h4>⚡ Efficiency &amp; Specialized Models</h4>
+            <p>Smaller, focused models often outperform much larger generalist ones</p>
+          </div>
+          <div class="learning fragment">
+            <h4>🎯 Beyond Benchmarks</h4>
+            <p>Calibration, faithfulness, and temporal validity matter more in deployment</p>
+          </div>
+        </div>
+        <aside class="notes">
+          Four cross-cutting learnings that emerge from the thesis.
+          First, the symbiosis of understanding and generation: in every chapter, generative objectives — de-noising,
+          de-rendering, text generation — improved understanding tasks. This is the "modern recipe" validated
+          empirically.
+          Second, the web is full of structured visual language — tables, charts, timestamps — that provides free
+          self-supervised training signal.
+          Third, specialized models matter: MatCha at 300M parameters beats PaLI at 17B. Efficiency is a feature, not
+          just an engineering concern.
+          Fourth, we need to look beyond accuracy: calibration, faithfulness, and temporal validity are what actually
+          matter for users.
+        </aside>
+      </section>
+
+      <section>
+        <h2>The Big Picture</h2>
+        <div class="big-picture">
+          <div class="bp-row">
+            <div class="bp-box ch-tables">Ch 3: Tables<br><span>TAPAS · MATE · TabT5</span></div>
+            <div class="bp-box ch-charts">Ch 4: Charts<br><span>MatCha · DePlot · ChaTS-Pi</span></div>
+          </div>
+          <div class="bp-center">Visual Language Reasoning</div>
+          <div class="bp-row">
+            <div class="bp-box ch-uncert">Ch 5: Uncertainty<br><span>Avg BLEU · Selective QA</span></div>
+            <div class="bp-box ch-vocab-time">Ch 6–7: Evolution<br><span>WinoDict · TimeLM</span></div>
+          </div>
+        </div>
+        <blockquote class="fragment feynman">"What I cannot create, I do not understand"</blockquote>
+        <aside class="notes">
+          Here's the big picture. The four quadrants correspond to the four research threads.
+          Tables and charts are about incorporating structured visual content.
+          Uncertainty and evolution are about making models reliable and robust over time.
+          Together, they form a comprehensive research program for visual language reasoning.
+          The Feynman quote captures the unifying principle: generation is the key to understanding.
+        </aside>
+      </section>
+
+      <section>
+        <h2>Limitations &amp; Ethics</h2>
+        <div class="columns">
+          <div class="col">
+            <h4>Limitations</h4>
+            <ul>
+              <li>English-centric datasets</li>
+              <li>Some single-run results</li>
+              <li>Prompt sensitivity in LLM experiments</li>
+              <li>Synthetic benchmarks vs. real-world complexity</li>
+            </ul>
+          </div>
+          <div class="col">
+            <h4>Ethical Considerations</h4>
+            <ul>
+              <li>Bias from web-crawled pre-training data</li>
+              <li>Risk to visually impaired users from confident errors</li>
+              <li>Environmental impact of large-scale training</li>
+              <li>Low privacy risk (public datasets)</li>
+            </ul>
+          </div>
+        </div>
+        <aside class="notes">
+          I want to be transparent about limitations.
+          Most of our datasets are English-only — multilingual visual language understanding remains largely unexplored.
+          Some results are based on single runs due to computational constraints.
+          On the ethical side, the most pressing concern is deploying these models for assistive technology: a confident
+          wrong answer to a visually impaired user can have real consequences. This directly motivated our uncertainty
+          work.
+          We've tried to mitigate environmental impact by focusing on efficient models and releasing everything publicly
+          to avoid redundant retraining.
+        </aside>
+      </section>
+
+      <section>
+        <h2>Future Work</h2>
+        <div class="objective-list">
+          <div class="objective">
+            <span class="obj-num">1</span>
+            <div>
+              <h4>Richer Visual Encoding</h4>
+              <p>Beyond text: colors, spatial attributes, visual grammars for comics and infographics</p>
+            </div>
+          </div>
+          <div class="objective">
+            <span class="obj-num">2</span>
+            <div>
+              <h4>Better Training &amp; Evaluation Data</h4>
+              <p>Web-grounded, multilingual, multi-modal benchmarks that reflect real-world complexity</p>
+            </div>
+          </div>
+          <div class="objective">
+            <span class="obj-num">3</span>
+            <div>
+              <h4>From Understanding to Generating Visualizations</h4>
+              <p>Measure and improve the quality of model-generated charts and tables</p>
+            </div>
+          </div>
+        </div>
+        <aside class="notes">
+          Three directions for future work.
+          First, richer encoding: charts use color, spatial layout, and visual conventions that we don't fully capture
+          yet. Comics and infographics have their own visual grammars.
+          Second, better data: real-world visual language is messy, multilingual, and domain-specific. Current
+          benchmarks don't capture this.
+          Third, closing the loop: if generation aids understanding, then models that can generate good visualizations
+          demonstrate true comprehension. Can we teach models to create effective charts, not just read them?
+        </aside>
+      </section>
+
+      <!-- ============================================================ -->
+      <!-- PART 8: CLOSING -->
+      <!-- ============================================================ -->
+
+      <section>
+        <h2>Publications &amp; Open Source</h2>
+        <div class="papers-list">
+          <div class="paper"><span class="venue">EMNLP 2020</span> <a
+              href="https://aclanthology.org/2020.findings-emnlp.27" target="_blank">Understanding Tables with
+              Intermediate Pre-training</a></div>
+          <div class="paper"><span class="venue">EMNLP 2021</span> <a
+              href="https://aclanthology.org/2021.emnlp-main.600" target="_blank">MATE: Multi-view Attention for Table
+              Transformer Efficiency</a></div>
+          <div class="paper"><span class="venue">EMNLP 2022</span> <a
+              href="https://aclanthology.org/2022.findings-emnlp.503" target="_blank">Table-to-Text Generation and
+              Pre-training with TabT5</a></div>
+          <div class="paper"><span class="venue">TACL 2022</span> <a href="https://aclanthology.org/2022.tacl-1.15"
+              target="_blank">Time-Aware Language Models as Temporal Knowledge Bases</a></div>
+          <div class="paper"><span class="venue">ACL 2023</span> <a href="https://aclanthology.org/2023.acl-long.714"
+              target="_blank">MatCha: Enhancing Visual Language with Math &amp; Chart De-rendering</a></div>
+          <div class="paper"><span class="venue">ACL 2023</span> <a
+              href="https://aclanthology.org/2023.findings-acl.660" target="_blank">DePlot: One-shot Visual Reasoning by
+              Plot-to-Table Translation</a></div>
+          <div class="paper"><span class="venue">EACL 2023</span> <a href="https://aclanthology.org/2023.eacl-main.7"
+              target="_blank">WinoDict: Probing LMs for In-Context Word Acquisition</a></div>
+          <div class="paper"><span class="venue">EMNLP 2023</span> <a href="https://aclanthology.org/2023.emnlp-main.35"
+              target="_blank">Selectively Answering Ambiguous Questions</a></div>
+          <div class="paper"><span class="venue">ACL 2024</span> <a href="https://aclanthology.org/2024.acl-long.472/"
+              target="_blank">Faithful Chart Summarization with ChaTS-Pi</a></div>
+          <div class="paper"><span class="venue">ACL 2024</span> <a
+              href="https://aclanthology.org/2024.findings-acl.250/" target="_blank">Selectively Answering Visual
+              Questions</a></div>
+        </div>
+        <div style="margin-top:0.6em; display:flex; flex-wrap:wrap; gap:0.4em 1em; font-size:0.72em;">
+          <span>💻</span>
+          <a href="https://github.com/google-research/tapas" target="_blank"
+            style="color:var(--accent);">google-research/tapas</a>
+          <a href="https://github.com/google-research/google-research/tree/master/deplot" target="_blank"
+            style="color:var(--accent);">google-research/deplot</a>
+          <a href="https://github.com/eisenjulian/avg-bleu" target="_blank"
+            style="color:var(--accent);">eisenjulian/avg-bleu</a>
+          <a href="https://github.com/google-research/language/tree/master/language/wino_dict" target="_blank"
+            style="color:var(--accent);">google-research/wino_dict</a>
+          <a href="https://github.com/google-research/language/tree/master/language/templama" target="_blank"
+            style="color:var(--accent);">google-research/templama</a>
+          <a href="https://hf.co/spaces/chats-pi/chats-pi" target="_blank" style="color:var(--accent);">🤗 chats-pi</a>
+        </div>
+        <aside class="notes">
+          Here are all 10 publications — spanning five years and multiple top venues — along with the open-source
+          repositories.
+          All code is publicly available. TAPAS alone has been cited over 1,000 times and is integrated into Hugging
+          Face Transformers.
+          I want to emphasize the open-source commitment: every model and dataset from this thesis is freely available
+          for the community.
+        </aside>
+      </section>
+
+      <section>
+        <div class="title-slide">
+          <h1 class="title-main thank-you">Thank You</h1>
+          <p class="title-subtitle" style="font-size:1.2em;">Questions?</p>
+          <p class="title-author">Julian Martin Eisenschlos</p>
+          <p class="title-affiliation">eisenjulian@google.com</p>
+          <p class="title-affiliation" style="font-size:0.85em; margin-top:0.3em;">Advisor: Dr. Luciana Benotti</p>
+          <img src="imgs/UNC.png" alt="UNC" class="title-logo" style="margin-top:1em;">
+        </div>
+        <aside class="notes">
+          Thank you. I'm happy to take questions.
+          I'd like to thank my advisors, co-authors, and the committee for their time and guidance throughout this
+          journey.
+        </aside>
+      </section>
+
+    </div><!-- end slides -->
+  </div><!-- end reveal -->
+
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/math/math.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/highlight.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/notes/notes.js"></script>
+  <script src="charts.js"></script>
+  <script>
+    Reveal.initialize({
+      hash: true, width: 1280, height: 720, margin: 0.04,
+      transition: 'slide', backgroundTransition: 'fade',
+      slideNumber: 'c/t',
+      plugins: [RevealMath.KaTeX, RevealHighlight, RevealNotes],
+      katex: { local: 'https://cdn.jsdelivr.net/npm/katex@0.16.11' }
+    });
+    Reveal.on('slidechanged', event => { if (typeof initCharts === 'function') initCharts(); });
+    Reveal.on('ready', event => { if (typeof initCharts === 'function') initCharts(); });
+  </script>
+</body>
+
+</html>
