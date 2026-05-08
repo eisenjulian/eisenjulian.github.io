@@ -178,18 +178,30 @@ function initCharts() {
     chartInstances.calibration = new Chart(calEl, {
       type: 'bar',
       data: {
-        labels: ['Likelihood', 'Repetition', 'Diversity', 'Avg BLEU\n(ours)'],
+        labels: ['ECE ↓', 'ROC-AUC ↑'],
         datasets: [
           {
-            label: 'ECE ↓',
-            data: [18.2, 15.5, 16.8, 11.3],
+            label: 'Likelihood',
+            data: [18.2, 62.5],
+            backgroundColor: 'rgba(148,163,184,0.6)',
+            borderRadius: 4
+          },
+          {
+            label: 'Repetition',
+            data: [15.5, 66.8],
             backgroundColor: 'rgba(245,158,11,0.6)',
             borderRadius: 4
           },
           {
-            label: 'ROC-AUC ↑',
-            data: [62.5, 66.8, 64.2, 72.1],
-            backgroundColor: 'rgba(56,189,248,0.7)',
+            label: 'Diversity',
+            data: [16.8, 64.2],
+            backgroundColor: 'rgba(167,139,250,0.5)',
+            borderRadius: 4
+          },
+          {
+            label: 'Avg BLEU (ours)',
+            data: [11.3, 72.1],
+            backgroundColor: 'rgba(16,185,129,0.8)',
             borderRadius: 4
           }
         ]

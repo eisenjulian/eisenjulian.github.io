@@ -631,6 +631,84 @@
   color: var(--text-dim);
 }
 
+/* ----------- Extra-large figures ----------- */
+.reveal section img.fig-xlarge {
+  max-width: 88% !important;
+  max-height: 370px !important;
+  margin: 0.5em auto;
+  border-radius: 8px;
+  background: #ffffff;
+  padding: 0.5em;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* ----------- Award badge ----------- */
+.award-badge {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--unc-gold), #e6c84a);
+  color: var(--bg);
+  font-weight: 700;
+  font-size: 0.8em;
+  padding: 0.2em 0.7em;
+  border-radius: 6px;
+  margin-top: 0.3em;
+}
+
+/* ----------- TempLAMA examples ----------- */
+.templama-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6em;
+  margin-top: 0.6em;
+}
+
+.templama-ex {
+  background: var(--bg-card);
+  border-radius: 10px;
+  padding: 0.6em 0.8em;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 0.82em;
+}
+
+.templama-ex .query {
+  color: var(--text);
+  margin-bottom: 0.3em;
+}
+
+.templama-ex .answers {
+  display: flex;
+  gap: 0.8em;
+  font-size: 0.9em;
+}
+
+.templama-ex .answers span {
+  color: var(--text-dim);
+}
+
+.templama-ex .answers strong {
+  color: var(--accent);
+}
+
+/* ----------- Winograd pair ----------- */
+.winograd-pair {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4em;
+}
+
+.winograd-pair .sent {
+  background: var(--bg-card);
+  border-radius: 8px;
+  padding: 0.5em 0.8em;
+  font-size: 0.85em;
+  border-left: 3px solid var(--accent2);
+}
+
+.winograd-pair .sent .ref {
+  color: var(--accent);
+  font-weight: 600;
+}
+
 /* ----------- Slide Numbers ----------- */
 .reveal .slide-number {
   font-size: 14px;
