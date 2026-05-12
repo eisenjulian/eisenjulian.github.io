@@ -128,17 +128,12 @@
           <div class="roadmap-item ch-charts"><span>Ch 4</span> Charts</div>
           <div class="roadmap-arrow">→</div>
           <div class="roadmap-item ch-uncert"><span>Ch 5</span> Uncertainty</div>
-          <div class="roadmap-arrow">→</div>
-          <div class="roadmap-item ch-vocab"><span>Ch 6</span> Vocabulary</div>
-          <div class="roadmap-arrow">→</div>
-          <div class="roadmap-item ch-time"><span>Ch 7</span> Time</div>
         </div>
         <p class="roadmap-note">Each chapter <em>incorporates</em> a new dimension into language models</p>
         <aside class="notes">
           Here's the roadmap. After a foundations chapter, each subsequent chapter incorporates a new modality or dimension.
           We begin with tables — learning to encode 2D structure — then move to charts, where the data lives in pixels.
           From there we ask: even when models are accurate, can we trust them? That's the uncertainty chapter.
-          Finally, the last two chapters tackle how language itself changes: new words emerge and facts expire over time.
           Each chapter builds on insights from the previous one, and together they form a progression from structured data to
           reliable, adaptive models.
         </aside>
@@ -301,7 +296,6 @@
       <section>
         <h2 class="section-title">Incorporating Tables<br>into Models</h2>
         <p class="section-chapter">Chapter 3</p>
-        <p class="section-papers">EMNLP 2020 · EMNLP 2021 · EMNLP 2022 · ACL 2024</p>
         <aside class="notes">
           Let's start with Chapter 3 on tables — this is where the thesis began.
           The question is simple: how do we make a language model understand tabular data?
@@ -497,7 +491,6 @@
       <section>
         <h2 class="section-title">Incorporating Charts<br>into Models</h2>
         <p class="section-chapter">Chapter 4</p>
-        <p class="section-papers">ACL 2023 (×2) · ACL 2024</p>
         <aside class="notes">
           Chapter 4 moves from structured text to truly visual inputs: charts and plots.
           Here we face an additional challenge — the data is embedded in pixels, not text tokens.
@@ -556,6 +549,37 @@
           visual encodings — bar heights, line slopes, pie slices.
           Math reasoning: we take the MATH and DROP datasets and render the questions as images, so the model learns numerical
           computation in the visual domain. This is essential for answering quantitative questions about charts.
+        </aside>
+      </section>
+
+      <section>
+        <h2>Pix2Struct: The Backbone Architecture</h2>
+        <p class="subtitle">Screenshot parsing as pre-training for visually-situated language</p>
+        <img src="imgs/pix2struct.png" alt="Pix2Struct variable-resolution input pipeline" class="fig-large">
+        <p class="fig-caption">Variable-resolution inputs: screenshots are scaled preserving aspect ratio, then split into fixed-size patches fed as a sequence to a Vision Transformer encoder</p>
+        <div class="columns fragment">
+          <div class="col">
+            <div class="method-box">
+              <h4>Key Innovation</h4>
+              <p>Variable-resolution input: instead of resizing to a fixed square, preserve the original aspect ratio and extract a variable number of patches</p>
+            </div>
+          </div>
+          <div class="col">
+            <div class="method-box accent">
+              <h4>Why It Matters for Charts</h4>
+              <p>Charts come in all shapes — tall bar charts, wide timelines, square pie charts. Fixed resizing distorts fine-grained visual details like axis labels and legends</p>
+            </div>
+          </div>
+        </div>
+        <aside class="notes">
+          Before diving into MatCha's results, let me explain the architecture it builds on.
+          Pix2Struct is an image-to-text model based on Vision Transformer — it takes a screenshot, splits it into patches, and feeds them to a Transformer encoder-decoder.
+          The key innovation shown in this figure is variable-resolution input handling.
+          Standard ViT models resize all images to a fixed square — say 224×224. But charts come in all aspect ratios: tall bar charts, wide timelines, square pie charts.
+          Pix2Struct instead preserves the original aspect ratio, scales the image, and extracts a variable number of fixed-size patches.
+          This is critical for chart understanding because resizing to a square would distort fine-grained visual details like axis tick labels, legend entries, and data point positions.
+          The model is pre-trained on a massive dataset of web screenshots paired with their simplified HTML — learning to parse visual layouts from the web.
+          MatCha then takes this pre-trained backbone and adds the chart-specific objectives we just discussed.
         </aside>
       </section>
 
@@ -679,7 +703,6 @@
       <section>
         <h2 class="section-title">Incorporating Multimodal<br>Uncertainty</h2>
         <p class="section-chapter">Chapter 5</p>
-        <p class="section-papers">EMNLP 2023 · ACL 2024</p>
         <aside class="notes">
           Chapter 5 asks a different question: even when models are accurate, can we trust their answers?
           High accuracy on benchmarks doesn't mean the model knows when it's wrong.
@@ -817,9 +840,9 @@
       </section>
 
       <!-- ============================================================ -->
-      <!-- PART 5: VOCABULARY -->
+      <!-- PART 5: VOCABULARY (hidden for defense) -->
       <!-- ============================================================ -->
-
+      <template>
       <section>
         <h2 class="section-title">Incorporating Novel<br>Vocabulary</h2>
         <p class="section-chapter">Chapter 6</p>
@@ -942,11 +965,12 @@
           If models can't handle new words, can they handle changing facts? That's what we explore next.
         </aside>
       </section>
-
+      </template>
 
       <!-- ============================================================ -->
-      <!-- PART 6: TIME -->
+      <!-- PART 6: TIME (hidden for defense) -->
       <!-- ============================================================ -->
+      <template>
 
       <section>
         <h2 class="section-title">Incorporating<br>Time-Stamped Facts</h2>
@@ -1091,6 +1115,7 @@
           This completes the technical contributions. Let me now discuss limitations before summarising the thesis-level findings.
         </aside>
       </section>
+      </template>
 
       <!-- ============================================================ -->
       <!-- PART 7: CONCLUSION -->
@@ -1144,7 +1169,8 @@
             <span class="obj-num">1</span>
             <div>
               <h4>Richer Visual Encoding</h4>
-              <p>Beyond text: colors, spatial attributes, visual grammars for comics and infographics</p>
+              <p>Beyond text: colors, spatial attributes, visual grammars for comics and infographics, caligrams, and concept trees
+              </p>
             </div>
           </div>
           <div class="objective">
@@ -1166,7 +1192,9 @@
         <aside class="notes">
           Three directions for future work.
           First, richer encoding: charts use color, spatial layout, and visual conventions that we don't fully capture yet. Comics
-          and infographics have their own visual grammars.
+          and infographics have their own visual grammars, and so do caligrams and concept trees — structured visual
+          representations
+          that combine text and imagery in ways our current models don't handle well.
           Second, better data: real-world visual language is messy, multilingual, and domain-specific. Current benchmarks don't
           capture this.
           Third, closing the loop: if generation aids understanding, then models that can generate good visualizations demonstrate
@@ -1182,18 +1210,15 @@
               <div class="bp-row">
                 <div class="bp-box ch-tables">Ch 3: Tables<br><span>TAPAS · MATE · TabT5</span></div>
                 <div class="bp-box ch-charts">Ch 4: Charts<br><span>MatCha · DePlot · ChaTS-Pi</span></div>
+                <div class="bp-box ch-uncert">Ch 5: Uncertainty<br><span>Avg BLEU · Selective QA</span></div>
               </div>
               <div class="bp-center">Incorporating Structured Content</div>
-              <div class="bp-row">
-                <div class="bp-box ch-uncert">Ch 5: Uncertainty<br><span>Avg BLEU · Selective QA</span></div>
-                <div class="bp-box ch-vocab-time">Ch 6–7: Adaptation<br><span>WinoDict · TimeLM</span></div>
-              </div>
             </div>
             <blockquote class="fragment feynman">"What I cannot create, I do not understand"</blockquote>
             <aside class="notes">
-              Here's the big picture. The four quadrants correspond to the four research threads.
+              Here's the big picture. The three pillars correspond to the main research threads.
               Tables and charts are about incorporating structured visual content.
-              Uncertainty and adaptation are about making models reliable and robust over time.
+              Uncertainty is about making models reliable — knowing when to trust their answers.
               [>>>]
               Together, they form a comprehensive research program for incorporating structured content into language models.
               The Feynman quote captures the unifying principle: generation is the key to understanding.
@@ -1213,8 +1238,8 @@
               </div>
               <div class="learning fragment">
                 <h4>⚡ Specialised Models Matter</h4>
-                <p>MatCha (300M) beats PaLI (17B) — and today's SOTA models with 100s of billions of params are often trained
-                  using annotations from smaller expert models</p>
+                <p>MatCha (300M) beats PaLI (17B) — and today's SOTA models with 100B+ params are often use annotations from smaller
+                  expert models</p>
               </div>
               <div class="learning fragment">
                 <h4>🎯 Beyond Benchmarks</h4>
@@ -1250,55 +1275,47 @@
       <!-- ============================================================ -->
 
       <section>
-        <h2>Publications &amp; Open Source</h2>
-        <div class="papers-list">
-          <div class="paper"><span class="venue">EMNLP 2020</span> <a
-              href="https://aclanthology.org/2020.findings-emnlp.27" target="_blank">Understanding Tables with
-              Intermediate Pre-training</a></div>
-          <div class="paper"><span class="venue">EMNLP 2021</span> <a
-              href="https://aclanthology.org/2021.emnlp-main.600" target="_blank">MATE: Multi-view Attention for Table
-              Transformer Efficiency</a></div>
-          <div class="paper"><span class="venue">EMNLP 2022</span> <a
-              href="https://aclanthology.org/2022.findings-emnlp.503" target="_blank">Table-to-Text Generation and
-              Pre-training with TabT5</a></div>
-          <div class="paper"><span class="venue">TACL 2022</span> <a href="https://aclanthology.org/2022.tacl-1.15"
-              target="_blank">Time-Aware Language Models as Temporal Knowledge Bases</a></div>
-          <div class="paper"><span class="venue">ACL 2023</span> <a href="https://aclanthology.org/2023.acl-long.714"
-              target="_blank">MatCha: Enhancing Visual Language with Math &amp; Chart De-rendering</a></div>
-          <div class="paper"><span class="venue">ACL 2023</span> <a
-              href="https://aclanthology.org/2023.findings-acl.660" target="_blank">DePlot: One-shot Visual Reasoning by
-              Plot-to-Table Translation</a></div>
-          <div class="paper"><span class="venue">EACL 2023</span> <a href="https://aclanthology.org/2023.eacl-main.7"
-              target="_blank">WinoDict: Probing LMs for In-Context Word Acquisition</a> 🏆</div>
-          <div class="paper"><span class="venue">EMNLP 2023</span> <a href="https://aclanthology.org/2023.emnlp-main.35"
-              target="_blank">Selectively Answering Ambiguous Questions</a></div>
-          <div class="paper"><span class="venue">ACL 2024</span> <a href="https://aclanthology.org/2024.acl-long.472/"
-              target="_blank">Faithful Chart Summarization with ChaTS-Pi</a></div>
-          <div class="paper"><span class="venue">ACL 2024</span> <a
-              href="https://aclanthology.org/2024.findings-acl.250/" target="_blank">Selectively Answering Visual
-              Questions</a></div>
+        <h2>Open Source Impact</h2>
+        <div class="columns">
+          <div class="col">
+            <h4>💻 Code Repositories</h4>
+            <div class="small">⭐ 1.2k stars · 216 forks</div>
+            <ul>
+              <li><a href="https://github.com/google-research/tapas" target="_blank"
+                  style="color:var(--accent);">google-research/tapas</a>
+              </li>
+              <li><a href="https://github.com/google-research/google-research/tree/master/deplot" target="_blank"
+                  style="color:var(--accent);">google-research/deplot</a></li>
+              <li><a href="https://github.com/eisenjulian/avg-bleu" target="_blank"
+                  style="color:var(--accent);">eisenjulian/avg-bleu</a></li>
+            </ul>
+          </div>
+          <div class="col">
+            <h4>🤗 Models on Hugging Face</h4>
+            <div class="small">110k+ downloads · 20+ variants</div>
+            <ul>
+              <li><a href="https://huggingface.co/google/tapas-base" target="_blank"
+                  style="color:var(--accent);">google/tapas-*</a>
+              </li>
+              <li><a href="https://huggingface.co/google/deplot" target="_blank" style="color:var(--accent);">google/deplot</a>
+              </li>
+              <li><a href="https://huggingface.co/google/matcha-base" target="_blank"
+                  style="color:var(--accent);">google/matcha-*</a></li>
+              <li><a href="https://hf.co/spaces/chats-pi/chats-pi" target="_blank" style="color:var(--accent);">🤗 ChaTS-Pi
+                  demo</a></li>
+            </ul>
+          </div>
         </div>
-        <div style="margin-top:0.6em; display:flex; flex-wrap:wrap; gap:0.4em 1em; font-size:0.72em;">
-          <span>💻</span>
-          <a href="https://github.com/google-research/tapas" target="_blank"
-            style="color:var(--accent);">google-research/tapas</a>
-          <a href="https://github.com/google-research/google-research/tree/master/deplot" target="_blank"
-            style="color:var(--accent);">google-research/deplot</a>
-          <a href="https://github.com/eisenjulian/avg-bleu" target="_blank"
-            style="color:var(--accent);">eisenjulian/avg-bleu</a>
-          <a href="https://github.com/google-research/language/tree/master/language/wino_dict" target="_blank"
-            style="color:var(--accent);">google-research/wino_dict</a>
-          <a href="https://github.com/google-research/language/tree/master/language/templama" target="_blank"
-            style="color:var(--accent);">google-research/templama</a>
-          <a href="https://hf.co/spaces/chats-pi/chats-pi" target="_blank" style="color:var(--accent);">🤗 chats-pi</a>
-        </div>
+        <p class="fragment result-highlight">TAPAS is integrated into 🤗 Transformers — directly usable via
+          <code>pipeline("table-question-answering")</code>
+        </p>
         <aside class="notes">
-          Here are all 10 publications — spanning five years and multiple top venues — along with the open-source
-          repositories.
-          All code is publicly available. TAPAS alone has been cited over 1,000 times and is integrated into Hugging
-          Face Transformers.
-          I want to emphasize the open-source commitment: every model and dataset from this thesis is freely available
-          for the community.
+          All code and models from this thesis are publicly available.
+          The TAPAS repository has over 1,200 stars on GitHub, and across all variants the TAPAS models on Hugging Face
+          have been downloaded over 110,000 times.
+          TAPAS is natively integrated into the Hugging Face Transformers library, making it directly usable in just a few
+          lines of code.
+          MatCha, DePlot, and the ChaTS-Pi demo are also available as hosted models and interactive demos.
         </aside>
       </section>
 
