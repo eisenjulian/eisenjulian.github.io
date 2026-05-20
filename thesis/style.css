@@ -140,6 +140,7 @@
 
 .col {
   flex: 1;
+  min-width: 0;
 }
 
 /* ----------- Boxes ----------- */
@@ -439,8 +440,13 @@
 .chart-container {
   position: relative;
   max-width: 750px;
-  max-height: 360px;
+  height: 340px;
   margin: 0.5em auto;
+}
+
+/* Side-by-side charts need a smaller fixed height */
+.columns .chart-container {
+  height: 260px;
 }
 
 /* ----------- Results ----------- */
@@ -713,4 +719,24 @@
 .reveal .slide-number {
   font-size: 14px;
   color: var(--text-dim);
+}
+
+/* ----------- Mini Roadmap (chapter progress) ----------- */
+.mini-roadmap {
+  display: flex;
+  gap: 0.5em;
+  justify-content: center;
+  margin-top: 1.5em;
+}
+
+.mini-roadmap span {
+  padding: 0.2em 0.7em;
+  border-radius: 6px;
+  font-size: 0.65em;
+  opacity: 0.3;
+}
+
+.mini-roadmap span.active {
+  opacity: 1;
+  font-weight: 700;
 }

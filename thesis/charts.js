@@ -1,13 +1,37 @@
 /* ======================================= */
 /*  Chart.js Data for PhD Defense Slides    */
+/*  Charts animate on each slide entrance   */
 /* ======================================= */
 
 const chartInstances = {};
 
-function initCharts() {
-  // TabFact Results Chart
-  const tabfactEl = document.getElementById('tabfactChart');
-  if (tabfactEl && !chartInstances.tabfact) {
+/**
+ * Destroy all existing chart instances so they can be
+ * recreated with a fresh entrance animation.
+ */
+function destroyAllCharts() {
+  for (const key in chartInstances) {
+    if (chartInstances[key]) {
+      chartInstances[key].destroy();
+    }
+  }
+  Object.keys(chartInstances).forEach(key => delete chartInstances[key]);
+}
+
+/**
+ * Called on every slide transition.  Only the chart(s)
+ * whose <canvas> lives inside `slide` are created;
+ * everything else is destroyed so it re-animates later.
+ */
+function initChartsOnSlide(slide) {
+  if (!slide) return;
+  destroyAllCharts();
+
+  const animOpts = { duration: 900, easing: 'easeOutQuart' };
+
+  // ---- TabFact Results ----
+  const tabfactEl = slide.querySelector('#tabfactChart');
+  if (tabfactEl) {
     chartInstances.tabfact = new Chart(tabfactEl, {
       type: 'bar',
       data: {
@@ -33,7 +57,8 @@ function initCharts() {
       },
       options: {
         responsive: true,
-        maintainAspectRatio: true,
+        maintainAspectRatio: false,
+        animation: animOpts,
         scales: {
           y: { beginAtZero: false, min: 55, max: 95, ticks: { color: '#94a3b8' }, grid: { color: 'rgba(255,255,255,0.05)' } },
           x: { ticks: { color: '#94a3b8', font: { size: 10 } }, grid: { display: false } }
@@ -46,9 +71,9 @@ function initCharts() {
     });
   }
 
-  // MatCha Results Chart
-  const matchaEl = document.getElementById('matchaChart');
-  if (matchaEl && !chartInstances.matcha) {
+  // ---- MatCha Main Results ----
+  const matchaEl = slide.querySelector('#matchaChart');
+  if (matchaEl) {
     chartInstances.matcha = new Chart(matchaEl, {
       type: 'bar',
       data: {
@@ -82,7 +107,8 @@ function initCharts() {
       },
       options: {
         responsive: true,
-        maintainAspectRatio: true,
+        maintainAspectRatio: false,
+        animation: animOpts,
         scales: {
           y: { beginAtZero: true, max: 100, ticks: { color: '#94a3b8' }, grid: { color: 'rgba(255,255,255,0.05)' } },
           x: { ticks: { color: '#94a3b8', font: { size: 11 } }, grid: { display: false } }
@@ -95,9 +121,9 @@ function initCharts() {
     });
   }
 
-  // Ablation Chart
-  const ablationEl = document.getElementById('ablationChart');
-  if (ablationEl && !chartInstances.ablation) {
+  // ---- Ablation ----
+  const ablationEl = slide.querySelector('#ablationChart');
+  if (ablationEl) {
     chartInstances.ablation = new Chart(ablationEl, {
       type: 'bar',
       data: {
@@ -115,7 +141,8 @@ function initCharts() {
       },
       options: {
         responsive: true,
-        maintainAspectRatio: true,
+        maintainAspectRatio: false,
+        animation: animOpts,
         indexAxis: 'y',
         scales: {
           x: { min: 55, max: 65, ticks: { color: '#94a3b8' }, grid: { color: 'rgba(255,255,255,0.05)' } },
@@ -129,9 +156,9 @@ function initCharts() {
     });
   }
 
-  // DePlot Results Chart
-  const deplotEl = document.getElementById('deplotChart');
-  if (deplotEl && !chartInstances.deplot) {
+  // ---- DePlot Results ----
+  const deplotEl = slide.querySelector('#deplotChart');
+  if (deplotEl) {
     chartInstances.deplot = new Chart(deplotEl, {
       type: 'bar',
       data: {
@@ -159,7 +186,8 @@ function initCharts() {
       },
       options: {
         responsive: true,
-        maintainAspectRatio: true,
+        maintainAspectRatio: false,
+        animation: animOpts,
         scales: {
           y: { beginAtZero: true, max: 100, ticks: { color: '#94a3b8' }, grid: { color: 'rgba(255,255,255,0.05)' } },
           x: { ticks: { color: '#94a3b8', font: { size: 11 } }, grid: { display: false } }
@@ -172,35 +200,29 @@ function initCharts() {
     });
   }
 
-  // Calibration Chart
-  const calEl = document.getElementById('calibrationChart');
-  if (calEl && !chartInstances.calibration) {
-    chartInstances.calibration = new Chart(calEl, {
+  // ---- MatCha Fine-grained Analysis ----
+  const fgEl = slide.querySelector('#finegrainedChart');
+  if (fgEl) {
+    chartInstances.finegrained = new Chart(fgEl, {
       type: 'bar',
       data: {
-        labels: ['ECE ↓', 'ROC-AUC ↑'],
+        labels: ['Data extraction', 'Math reasoning', 'Plot attributes'],
         datasets: [
           {
-            label: 'Likelihood',
-            data: [18.2, 62.5],
+            label: 'PaLI',
+            data: [51.9, 26.2, 28.6],
             backgroundColor: 'rgba(148,163,184,0.6)',
             borderRadius: 4
           },
           {
-            label: 'Repetition',
-            data: [15.5, 66.8],
+            label: 'Pix2Struct',
+            data: [69.2, 23.8, 1.0],
             backgroundColor: 'rgba(245,158,11,0.6)',
             borderRadius: 4
           },
           {
-            label: 'Diversity',
-            data: [16.8, 64.2],
-            backgroundColor: 'rgba(167,139,250,0.5)',
-            borderRadius: 4
-          },
-          {
-            label: 'Avg BLEU (ours)',
-            data: [11.3, 72.1],
+            label: 'MatCha (ours)',
+            data: [76.9, 31.0, 14.3],
             backgroundColor: 'rgba(16,185,129,0.8)',
             borderRadius: 4
           }
@@ -208,14 +230,91 @@ function initCharts() {
       },
       options: {
         responsive: true,
-        maintainAspectRatio: true,
+        maintainAspectRatio: false,
+        animation: animOpts,
         scales: {
-          y: { beginAtZero: true, max: 80, ticks: { color: '#94a3b8' }, grid: { color: 'rgba(255,255,255,0.05)' } },
+          y: {
+            beginAtZero: true, max: 85, ticks: { color: '#94a3b8', stepSize: 10 }, grid: { color: 'rgba(255,255,255,0.05)' },
+            title: { display: true, text: 'Accuracy (%)', color: '#94a3b8', font: { size: 12 } }
+          },
           x: { ticks: { color: '#94a3b8', font: { size: 11 } }, grid: { display: false } }
         },
         plugins: {
           legend: { position: 'top', labels: { color: '#94a3b8', font: { size: 11 } } },
-          title: { display: true, text: 'Calibration Methods on VizWiz-VQA', color: '#e2e8f0', font: { size: 14 } }
+          title: { display: true, text: 'Performance by Question Category', color: '#e2e8f0', font: { size: 14 } }
+        }
+      }
+    });
+  }
+
+  // ---- ECE (lower is better) ----
+  const eceEl = slide.querySelector('#eceChart');
+  if (eceEl) {
+    chartInstances.ece = new Chart(eceEl, {
+      type: 'bar',
+      data: {
+        labels: ['Likelihood', 'Repetition', 'Diversity', 'Avg BLEU (ours)'],
+        datasets: [{
+          label: 'ECE (%)',
+          data: [18.2, 15.5, 16.8, 11.3],
+          backgroundColor: [
+            'rgba(148,163,184,0.6)',
+            'rgba(245,158,11,0.6)',
+            'rgba(167,139,250,0.5)',
+            'rgba(16,185,129,0.8)'
+          ],
+          borderRadius: 4
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+
+        animation: animOpts,
+        indexAxis: 'y',
+        scales: {
+          x: { beginAtZero: true, max: 20, ticks: { color: '#94a3b8' }, grid: { color: 'rgba(255,255,255,0.05)' } },
+          y: { ticks: { color: '#94a3b8', font: { size: 11 } }, grid: { display: false } }
+        },
+        plugins: {
+          legend: { display: false },
+          title: { display: true, text: 'ECE ↓ (lower is better)', color: '#e2e8f0', font: { size: 13 } }
+        }
+      }
+    });
+  }
+
+  // ---- ROC-AUC (higher is better) ----
+  const rocEl = slide.querySelector('#rocaucChart');
+  if (rocEl) {
+    chartInstances.rocauc = new Chart(rocEl, {
+      type: 'bar',
+      data: {
+        labels: ['Likelihood', 'Repetition', 'Diversity', 'Avg BLEU (ours)'],
+        datasets: [{
+          label: 'ROC-AUC (%)',
+          data: [62.5, 66.8, 64.2, 72.1],
+          backgroundColor: [
+            'rgba(148,163,184,0.6)',
+            'rgba(245,158,11,0.6)',
+            'rgba(167,139,250,0.5)',
+            'rgba(16,185,129,0.8)'
+          ],
+          borderRadius: 4
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        animation: animOpts,
+        indexAxis: 'y',
+        scales: {
+          x: { min: 55, max: 75, ticks: { color: '#94a3b8' }, grid: { color: 'rgba(255,255,255,0.05)' } },
+          y: { ticks: { color: '#94a3b8', font: { size: 11 } }, grid: { display: false } }
+        },
+        plugins: {
+          legend: { display: false },
+          title: { display: true, text: 'ROC-AUC ↑ (higher is better)', color: '#e2e8f0', font: { size: 13 } }
         }
       }
     });
